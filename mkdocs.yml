@@ -1,0 +1,28 @@
+site_name: 中国人民大学高性能计算集群
+theme:
+  name: 'readthedocs'
+  collapse_by_default: false
+  highlightjs: true
+
+extra_css:
+    - css/extra.css
+
+nav:
+    - '首页': 'index.md'
+    - '使用指南':
+      - '入门指南': 'cluster-overview.md'
+      - '登录方法': 'cluster-login.md'
+      - '作业调度': 'job-scheduler.md'
+      - '软件支持': 'software.md'
+    - '软件使用':
+      - 'Python': 'manual/python.md'
+      - 'R': 'manual/r.md'
+      - 'Julia': 'manual/julia.md'
+      - 'Jupyter': 'manual/jupyter.md'
+
+
+markdown_extensions:
+  - admonition
+
+plugins:
+    - search
