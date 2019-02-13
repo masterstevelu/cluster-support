@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>作业调度 - 中国人民大学高性能计算集群</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u4f5c\u4e1a\u8c03\u5ea6";
+    var mkdocs_page_input_path = "job-scheduler.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> 中国人民大学高性能计算集群</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">首页</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">使用指南</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../cluster-overview/">入门指南</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../cluster-login/">登录方法</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">作业调度</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#pbs">PBS简介</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_1">作业提交流程</a></li>
+    
+
+    <li class="toctree-l3"><a href="#qsub">使用qsub提交作业</a></li>
+    
+
+    <li class="toctree-l3"><a href="#pbs_1">PBS作业参数</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_2">申请计算资源</a></li>
+    
+
+    <li class="toctree-l3"><a href="#pbs_2">PBS脚本变量</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_3">通用脚本样例</a></li>
+    
+
+    <li class="toctree-l3"><a href="#qstat">使用qstat查看作业</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../software/">软件支持</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">软件使用</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../manual/python/">Python</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../manual/r/">R</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../manual/julia/">Julia</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../manual/jupyter/">Jupyter</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">中国人民大学高性能计算集群</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>使用指南 &raquo;</li>
+        
+      
+    
+    <li>作业调度</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1>作业调度</h1>
+
+<p><hr></hr></p>
+<p>高性能计算集群配有较高的计算资源，同时拥有较多用户，是一个多用户共享的服务。为了有效利用众多处理器核心所提供的计算能力，需要一个作业管理调度系统，统一用户作业提交，合理分配计算资源，将用户的作业指派到最合适的资源上执行。</p>
+<div class="admonition note">
+<p class="admonition-title">调度器与队列</p>
+<p>如果把向集群提交作业比作前往银行办理业务，那么作业调度器就是银行门口的取号机，用户需要排队，根据叫号来办理业务。用户一般需要告知取号机自己办理哪种服务，比如存取款的普通柜台、对公柜台、VIP柜台、理财顾问等等。取号机在相应的柜台服务上生成排队号码。调度器中的队列与之相似，用户在提交作业时，一般要告知调度器作业所属的队列，调度器会把用户作业放在该队列里排队。</p>
+</div>
+<h1 id="pbs">PBS简介</h1>
+<p>集群基于 PBS（Portable Batch System）作业管理系统来管理和调度计算任务。PBS是由NASA开发的作业调度管理系统。它被用于集群系统、超级计算机和大规模并行系统。PBS后来又发展出openPBS、PBS Pro和Torque三大分支。其中Torque是目前使用比较广泛的PBS开源实现。本集群使用Torque作为作业调度器。集群用户需要使用 PBS 脚本和命令提交计算任务。</p>
+<p>PBS系统的命令包括作业控制、作业检测和节点状态等几大部分。下面将介绍如何使用PBS系统来提交作业，其他命令的具体使用可参考<a href="../manual/torque/">PBS使用手册</a>相关内容。</p>
+<h1 id="_1">作业提交流程</h1>
+<p>一个标准的作业提交步骤将包含以下流程：</p>
+<ol>
+<li>准备：用户编写代码，编译生成可执行文件，准备输入文件和提交作业作业的脚本（包括作业名，需要的计算资源等）。</li>
+<li>提交：用户使用作业提交命令 <code>qsub</code> 将该作业提交给作业调度器。</li>
+<li>排队：调度器将该任务排入队列。</li>
+<li>调度：调度器检查队列内各计算节点的状态是否符合该作业的要求，并进行调度。</li>
+<li>执行：当条件满足时，作业被发给相应的执行计算节点执行。程序运行时执行计算节点会收集程序的标准输出和标准错误流，等程序结束时，将这些信息返回给用户。</li>
+<li>查询和调整：当作业在运行时，用户可以使用监控命令 <code>qstat</code> 进行状态查询。用户发现作业提交错误时，可以使用作业删除命令 <code>qdel</code> 删除正在运行的作业。</li>
+<li>查看结果：使用 <code>qpeek</code> 查看作业运行时的标准输出。</li>
+</ol>
+<h1 id="qsub">使用qsub提交作业</h1>
+<p>在PBS调度系统中提交任务需要使用 <code>qsub</code> 命令，<code>qsub</code> 命令是整个调度系统中使用最多的命令。</p>
+<pre><code class="shell">qsub [options] &lt;script&gt;
+</code></pre>
+
+<p>其中options表示参数列表，参数列表包括作业名称、作业需要申请的节点数等等参数，script为要执行的作业本身。</p>
+<p>例如，我们提交一个名为 hello.sh 的作业，其功能为要求每个节点睡眠10秒钟，并打印节点的主机名。</p>
+<p>hello.sh的内容为</p>
+<pre><code class="bash">#!/bin/bash
+
+sleep 10
+hostname
+</code></pre>
+
+<p>在集群上提交这个作业的方式为</p>
+<pre><code class="bash">qsub hello.sh
+</code></pre>
+
+<h1 id="pbs_1">PBS作业参数</h1>
+<p>前一节介绍了如何使用 <code>qsub</code> 来向集群提交作业。在提交作业过程中需要指定参数，以向集群申请资源。下表列出常用的 PBS 作业参数。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>取值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-l</td>
+<td>资源申请参数，通常为多个参数，参数间以冒号隔开</td>
+<td>设定作业所需资源</td>
+</tr>
+<tr>
+<td>-N</td>
+<td>作业名称</td>
+<td>设定作业名称</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>程序运行后标准输出的文件路径，可以设置为用户的家目录下某个文件夹下</td>
+<td>设定作业的标准输出文件路径</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>程序运行后错误日志输出的文件路径，可以设置为用户家目录下的某个文件夹下</td>
+<td>设定作业的标准错误文件路径</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>-1024到1023之间的整数</td>
+<td>设定作业的优先级，数值越大优先级越高</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>队列名</td>
+<td>设定作业队列名称</td>
+</tr>
+</tbody>
+</table>
+<p><em>表 PBS作业常用参数</em></p>
+<p>PBS系统允许两种方式设置上述作业参数。一种是在执行 <code>qsub</code> 命令时附上参数；另一种是将这些参数写在 shell 脚本里，在脚本中指定这些参数。脚本中的这些参数以“#PBS”开头，参数形式跟qsub命令参数一样。</p>
+<p>依然以前面所举的 <code>hello.sh</code> 为例，分别演示两种提交作业的方式。</p>
+<p><strong>在命令中附上参数</strong></p>
+<pre><code class="bash">qsub -N hello -o hello_out -e hello_err -q default hello.sh
+</code></pre>
+
+<p>作业被提交到了 default 队列中，作业名叫做 hello , 作业成功运行的标准输出为 hello_out 文件，出现错误的话，输出的错误文件为 hello_err。</p>
+<p><strong>在脚本中设定参数</strong></p>
+<p>编辑一个脚本名为 <code>submit_hello.sh</code></p>
+<pre><code class="bash">#!/bin/bash
+
+### set job name
+#PBS -N hello
+### set job queue
+#PBS -q daopian
+
+### print job id and job queue
+echo &quot;This jobs is &quot;$PBS_JOBID@$PBS_QUEUE
+echo begin time is `date`
+sh hello.sh
+echo end time is `date`
+</code></pre>
+
+<p>执行这个脚本</p>
+<pre><code class="bash">qsub submit_hello.sh
+</code></pre>
+
+<div class="admonition note">
+<p class="admonition-title">注释与井号</p>
+<p>在 Linux shell 脚本中，行首单个井号“#”表示注释。PBS系统必须使用"#PBS"前缀来设定参数。为区别PBS参数和注释内容，实际注释内容就用三个井号来表示。</p>
+</div>
+<p>第二种方法起到的效果与第一种相同，第二种方法还可以在脚本中添加一些我们自己想要添加的命令或程序，比如这个例子中的打印开始时间和结束时间的计时功能。</p>
+<p>我们建议使用第二种在在脚本中设定参数的方法。</p>
+<h1 id="_2">申请计算资源</h1>
+<p>作业提交脚本中最为重要的参数为计算资源申请部分。</p>
+<p>如请求4个节点，每个节点上使用2个CPU，每个核心的最大内存为1024mb，那么-l参数应该写为:</p>
+<pre><code class="bash">#PBS -l nodes=4:ppn=2,pmem=1024mb
+</code></pre>
+
+<p>也可以将这些参数拆开，分行写成</p>
+<pre><code class="bash">#PBS -l nodes=4
+#PBS -l ppn=2
+#PBS -l pmem=1024mb
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>资源</th>
+<th>取值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nodes</td>
+<td>节点</td>
+<td>设定作业所需节点资源</td>
+</tr>
+<tr>
+<td>ppn</td>
+<td>数值，应小于每个节点上的CPU核数</td>
+<td>设定每个节点所需要的CPU核数</td>
+</tr>
+<tr>
+<td>walltime</td>
+<td>hh:mm:ss</td>
+<td>设定作业所需的最大墙上时间，从进程从开始运行到结束，时钟走过的时间</td>
+</tr>
+<tr>
+<td>pmem</td>
+<td>正整数，后面可跟b、kb、mb、gb</td>
+<td>设定作业在每个核心上所需最大内存</td>
+</tr>
+<tr>
+<td>cput</td>
+<td>hh:mm:ss</td>
+<td>设定作业所需的最大CPU时间，用户的作业获得了CPU资源以后，所有CPU执行时间的总和</td>
+</tr>
+</tbody>
+</table>
+<p><em>表 常用资源设置参数</em></p>
+<h1 id="pbs_2">PBS脚本变量</h1>
+<p>PBS脚本中有一些与集群环境相关的环境变量。这些环境变量是PBS系统传递给脚本的变量内容，在脚本中需要使用 <code>${PBS_*}</code>这样的形式获取变量值。</p>
+<p>例如，<code>${PBS_O_WORKDIR}</code>是执行<code>qsub</code>命令所在的绝对路径，<code>${PBS_QUEUE}</code>是作业所执行的队列名。</p>
+<table>
+<thead>
+<tr>
+<th>环境变量</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>登陆SHELL继承来的变量</td>
+<td>$HOME，$LANG，$PATH，$MAIL，$SHELL等shell自带环境变量</td>
+</tr>
+<tr>
+<td>PBS_ENVIRONMENT</td>
+<td>批处理作业为 PBS_BATCH，交互式作业为 PBS_INTERACTIVE</td>
+</tr>
+<tr>
+<td>PBS_JOBID</td>
+<td>PBS 系统给作业分配的标识号</td>
+</tr>
+<tr>
+<td>PBS_JOBNAME</td>
+<td>用户指定的作业名称</td>
+</tr>
+<tr>
+<td>PBS_NODEFILE</td>
+<td>执行作业的节点列表，列表的形式为：node1 node2 node3 …</td>
+</tr>
+<tr>
+<td>PBS_QUEUE</td>
+<td>作业所执行的队列名称</td>
+</tr>
+<tr>
+<td>PBS_O_HOME</td>
+<td>执行 qsub 命令的 HOME 环境变量值</td>
+</tr>
+<tr>
+<td>PBS_O_PATH</td>
+<td>执行 qsub 命令的 PATH 环境变量值</td>
+</tr>
+<tr>
+<td>PBS_O_SHELL</td>
+<td>执行 qsub 命令的 SHELL 环境变量值</td>
+</tr>
+<tr>
+<td>PBS_O_HOST</td>
+<td>执行 qsub 命令节点名称</td>
+</tr>
+<tr>
+<td>PBS_O_QUEUE</td>
+<td>提交的作业的最初队列名称</td>
+</tr>
+<tr>
+<td>PBS_O_WORKDIR</td>
+<td>执行 qsub 命令所在的绝对路径</td>
+</tr>
+</tbody>
+</table>
+<p><em>表 PBS脚本环境变量</em></p>
+<h1 id="_3">通用脚本样例</h1>
+<p>一般地，一个提交作业的脚本应如下所示。</p>
+<pre><code class="sh">#!/bin/bash
+
+### file: example.sh
+### set job name
+#PBS -N example-job
+### set output files
+#PBS -o example.stdout
+#PBS -e example.stderr
+### set queue name
+#PBS -q default
+### set computing resources
+#PBS -l nodes=2:ppn=4
+# enter job's working directory
+cd $PBS_O_WORKDIR
+# get the number of processors
+NP=`cat $PBS_NODEFILE | wc -l`
+
+### add environment variables
+module load mpi/intelmpi-2015
+# run an example mpi4py job
+mpirun -np $NP -machinefile $PBS_NODEFILE python example_mpi4py.py
+</code></pre>
+
+<p>这个样例脚本基本上能覆盖了绝大多数的功能，用户可以根据这个样例脚本做一些修改，生成适合自己的提交作业脚本。</p>
+<h1 id="qstat">使用qstat查看作业</h1>
+<p>直接执行 <code>qstat</code> 可以看到当前用户所有提交作业，使用 <code>qstat -f &lt;job_id&gt;</code> 可以查看某个job的信息。</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../software/" class="btn btn-neutral float-right" title="软件支持">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../cluster-login/" class="btn btn-neutral" title="登录方法"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../cluster-login/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../software/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

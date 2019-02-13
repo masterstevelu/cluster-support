@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Jupyter - 中国人民大学高性能计算集群</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Jupyter";
+    var mkdocs_page_input_path = "manual/jupyter.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> 中国人民大学高性能计算集群</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">首页</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">使用指南</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../cluster-overview/">入门指南</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../cluster-login/">登录方法</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../job-scheduler/">作业调度</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../software/">软件支持</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">软件使用</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../python/">Python</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../r/">R</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../julia/">Julia</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Jupyter</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#node-0-1">登录到计算节点 node-0-1</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#jupyter">启动Jupyter</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#ssh">建立SSH隧道</a></li>
+    
+
+    <li class="toctree-l3"><a href="#jupyter_1">在个人浏览器打开Jupyter界面</a></li>
+    
+
+    <li class="toctree-l3"><a href="#jupyter_2">关闭Jupyter</a></li>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">中国人民大学高性能计算集群</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>软件使用 &raquo;</li>
+        
+      
+    
+    <li>Jupyter</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>Jupyter Notebook可以允许在网页页面中直接编写代码和运行代码，得到运行结果，用户在网页界面中可以完成整个数据科学的工作流程，包括数据清理、统计建模、构建和训练机器学习模型、可视化数据等等。这种交互界面大大方便了研究人员进行数据科学的开发和调试。</p>
+<p>由于用户只能访问集群的登录节点，集群上计算节点是无法被用户直接访问，而登录节点原则上不允许直接运行 Jupyter 等程序。因此，在集群上使用 Jupyter 要稍做一些修改。</p>
+<ol>
+<li>登录到计算节点node-0-1</li>
+<li>启动Jupyter</li>
+<li>建立SSH隧道</li>
+<li>在个人浏览器打开Jupyter界面</li>
+</ol>
+<h1 id="node-0-1">登录到计算节点 node-0-1</h1>
+<p>从登录节点ssh到集群计算节点 node-0-1，集群目前暂时只支持 node-0-1 使用 jupyter，如用户太多，计算需求无法被满足，可与我们联系，进行扩容。</p>
+<pre><code class="bash">ssh node-0-1
+</code></pre>
+
+<h2 id="jupyter">启动Jupyter</h2>
+<ol>
+<li>在计算节点node-0-1上加载anaconda和相应python或r环境，使用命令启动Jupyter Notebook。</li>
+</ol>
+<pre><code class="bash">module load anaconda/5.3.0
+source activate python36
+jupyter notebook --no-browser --port=9030 --ip=node-0-1
+</code></pre>
+
+<div class="admonition tip">
+<p class="admonition-title">IP和端口号</p>
+<p>为避免端口号冲突，port要设置成9000~9999中的某个值。如这个端口被占用，系统会提示 <code>The port 9030 is already in use, trying another port.</code> 。请选择另外一个端口号尝试重启 Jupyter。启动成功后记住这个端口号。IP目前暂时只支持 node-0-1。</p>
+</div>
+<h1 id="ssh">建立SSH隧道</h1>
+<p>SSH隧道的原理如图所示，我们为了访问原本无法访问的 node-0-1，需要建立一个隧道。刚刚启动Jupyter所用的端口号9030，即为Remote Server Port。</p>
+<p><img alt="SSH隧道" src="../../img/local-port-forwarding.png" /></p>
+<p><strong>Mac和Linux用户</strong></p>
+<p>直接使用ssh命令</p>
+<pre><code class="bash">ssh -NL 9030:node-0-1:9030 linpack@183.174.229.251
+</code></pre>
+
+<p>记得这里为将9030修改为你刚才启动Jupyter的端口号。</p>
+<p><strong>Windows用户</strong></p>
+<p>MobaXterm 用户 可以在“Tools”下“MobaSSHTunnel (port forwarding)”中选择“New SSH Tunnel”，选择“Local port forwarding” 选项，在Remote Server处将端口号和服务器填写进去。然后启动这个SSH隧道。</p>
+<h1 id="jupyter_1">在个人浏览器打开Jupyter界面</h1>
+<p>刚才启动Jupyter的时候，系统会返回一个登录的URL：</p>
+<p><code>http://node-0-1:9030/?token=a6f9113aef92aafaed458917ebcc43de5c77483572fdf484</code></p>
+<p>把URL中的node-0-1换成localhost即可，访问该URL即可使用Jupyter服务。</p>
+<h1 id="jupyter_2">关闭Jupyter</h1>
+<p>不需要时，请在node-0-1的命令行使用<code>Control-C</code>及时关闭你的Jupyter服务。</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../julia/" class="btn btn-neutral" title="Julia"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../julia/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

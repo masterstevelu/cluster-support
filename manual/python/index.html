@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Python - 中国人民大学高性能计算集群</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Python";
+    var mkdocs_page_input_path = "manual/python.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> 中国人民大学高性能计算集群</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">首页</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">使用指南</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../cluster-overview/">入门指南</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../cluster-login/">登录方法</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../job-scheduler/">作业调度</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../software/">软件支持</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">软件使用</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="./">Python</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#conda-python">使用 conda 管理 Python 环境</a></li>
+    
+
+    <li class="toctree-l3"><a href="#python">在调度系统中提交 Python 作业</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../r/">R</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../julia/">Julia</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../jupyter/">Jupyter</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">中国人民大学高性能计算集群</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>软件使用 &raquo;</li>
+        
+      
+    
+    <li>Python</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>我们在公共目录上安装了Python解释器，也安装了 <a href="https://www.anaconda.com/">Anaconda</a> 包管理器。建议用户使用Anaconda。</p>
+<h1 id="conda-python">使用 conda 管理 Python 环境</h1>
+<p>加载 Anaconda</p>
+<pre><code class="bash">module load anaconda/5.3.0
+</code></pre>
+
+<p>接下来我们用 <code>conda</code> 来安装和管理一个针对自己的Python环境。</p>
+<pre><code>conda create -n test_env python=3.6
+</code></pre>
+
+<p>conda 会在用户个人目录 <code>/home/~your-cluster-username~/.conda/envs/test_env</code> 里创建 Python 3.6 的环境，安装了Python 3.6解释器、pip等软件。</p>
+<p>使用 conda 继续安装所需软件包 <code>numpy</code>，-n 表示安装到所创建的test_env的Python环境。</p>
+<pre><code class="bash">conda install -n test_env numpy
+</code></pre>
+
+<p>激活这个环境，激活后行首会出现<code>(your_env_name)</code>，表示激活成功：</p>
+<pre><code class="bash">[linpack@rmdx-cluster ~]$ source activate test_env
+(test_env) [linpack@rmdx-cluster ~]$
+</code></pre>
+
+<p>在这个环境中也可以使用 <code>pip</code> 来安装自己想要安装的软件：</p>
+<pre><code class="bash">pip3 install jieba -i https://pypi.douban.com/simple
+</code></pre>
+
+<div class="admonition tip">
+<p class="admonition-title">国内源</p>
+<p>pip默认使用的官方源服务器在国外，相对比较慢。<code>-i https://pypi.douban.com/simple</code> 使用了豆瓣提供的国内Python安装源，可以大大加快安装速度。</p>
+</div>
+<p>退出该环境：</p>
+<pre><code class="bash">source deactivate
+</code></pre>
+
+<div class="admonition note">
+<p class="admonition-title">为什么要创建虚拟环境</p>
+<p>conda 的虚拟环境提供了环境隔离。不同用户可以使用不同的包，同一用户也可以使用不同版本的包。这样可以保证用户之间、环境和环境之间互相不冲突。</p>
+</div>
+<p>用户可以根据我们本教程来创建自己的环境，也可以使用我们已经安装好的基础环境（base）。基础环境包含了常见的数据科学库，包括mpi4py、numpy 、 pandas 、 scikit-learn 、 xgboost等。</p>
+<p>使用 <code>conda list -n base</code> 查看基础环境已经安装的包。</p>
+<p>普通用户无root权限，无法在基础环境（base）上安装或修改包。用户将常用包告知我们，我们统一安装，也可以根据需要创建自己的环境，或从基础环境上克隆出自己的环境再进行修改：</p>
+<pre><code class="bash">conda create --name test_env_2 --clone base
+</code></pre>
+
+<p>删除环境：</p>
+<pre><code class="bash">conda remove --name test_env_2 --all
+</code></pre>
+
+<div class="admonition warning">
+<p class="admonition-title">注意！</p>
+<p>如不激活任何环境，系统使用默认的基础环境（base）。有时会因为忘记执行激活用户环境的命令，导致程序报错，这时应该检查自己是否激活正确的环境。</p>
+</div>
+<h1 id="python">在调度系统中提交 Python 作业</h1>
+<p>准备好一个 Python 程序，程序使用 xgboost 算法对 iris 数据集进行分类预测，输出准确度：</p>
+<pre><code class="python">from sklearn.datasets import load_iris
+import xgboost as xgb
+from xgboost import plot_importance
+from matplotlib import pyplot as plt
+from sklearn.model_selection import train_test_split
+
+# read in the iris data
+iris = load_iris()
+
+X = iris.data
+y = iris.target
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234565)
+
+params = {
+    'booster': 'gbtree',
+    'objective': 'multi:softmax',
+    'num_class': 3,
+    'gamma': 0.1,
+    'max_depth': 6,
+    'lambda': 2,
+    'subsample': 0.7,
+    'colsample_bytree': 0.7,
+    'min_child_weight': 3,
+    'silent': 1,
+    'eta': 0.1,
+    'seed': 1000,
+    'nthread': 4,
+}
+
+plst = params.items()
+dtrain = xgb.DMatrix(X_train, y_train)
+num_rounds = 500
+model = xgb.train(plst, dtrain, num_rounds)
+
+# 对测试集进行预测
+dtest = xgb.DMatrix(X_test)
+ans = model.predict(dtest)
+
+# 计算准确率
+cnt1 = 0
+cnt2 = 0
+for i in range(len(y_test)):
+    if ans[i] == y_test[i]:
+        cnt1 += 1
+    else:
+        cnt2 += 1
+
+print(&quot;Accuracy: %.2f %% &quot; % (100 * cnt1 / (cnt1 + cnt2)))
+
+# 显示重要特征
+#plot_importance(model)
+#plt.show()
+</code></pre>
+
+<p>编写 PBS 脚本如下：</p>
+<pre><code class="bash">#PBS -N iris_classification_example
+### use one node for this job
+#PBS -l nodes=1
+#PBS -q default
+#PBS -o iris.stdout
+#PBS -e iris.stderr
+
+cd $PBS_O_WORKDIR
+### set python in anaconda and 'test_evn_2' environment
+module load anaconda/5.3.0
+source activate test_env_2
+
+python3 iris_with_xgb.py
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../r/" class="btn btn-neutral float-right" title="R">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../software/" class="btn btn-neutral" title="软件支持"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../software/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../r/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

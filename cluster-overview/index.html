@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>入门指南 - 中国人民大学高性能计算集群</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u5165\u95e8\u6307\u5357";
+    var mkdocs_page_input_path = "cluster-overview.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> 中国人民大学高性能计算集群</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">首页</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">使用指南</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="./">入门指南</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#_1">高性能计算集群简介</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_2">人大集群概况</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_3">账号申请</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_4">登录方法</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_5">软件支持</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_6">作业调度</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_7">数据管理</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../cluster-login/">登录方法</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../job-scheduler/">作业调度</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../software/">软件支持</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">软件使用</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../manual/python/">Python</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../manual/r/">R</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../manual/julia/">Julia</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../manual/jupyter/">Jupyter</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">中国人民大学高性能计算集群</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>使用指南 &raquo;</li>
+        
+      
+    
+    <li>入门指南</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1>入门指南</h1>
+
+<p><hr></hr></p>
+<h1 id="_1">高性能计算集群简介</h1>
+<p><img alt="集群架构" src="../img/cluster.png" /></p>
+<p><em>图 集群拓扑结构图</em></p>
+<p>广义上来讲，一个高性能计算集群是由一组计算性能强劲的计算机通过高速网络连接后组成。集群中某单台计算机被称为节点（node）。高性能计算集群一般由登录节点、计算节点和存储节点组成。</p>
+<p>其中，计算节点和存储节点不能被用户直接访问，需要用户先连接到登录节点，登录节点是连接整个集群的入口。计算节点，顾名思义，就是提供计算服务的计算机节点。通常情况下，一个用户作业任务需要一台或多台计算节点来支持其计算服务。将某个计算作业任务分配到不同计算节点上进行计算的工具被称为<strong>作业调度器</strong>。计算作业一般需要读写文件，我们采用了<strong>共享存储系统</strong>，将存储节点的磁盘空间映射到所有计算节点上。共享存储系统使用户可以像操作个人计算机上的文件一样操作远程的存储节点上的文件。</p>
+<h1 id="_2">人大集群概况</h1>
+<p>中国人民大学高性能计算集群由55台计算节点、1台存储节点和1台登录节点组成，总CPU核数1456颗，内存共4608GB，存储空间190TB，理论计算峰值25625flops。</p>
+<p>集群中所有节点均为CentOS 6.6 Linux操作系统，为用户提供了标准的64位Linux操作系统环境。这要求用户需具有一定的Linux操作基础，包括Linux shell命令行知识、vi编辑器操作基础等相关知识。集群使用了NFS文件系统以支持用户的存储需求、Torque/PBS作业调度系统支持集群计算资源调度。</p>
+<p>由于校园网网关的限制以及安全的考虑，目前集群不支持从校外登陆。需要校外登录的用户可以考虑使用TeamViewer软件，在校外远程登录到校内机器上。</p>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>理论峰值性能</td>
+<td>25625flops</td>
+</tr>
+<tr>
+<td>linpack实测性能</td>
+<td>21000flops</td>
+</tr>
+<tr>
+<td>双路刀片节点 50台</td>
+<td>24 * Intel Xeon E5 2650 2.2G Hz 64GB 内存</td>
+</tr>
+<tr>
+<td>四路胖节点 5台</td>
+<td>40 * Intel Xeon E5 4620 2.0G Hz 256GB内存</td>
+</tr>
+<tr>
+<td>登录节点</td>
+<td>1台</td>
+</tr>
+<tr>
+<td>存储节点</td>
+<td>1台</td>
+</tr>
+<tr>
+<td>CPU核数</td>
+<td>1456核</td>
+</tr>
+<tr>
+<td>内存</td>
+<td>4608GB</td>
+</tr>
+<tr>
+<td>存储能力</td>
+<td>150TB</td>
+</tr>
+<tr>
+<td>操作系统</td>
+<td>CentOS 6.6</td>
+</tr>
+<tr>
+<td>存储系统</td>
+<td>NFS</td>
+</tr>
+<tr>
+<td>作业调度系统</td>
+<td>PBS(Torque)</td>
+</tr>
+</tbody>
+</table>
+<p>表 1 集群配置概况</p>
+<p>其中用户登录节点为IP地址为183.174.229.251。此节点为用户主登录节点，用户使用本集群需要先登录到此节点。用户在此节点上可以编译代码，并通过作业调度系统提交作业。</p>
+<div class="admonition warning">
+<p class="admonition-title">注意</p>
+<p>禁止在登录节点上运行作业，否则会影响其他用户的使用！</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>节点名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>登录节点</td>
+<td>rmdx-cluster</td>
+<td>用户登录、编写代码、提交作业</td>
+</tr>
+<tr>
+<td>计算节点</td>
+<td>node-0-1~16</td>
+<td>计算节点</td>
+</tr>
+<tr>
+<td>-</td>
+<td>node-1-1~16</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>node-2-1~16</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>node-3-1~2</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>pnode-1~5</td>
+<td>大内存、高性能计算</td>
+</tr>
+<tr>
+<td>存储节点</td>
+<td>io-0-1</td>
+<td>文件存储</td>
+</tr>
+</tbody>
+</table>
+<h1 id="_3">账号申请</h1>
+<p>集群现对人民大学在校师生开放，对于科研计算需求，按照一个课题组/导师共用一个账号的方式进行账号管理。请将科研方向、所在院系、所在课题组导师姓名、联系电话和邮箱、所需软件或其他特殊计算需求等相关信息发送到邮箱 <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#121;&#105;&#113;&#105;&#112;&#105;&#110;&#103;&#116;&#97;&#105;&#64;&#49;&#50;&#54;&#46;&#99;&#111;&#109;">&#121;&#105;&#113;&#105;&#112;&#105;&#110;&#103;&#116;&#97;&#105;&#64;&#49;&#50;&#54;&#46;&#99;&#111;&#109;</a>。</p>
+<h1 id="_4">登录方法</h1>
+<p>用户需要基于SSH协议来访问集群，成功申请到账号后，请参考我们提供的<a href="../cluster-login/">登录方法</a>。</p>
+<h1 id="_5">软件支持</h1>
+<p>我们在集群上安装了常用的编译器、程序包和科学计算软件，涵盖了绝大多数科学计算应用场景，软件安装和使用说明请参考<a href="../software/">软件支持</a>。</p>
+<h1 id="_6">作业调度</h1>
+<p>与用户的个人计算机不同，集群是一个多人共享的服务，不能直接在机器上执行计算任务，需要使用作业调度器来调度计算资源。我们采用了一款名为Torque的作业调度器来管理资源和调度作业。调度器会根据集群当时的负载状况，帮助用户分配所需要的计算资源，最终指定一台或多台计算节点来运行用户的计算任务。请参考我们的<a href="../job-scheduler/">作业调度器使用指南</a>。</p>
+<h1 id="_7">数据管理</h1>
+<p>用户登录后将进入账户对应的家目录（home），对于某个用户，其家目录为<code>/home/your-cluster-username/</code>一般情况下，用户的个人数据都应存放在个人家目录中，包括代码、可执行文件和部分数据。较大的规模的数据必须放置在 <code>/mnt/data/</code> 目录下。该目录可用容量为150TB。鉴于存储空间有限，出于数据安全的考虑，请用户务必及时备份和下载代码数据和计算结果，并定期清理存储空间。</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../cluster-login/" class="btn btn-neutral float-right" title="登录方法">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="首页"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../cluster-login/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

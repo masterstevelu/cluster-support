@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>登录方法 - 中国人民大学高性能计算集群</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u767b\u5f55\u65b9\u6cd5";
+    var mkdocs_page_input_path = "cluster-login.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> 中国人民大学高性能计算集群</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">首页</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">使用指南</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../cluster-overview/">入门指南</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">登录方法</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#windows">Windows用户</a></li>
+    
+
+    <li class="toctree-l3"><a href="#linuxmac">Linux和Mac用户</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#_1">免密码登录</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../job-scheduler/">作业调度</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../software/">软件支持</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">软件使用</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../manual/python/">Python</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../manual/r/">R</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../manual/julia/">Julia</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../manual/jupyter/">Jupyter</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">中国人民大学高性能计算集群</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>使用指南 &raquo;</li>
+        
+      
+    
+    <li>登录方法</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1>登录集群</h1>
+
+<p><hr></hr></p>
+<p>集群操作系统为CentOS Linux操作系统，需要使用可以SSH远程登录的软件来登录集群。</p>
+<p>当用户从集群管理员获取到用户名和密码后，使用登录软件，连接登录节点rmdx-cluster（183.174.229.251）。</p>
+<p>登录节点后，用户默认将进入账户对应的家目录（home目录），对于某个用户，其家目录为<code>/home/your-cluster-username/</code>一般情况下，用户的个人数据都应存放在个人家目录中，包括代码、可执行文件和部分数据。</p>
+<h1 id="windows">Windows用户</h1>
+<p>Windows下的登录软件有 XShell 、SecureCRT、 <a href="https://putty.org/">Putty</a> 和 <a href="https://mobaxterm.mobatek.net/">MobaXterm</a> ，其中 XShell 和 SecureCRT 是付费商业软件，功能强大，简单易用，用户众多，因此也有很多破解版本；Putty 是免费软件，但功能相对简单。<a href="https://blog.csdn.net/ValDC_Morning/article/details/79051615">文章</a>列举了使用上述几种软件连接集群的具体使用方法。我们不建议使用盗版破解的 XShell 和 SecureCRT ，有些别有用心的人会修改软件，在其中植入木马，窃取你的用户名密码等信息。</p>
+<p>我们推荐使用 MobaXterm ，这是一款功能强大的客户端，集成了命令行和文件上传等功能，并且提供官方免费版，足以覆盖日常需求 。</p>
+<p>用户需要从本地上传代码或数据时，Windows用户可使用 <a href="https://winscp.net/eng/index.php">Winscp</a> 或 xftp 等支持文件上传的软件。<a href="https://winscp.net/eng/index.php">Winscp</a> 主要功能是在用户的本地与计算集群间复制、编辑文件，使用方法可参考其<a href="https://winscp.net/eng/docs/introduction">官方文档</a>。MobaXterm 已经集成了文件上传的功能(sftp)，已经安装 MobaXterm 的用户可不必再安装 Winscp。</p>
+<h1 id="linuxmac">Linux和Mac用户</h1>
+<p>Mac OS X下建议使用 <a href="https://www.iterm2.com/">iTerm</a> ，Ubuntu 等 Linux 系统可以使用自带的终端软件。</p>
+<p>用户可以直接终端中使用 <code>ssh</code> 和 <code>scp</code> 或 <code>rsync</code> 命令来登录集群和上传文件。</p>
+<pre><code class="bash">ssh yourusername@183.174.229.251
+</code></pre>
+
+<p>scp可以将数据同步到集群，也可以从远程复制到本地。命令的基本模式为：</p>
+<pre><code class="bash">scp [source_location] [destination]
+</code></pre>
+
+<p>将本地当前文件夹下 README.md 上传到集群 <code>/home/~your-cluster-username~/examples/</code> 位置下：</p>
+<pre><code class="bash">scp README.md ~your-cluster-username~@183.174.229.251:/home/~your-cluster-username~/examples/
+</code></pre>
+
+<p>将集群 <code>/home/~your-cluster-username~/examples/</code> 同步到本地当前目录：</p>
+<pre><code class="bash">scp -r ~your-cluster-username~@183.174.229.251:/home/~your-cluster-username~/examples/ ./
+</code></pre>
+
+<p>更多<code>scp</code> 命令使用方法可参考<a href="http://www.runoob.com/linux/linux-comm-scp.html">文章</a>。</p>
+<p><code>rsync</code> 是一个比 <code>scp</code> 更快的命令，比起 <code>scp</code> 将整个文件进行传输，它是增量传输文件，即只传输文件中被修改的部分。<code>rsync</code> 可被用来文件夹之间以及机器之间同步数据。</p>
+<pre><code class="bash">rsync -r README.md linpack@183.174.229.251:/home/~your-cluster-username~/examples
+</code></pre>
+
+<div class="admonition tip">
+<p class="admonition-title">文件夹同步</p>
+<p><code>scp</code> 和 <code>rsync</code> 的 "-r" 模式可以同步整个文件夹。</p>
+</div>
+<h2 id="_1">免密码登录</h2>
+<p>本节仅针对Linxu和Mac用户。</p>
+<p>每次使用<code>ssh</code> 和 <code>scp</code> 命令时都需要用户输入密码，对于频繁操作来说有些麻烦，好在ssh协议提供了免密码登录的功能。ssh免密码登录需要一对密钥对，其中一个私钥放在用户本机，一个公钥放在集群的公钥目录：<code>~/.ssh/authorized_keys</code>。下次登录时，用户本机的私钥和远程集群的公钥通过加密协议的配对，验证成功后将不需要密码直接登录成功。所以这里需要生成公私钥，并将公钥上传到集群指定位置。</p>
+<p>1 生成公私钥
+2 将公钥上传到集群
+3 登录集群 将集群上的公钥添加到指定文件上</p>
+<p>在本机生成公钥和私钥的命令为</p>
+<pre><code class="bash">ssh-keygen -t rsa
+</code></pre>
+
+<p>这时终端会提示</p>
+<pre><code class="bash">Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/~your-local-username~/.ssh/id_rsa):
+</code></pre>
+
+<p>括号内为生成的公私钥的默认目录位置，直接回车就会使用这个默认位置。如果默认位置已经生成过公私钥，则终端会提示是否需要覆盖，这时可不用再次生成公私钥。</p>
+<pre><code class="bash">/Users/~your-local-username~/.ssh/id_rsa already exists.
+Overwrite (y/n)?
+</code></pre>
+
+<p>终端会提示输入密码 passphrase，这个密码为生成私钥的密码，将来防止私钥被其他人盗用。这里可以不输入任何密码，直接回车，再次提示输入密码，再次回车。</p>
+<p>这时公钥存储在 <code>/Users/~your-local-username~/.ssh/id_rsa.pub</code> 文件里，私钥存储在 <code>/Users/~your-local-username~/.ssh/id_rsa</code> 文件里。</p>
+<p>生成好公私钥后，接下来需要我们将公钥上传到集群，这里使用 <code>scp</code> 命令，并将公钥追加到 <code>~/.ssh/authorized_keys</code>。</p>
+<pre><code class="bash">scp /Users/~your-local-username~/.ssh/id_rsa.pub ~your-cluster-username~@183.174.229.251:/home/~your-cluster-username~/id_rsa.pub
+</code></pre>
+
+<p>公钥上传到集群后，使用ssh命令登录到集群，执行命令将公钥添加到指定文件上。</p>
+<pre><code>cat /home/~your-cluster-username~/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+</code></pre>
+
+<p>接下来就可以免密码登录了。</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../job-scheduler/" class="btn btn-neutral float-right" title="作业调度">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../cluster-overview/" class="btn btn-neutral" title="入门指南"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../cluster-overview/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../job-scheduler/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
