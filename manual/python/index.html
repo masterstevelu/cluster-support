@@ -106,6 +106,10 @@
                     
     <a class="" href="../jupyter/">Jupyter</a>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../singularity/">Singularity</a>
+                </li>
     </ul>
 	    </li>
           
@@ -145,7 +149,8 @@
           <div role="main">
             <div class="section">
               
-                <p>我们在公共目录上安装了Python解释器，也安装了 <a href="https://www.anaconda.com/">Anaconda</a> 包管理器。建议用户使用Anaconda。</p>
+                <p>我们建议用户使用 <a href="https://www.anaconda.com/">Anaconda</a> 来管理Python。我们已经在 Anaconda 中安装好了常用的 Python 科学计算库，包括 jupyter、mpi4py、numpy、pandas、scikit-learn、xgboost等。</p>
+<p>对于深度学习技术的用户，由于大多数深度学习框架对操作系统版本要求高，我们建议使用Singularity容器来运行你的计算任务。你可以忽略下文的教程，直接跳转到<a href="../singularity/">Singularity</a>的页面。</p>
 <h1 id="conda-python">使用 conda 管理 Python 环境</h1>
 <p>加载 Anaconda</p>
 <pre><code class="bash">module load anaconda/5.3.0

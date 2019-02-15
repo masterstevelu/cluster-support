@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Jupyter - 中国人民大学高性能计算集群</title>
+  <title>Singularity - 中国人民大学高性能计算集群</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Jupyter";
-    var mkdocs_page_input_path = "manual/jupyter.md";
+    var mkdocs_page_name = "Singularity";
+    var mkdocs_page_input_path = "manual/singularity.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -93,34 +93,19 @@
                     
     <a class="" href="../julia/">Julia</a>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../jupyter/">Jupyter</a>
+                </li>
                 <li class=" current">
                     
-    <a class="current" href="./">Jupyter</a>
+    <a class="current" href="./">Singularity</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#node-0-1">登录到计算节点 node-0-1</a></li>
-    
-
-    <li class="toctree-l3"><a href="#jupyter">启动Jupyter</a></li>
-    
-
-    <li class="toctree-l3"><a href="#ssh">建立SSH隧道</a></li>
-    
-
-    <li class="toctree-l3"><a href="#jupyter_1">在个人浏览器打开Jupyter界面</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#jupyter_2">关闭Jupyter</a></li>
-        
-        </ul>
+    <li class="toctree-l3"><a href="#singularity">Singularity容器</a></li>
     
 
     </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../singularity/">Singularity</a>
                 </li>
     </ul>
 	    </li>
@@ -151,7 +136,7 @@
         
       
     
-    <li>Jupyter</li>
+    <li>Singularity</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -161,50 +146,9 @@
           <div role="main">
             <div class="section">
               
-                <p><a href="https://jupyter.org/">Jupyter</a> Notebook可以允许在网页页面中直接编写代码和运行代码，得到运行结果，用户在网页界面中可以完成整个数据科学的工作流程，包括数据清理、统计建模、构建和训练机器学习模型、可视化数据等等。这种交互界面大大方便了研究人员进行数据科学的开发和调试。</p>
-<p>由于集群上计算节点是无法被用户直接访问，用户只能访问集群的登录节点，而登录节点原则上不允许直接运行 Jupyter 等程序。因此，在集群上使用 Jupyter 暂时不需要向作业调度系统提交作业，而是直接在计算节点上启动作业。</p>
-<ol>
-<li>登录到计算节点node-0-1</li>
-<li>启动Jupyter</li>
-<li>建立SSH隧道</li>
-<li>在个人浏览器打开Jupyter界面</li>
-</ol>
-<h2 id="node-0-1">登录到计算节点 node-0-1</h2>
-<p>从登录节点ssh到集群计算节点 node-0-1，集群目前暂时只支持 node-0-1 使用 jupyter，如用户太多，计算需求无法被满足，可与我们联系，我们会根据情况进行扩容。</p>
-<pre><code class="bash">ssh node-0-1
-</code></pre>
-
-<h2 id="jupyter">启动Jupyter</h2>
-<ol>
-<li>在计算节点node-0-1上加载anaconda和相应python或r环境，使用命令启动Jupyter Notebook。</li>
-</ol>
-<pre><code class="bash">module load anaconda/5.3.0
-source activate python36
-jupyter notebook --no-browser --port=9030 --ip=node-0-1
-</code></pre>
-
-<div class="admonition tip">
-<p class="admonition-title">IP和端口号</p>
-<p>为避免端口号冲突，port要设置成9000~9999中的某个值。如这个端口被占用，系统会提示 <code>The port 9030 is already in use, trying another port.</code> 。请选择另外一个端口号尝试重启 Jupyter。启动成功后记住这个端口号。IP目前暂时只支持 node-0-1。</p>
-</div>
-<h2 id="ssh">建立SSH隧道</h2>
-<p>SSH隧道的原理如图所示，我们为了访问原本无法访问的 node-0-1，需要建立一个隧道。刚刚启动Jupyter所用的端口号9030，即为Remote Server Port。</p>
-<p><img alt="SSH隧道" src="../../img/local-port-forwarding.png" /></p>
-<p><strong>Mac和Linux用户</strong></p>
-<p>直接使用ssh命令</p>
-<pre><code class="bash">ssh -NL 9030:node-0-1:9030 linpack@183.174.229.251
-</code></pre>
-
-<p>记得这里为将9030修改为你刚才启动Jupyter的端口号。</p>
-<p><strong>Windows用户</strong></p>
-<p>MobaXterm 用户 可以在“Tools”下“MobaSSHTunnel (port forwarding)”中选择“New SSH Tunnel”，选择“Local port forwarding” 选项，在Remote Server处将端口号和服务器填写进去。然后启动这个SSH隧道。</p>
-<p>其他SSH客户端用户可以根据上述原理配置SSH隧道的转发规则。</p>
-<h1 id="jupyter_1">在个人浏览器打开Jupyter界面</h1>
-<p>刚才启动Jupyter的时候，系统会返回一个登录的URL：</p>
-<p><code>http://node-0-1:9030/?token=a6f9113aef92aafaed458917ebcc43de5c77483572fdf484</code></p>
-<p>把URL中的node-0-1换成localhost即可，访问该URL即可使用Jupyter服务。</p>
-<h2 id="jupyter_2">关闭Jupyter</h2>
-<p>不需要时，请在node-0-1的命令行使用<code>Control-C</code>及时关闭你的Jupyter服务。</p>
+                <h1 id="singularity">Singularity容器</h1>
+<p><a href="https://www.sylabs.io/docs/">Singularity</a> 是一种针对高性能计算而设计的的 Linux 容器，它完美支持了并行计算、深度学习等科学计算技术，被广泛部署在全球各大高性能计算中心，包括斯坦福、哈佛、耶鲁、普林斯顿等大学的高性能计算中心均已采用这项技术。</p>
+<p>和 Docker 及其相似，Singularity 是一种容器技术。容器将用户所需的操作系统和应用软件打包到一个“镜像”中。用户需要计算环境时，镜像可以被 Singularity 以类似一台“虚拟机”的方式启动。例如，用户可以在一台CentOS上启动一台基于Ubuntu的容器，且容器中已经安装好指定版本的深度学习框架。但不同于虚拟机，容器启动速度极快。相比在物理机上运行程序而言，在容器上运行程序的性能损失几乎可忽略不计。Singularity 允许用户间共享镜像，如果你的工作需要和其他研究人员合作，或者你的工作经常在不同的计算机环境上切换，那 Singularity 将大大提高你的工作效率。</p>
               
             </div>
           </div>
@@ -212,10 +156,8 @@ jupyter notebook --no-browser --port=9030 --ip=node-0-1
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../singularity/" class="btn btn-neutral float-right" title="Singularity">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../julia/" class="btn btn-neutral" title="Julia"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../jupyter/" class="btn btn-neutral" title="Jupyter"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -241,10 +183,8 @@ jupyter notebook --no-browser --port=9030 --ip=node-0-1
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../julia/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../jupyter/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../singularity/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

@@ -71,28 +71,27 @@
     <a class="current" href="./">作业调度</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#pbs">PBS简介</a></li>
+    <li class="toctree-l3"><a href="#_1">作业调度</a></li>
     
-
-    <li class="toctree-l3"><a href="#_1">作业提交流程</a></li>
-    
-
-    <li class="toctree-l3"><a href="#qsub">使用qsub提交作业</a></li>
-    
-
-    <li class="toctree-l3"><a href="#pbs_1">PBS作业参数</a></li>
-    
-
-    <li class="toctree-l3"><a href="#_2">申请计算资源</a></li>
-    
-
-    <li class="toctree-l3"><a href="#pbs_2">PBS脚本变量</a></li>
-    
-
-    <li class="toctree-l3"><a href="#_3">通用脚本样例</a></li>
-    
-
-    <li class="toctree-l3"><a href="#qstat">使用qstat查看作业</a></li>
+        <ul>
+        
+            <li><a class="toctree-l4" href="#pbs">PBS简介</a></li>
+        
+            <li><a class="toctree-l4" href="#_2">作业提交流程</a></li>
+        
+            <li><a class="toctree-l4" href="#qsub">使用qsub提交作业</a></li>
+        
+            <li><a class="toctree-l4" href="#pbs_1">PBS作业参数</a></li>
+        
+            <li><a class="toctree-l4" href="#_3">申请计算资源</a></li>
+        
+            <li><a class="toctree-l4" href="#pbs_2">PBS脚本变量</a></li>
+        
+            <li><a class="toctree-l4" href="#_4">通用脚本样例</a></li>
+        
+            <li><a class="toctree-l4" href="#qstat">使用qstat查看作业</a></li>
+        
+        </ul>
     
 
     </ul>
@@ -123,6 +122,10 @@
                 <li class="">
                     
     <a class="" href="../manual/jupyter/">Jupyter</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../manual/singularity/">Singularity</a>
                 </li>
     </ul>
 	    </li>
@@ -163,18 +166,16 @@
           <div role="main">
             <div class="section">
               
-                <h1>作业调度</h1>
-
-<p><hr></hr></p>
+                <h1 id="_1">作业调度</h1>
 <p>高性能计算集群配有较高的计算资源，同时拥有较多用户，是一个多用户共享的服务。为了有效利用众多处理器核心所提供的计算能力，需要一个作业管理调度系统，统一用户作业提交，合理分配计算资源，将用户的作业指派到最合适的资源上执行。</p>
 <div class="admonition note">
 <p class="admonition-title">调度器与队列</p>
 <p>如果把向集群提交作业比作前往银行办理业务，那么作业调度器就是银行门口的取号机，用户需要排队，根据叫号来办理业务。用户一般需要告知取号机自己办理哪种服务，比如存取款的普通柜台、对公柜台、VIP柜台、理财顾问等等。取号机在相应的柜台服务上生成排队号码。调度器中的队列与之相似，用户在提交作业时，一般要告知调度器作业所属的队列，调度器会把用户作业放在该队列里排队。</p>
 </div>
-<h1 id="pbs">PBS简介</h1>
+<h2 id="pbs">PBS简介</h2>
 <p>集群基于 PBS（Portable Batch System）作业管理系统来管理和调度计算任务。PBS是由NASA开发的作业调度管理系统。它被用于集群系统、超级计算机和大规模并行系统。PBS后来又发展出openPBS、PBS Pro和Torque三大分支。其中Torque是目前使用比较广泛的PBS开源实现。本集群使用Torque作为作业调度器。集群用户需要使用 PBS 脚本和命令提交计算任务。</p>
 <p>PBS系统的命令包括作业控制、作业检测和节点状态等几大部分。下面将介绍如何使用PBS系统来提交作业，其他命令的具体使用可参考<a href="../manual/torque/">PBS使用手册</a>相关内容。</p>
-<h1 id="_1">作业提交流程</h1>
+<h2 id="_2">作业提交流程</h2>
 <p>一个标准的作业提交步骤将包含以下流程：</p>
 <ol>
 <li>准备：用户编写代码，编译生成可执行文件，准备输入文件和提交作业作业的脚本（包括作业名，需要的计算资源等）。</li>
@@ -185,7 +186,7 @@
 <li>查询和调整：当作业在运行时，用户可以使用监控命令 <code>qstat</code> 进行状态查询。用户发现作业提交错误时，可以使用作业删除命令 <code>qdel</code> 删除正在运行的作业。</li>
 <li>查看结果：使用 <code>qpeek</code> 查看作业运行时的标准输出。</li>
 </ol>
-<h1 id="qsub">使用qsub提交作业</h1>
+<h2 id="qsub">使用qsub提交作业</h2>
 <p>在PBS调度系统中提交任务需要使用 <code>qsub</code> 命令，<code>qsub</code> 命令是整个调度系统中使用最多的命令。</p>
 <pre><code class="shell">qsub [options] &lt;script&gt;
 </code></pre>
@@ -203,7 +204,7 @@ hostname
 <pre><code class="bash">qsub hello.sh
 </code></pre>
 
-<h1 id="pbs_1">PBS作业参数</h1>
+<h2 id="pbs_1">PBS作业参数</h2>
 <p>前一节介绍了如何使用 <code>qsub</code> 来向集群提交作业。在提交作业过程中需要指定参数，以向集群申请资源。下表列出常用的 PBS 作业参数。</p>
 <table>
 <thead>
@@ -280,7 +281,7 @@ echo end time is `date`
 </div>
 <p>第二种方法起到的效果与第一种相同，第二种方法还可以在脚本中添加一些我们自己想要添加的命令或程序，比如这个例子中的打印开始时间和结束时间的计时功能。</p>
 <p>我们建议使用第二种在在脚本中设定参数的方法。</p>
-<h1 id="_2">申请计算资源</h1>
+<h2 id="_3">申请计算资源</h2>
 <p>作业提交脚本中最为重要的参数为计算资源申请部分。</p>
 <p>如请求4个节点，每个节点上使用2个CPU，每个核心的最大内存为1024mb，那么-l参数应该写为:</p>
 <pre><code class="bash">#PBS -l nodes=4:ppn=2,pmem=1024mb
@@ -329,7 +330,7 @@ echo end time is `date`
 </tbody>
 </table>
 <p><em>表 常用资源设置参数</em></p>
-<h1 id="pbs_2">PBS脚本变量</h1>
+<h2 id="pbs_2">PBS脚本变量</h2>
 <p>PBS脚本中有一些与集群环境相关的环境变量。这些环境变量是PBS系统传递给脚本的变量内容，在脚本中需要使用 <code>${PBS_*}</code>这样的形式获取变量值。</p>
 <p>例如，<code>${PBS_O_WORKDIR}</code>是执行<code>qsub</code>命令所在的绝对路径，<code>${PBS_QUEUE}</code>是作业所执行的队列名。</p>
 <table>
@@ -391,7 +392,7 @@ echo end time is `date`
 </tbody>
 </table>
 <p><em>表 PBS脚本环境变量</em></p>
-<h1 id="_3">通用脚本样例</h1>
+<h2 id="_4">通用脚本样例</h2>
 <p>一般地，一个提交作业的脚本应如下所示。</p>
 <pre><code class="sh">#!/bin/bash
 
@@ -417,7 +418,7 @@ mpirun -np $NP -machinefile $PBS_NODEFILE python example_mpi4py.py
 </code></pre>
 
 <p>这个样例脚本基本上能覆盖了绝大多数的功能，用户可以根据这个样例脚本做一些修改，生成适合自己的提交作业脚本。</p>
-<h1 id="qstat">使用qstat查看作业</h1>
+<h2 id="qstat">使用qstat查看作业</h2>
 <p>直接执行 <code>qstat</code> 可以看到当前用户所有提交作业，使用 <code>qstat -f &lt;job_id&gt;</code> 可以查看某个job的信息。</p>
               
             </div>

@@ -67,14 +67,13 @@
     <a class="current" href="./">登录方法</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#windows">Windows用户</a></li>
-    
-
-    <li class="toctree-l3"><a href="#linuxmac">Linux和Mac用户</a></li>
+    <li class="toctree-l3"><a href="#_1">登录方法</a></li>
     
         <ul>
         
-            <li><a class="toctree-l4" href="#_1">免密码登录</a></li>
+            <li><a class="toctree-l4" href="#windows">Windows用户</a></li>
+        
+            <li><a class="toctree-l4" href="#linuxmac">Linux和Mac用户</a></li>
         
         </ul>
     
@@ -111,6 +110,10 @@
                 <li class="">
                     
     <a class="" href="../manual/jupyter/">Jupyter</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../manual/singularity/">Singularity</a>
                 </li>
     </ul>
 	    </li>
@@ -151,17 +154,15 @@
           <div role="main">
             <div class="section">
               
-                <h1>登录集群</h1>
-
-<p><hr></hr></p>
+                <h1 id="_1">登录方法</h1>
 <p>集群操作系统为CentOS Linux操作系统，需要使用可以SSH远程登录的软件来登录集群。</p>
 <p>当用户从集群管理员获取到用户名和密码后，使用登录软件，连接登录节点rmdx-cluster（183.174.229.251）。</p>
 <p>登录节点后，用户默认将进入账户对应的家目录（home目录），对于某个用户，其家目录为<code>/home/your-cluster-username/</code>一般情况下，用户的个人数据都应存放在个人家目录中，包括代码、可执行文件和部分数据。</p>
-<h1 id="windows">Windows用户</h1>
+<h2 id="windows">Windows用户</h2>
 <p>Windows下的登录软件有 XShell 、SecureCRT、 <a href="https://putty.org/">Putty</a> 和 <a href="https://mobaxterm.mobatek.net/">MobaXterm</a> ，其中 XShell 和 SecureCRT 是付费商业软件，功能强大，简单易用，用户众多，因此也有很多破解版本；Putty 是免费软件，但功能相对简单。<a href="https://blog.csdn.net/ValDC_Morning/article/details/79051615">文章</a>列举了使用上述几种软件连接集群的具体使用方法。我们不建议使用盗版破解的 XShell 和 SecureCRT ，有些别有用心的人会修改软件，在其中植入木马，窃取你的用户名密码等信息。</p>
 <p>我们推荐使用 MobaXterm ，这是一款功能强大的客户端，集成了命令行和文件上传等功能，并且提供官方免费版，足以覆盖日常需求 。</p>
 <p>用户需要从本地上传代码或数据时，Windows用户可使用 <a href="https://winscp.net/eng/index.php">Winscp</a> 或 xftp 等支持文件上传的软件。<a href="https://winscp.net/eng/index.php">Winscp</a> 主要功能是在用户的本地与计算集群间复制、编辑文件，使用方法可参考其<a href="https://winscp.net/eng/docs/introduction">官方文档</a>。MobaXterm 已经集成了文件上传的功能(sftp)，已经安装 MobaXterm 的用户可不必再安装 Winscp。</p>
-<h1 id="linuxmac">Linux和Mac用户</h1>
+<h2 id="linuxmac">Linux和Mac用户</h2>
 <p>Mac OS X下建议使用 <a href="https://www.iterm2.com/">iTerm</a> ，Ubuntu 等 Linux 系统可以使用自带的终端软件。</p>
 <p>用户可以直接终端中使用 <code>ssh</code> 和 <code>scp</code> 或 <code>rsync</code> 命令来登录集群和上传文件。</p>
 <pre><code class="bash">ssh yourusername@183.174.229.251
@@ -188,7 +189,7 @@
 <p class="admonition-title">文件夹同步</p>
 <p><code>scp</code> 和 <code>rsync</code> 的 "-r" 模式可以同步整个文件夹。</p>
 </div>
-<h2 id="_1">免密码登录</h2>
+<h3 id="_2">免密码登录</h3>
 <p>本节仅针对Linxu和Mac用户。</p>
 <p>每次使用<code>ssh</code> 和 <code>scp</code> 命令时都需要用户输入密码，对于频繁操作来说有些麻烦，好在ssh协议提供了免密码登录的功能。ssh免密码登录需要一对密钥对，其中一个私钥放在用户本机，一个公钥放在集群的公钥目录：<code>~/.ssh/authorized_keys</code>。下次登录时，用户本机的私钥和远程集群的公钥通过加密协议的配对，验证成功后将不需要密码直接登录成功。所以这里需要生成公私钥，并将公钥上传到集群指定位置。</p>
 <p>1 生成公私钥

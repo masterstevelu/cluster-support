@@ -75,34 +75,13 @@
     <a class="current" href="./">软件支持</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#_1">软件加载方法</a></li>
+    <li class="toctree-l3"><a href="#_1">软件支持</a></li>
     
         <ul>
         
-            <li><a class="toctree-l4" href="#source">使用source加载软件</a></li>
+            <li><a class="toctree-l4" href="#_2">软件加载方法</a></li>
         
-            <li><a class="toctree-l4" href="#module">使用module加载软件</a></li>
-        
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#_2">已安装软件及其加载方法</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#_3">编译器</a></li>
-        
-            <li><a class="toctree-l4" href="#mpi">MPI库</a></li>
-        
-            <li><a class="toctree-l4" href="#_4">分子动力学软件</a></li>
-        
-            <li><a class="toctree-l4" href="#python">Python</a></li>
-        
-            <li><a class="toctree-l4" href="#r">R</a></li>
-        
-            <li><a class="toctree-l4" href="#julia">Julia</a></li>
-        
-            <li><a class="toctree-l4" href="#jupyter">Jupyter</a></li>
+            <li><a class="toctree-l4" href="#_3">已安装软件及其加载方法</a></li>
         
         </ul>
     
@@ -131,6 +110,10 @@
                 <li class="">
                     
     <a class="" href="../manual/jupyter/">Jupyter</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../manual/singularity/">Singularity</a>
                 </li>
     </ul>
 	    </li>
@@ -171,16 +154,14 @@
           <div role="main">
             <div class="section">
               
-                <h1>软件支持</h1>
-
-<p><hr></hr></p>
+                <h1 id="_1">软件支持</h1>
 <p>我们在集群上安装了常用的编译器、MPI库、数学库、解释语言与科学计算库，涵盖了绝大多数科学计算应用场景。本文将介绍如何使用这些软件。</p>
 <div class="admonition note">
 <p class="admonition-title">什么是 Linux 环境变量</p>
 <p>在Linux系统下使用软件需要了解“环境变量”这个概念。不同的软件会被安装在不同的目录下，环境变量决定了Linux系统将到哪个目录中寻找安装好的软件。用户在命令行或脚本中使用软件时，Linux 系统会从环境变量的所有路径下，从前到后寻找用户输入的软件，调用该目录的软件执行程序。一些常用的软件，如 <code>ssh</code> 已经被默认添加在系统的环境变量中。一些用户安装的软件一般要将该软件所在目录手动加载到系统的环境变量。</p>
 </div>
-<h1 id="_1">软件加载方法</h1>
-<h2 id="source">使用source加载软件</h2>
+<h2 id="_2">软件加载方法</h2>
+<h3 id="source">使用source加载软件</h3>
 <p>我们在公共目录下准备好了添加环境变量的脚本，可以使用 <code>source &lt;env_script&gt;</code> 来添加环境变量。</p>
 <p>比如，使用 openmpi 3.1.1：</p>
 <pre><code class="bash">source /public/software/gnu/etc/env.openmpi.3.1.1
@@ -192,7 +173,7 @@
 
 <p>结果为：<code>/public/software/gnu/openmpi-3.1.1/bin/mpicc</code>，表示系统已经加载该软件，接下来执行 <code>mpicc</code> 命令都使用这个目录下的安装的软件。</p>
 <div class="admonition tip">
-<p class="admonition-title">小提示</p>
+<p class="admonition-title">提示</p>
 <p>使用 gcc 编译器编译的软件环境变量脚本放置 <code>/public/software/gnu/etc/</code> 下，使用 intel 编译器编译的软件环境变量脚本放置在了 <code>/public/software/intel/etc</code> 下。</p>
 </div>
 <p>一个使用source加载软件的PBS脚本</p>
@@ -212,7 +193,7 @@ source /public/software/gnu/etc/env.openmpi.3.1.1
 mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 </code></pre>
 
-<h2 id="module">使用module加载软件</h2>
+<h3 id="module">使用module加载软件</h3>
 <p><code>source</code> 命令可以满足绝大多数需求，不过为了更加方便易用，有研究人员开发了 <a href="http://modules.sourceforge.net/">module</a> 这个软件来帮助用户加载软件。module 软件是一个用户界面友好的软件加载工具。</p>
 <ul>
 <li>列举可被加载的软件</li>
@@ -228,7 +209,7 @@ mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 </code></pre>
 
 <div class="admonition tip">
-<p class="admonition-title">小提示</p>
+<p class="admonition-title">提示</p>
 <p>软件命名规则采用了“软件名/软件版本号”的方式。用户可以使用 <code>tab</code> 键来帮助补全。</p>
 </div>
 <ul>
@@ -266,8 +247,8 @@ module load mpi/openmpi-1.6.5
 mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 </code></pre>
 
-<h1 id="_2">已安装软件及其加载方法</h1>
-<h2 id="_3">编译器</h2>
+<h2 id="_3">已安装软件及其加载方法</h2>
+<h3 id="_4">编译器</h3>
 <table>
 <thead>
 <tr>
@@ -304,7 +285,7 @@ mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 </tr>
 </tbody>
 </table>
-<h2 id="mpi">MPI库</h2>
+<h3 id="mpi">MPI库</h3>
 <table>
 <thead>
 <tr>
@@ -341,7 +322,7 @@ mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 </tr>
 </tbody>
 </table>
-<h2 id="_4">分子动力学软件</h2>
+<h3 id="_5">分子动力学软件</h3>
 <table>
 <thead>
 <tr>
@@ -373,14 +354,14 @@ mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 </tr>
 </tbody>
 </table>
-<h2 id="python">Python</h2>
+<h3 id="python">Python</h3>
 <p>参见 <a href="../manual/python/">Python使用方法</a>。</p>
-<h2 id="r">R</h2>
+<h3 id="r">R</h3>
 <p>参见 <a href="../manual/r/">R使用方法</a>。</p>
-<h2 id="julia">Julia</h2>
+<h3 id="julia">Julia</h3>
 <p>参见 <a href="../manual/julia/">Julia使用方法</a>。</p>
-<h2 id="jupyter">Jupyter</h2>
-<p>参见 <a href="../manual/jupyter/">Julia使用方法</a>。</p>
+<h3 id="jupyter">Jupyter</h3>
+<p>参见 <a href="../manual/jupyter/">Jupyter使用方法</a>。</p>
               
             </div>
           </div>
