@@ -1,7 +1,6 @@
 site_name: 中国人民大学高性能计算集群
 theme:
   name: 'readthedocs'
-  collapse_by_default: false
   highlightjs: true
 
 extra_css:
@@ -19,10 +18,12 @@ nav:
       - 'R': 'manual/r.md'
       - 'Julia': 'manual/julia.md'
       - 'Jupyter': 'manual/jupyter.md'
+      - 'Singularity': 'manual/singularity.md'
 
 
 markdown_extensions:
   - admonition
+
 
 plugins:
     - search

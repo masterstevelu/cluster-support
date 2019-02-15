@@ -1,4 +1,6 @@
-我们在公共目录上安装了Python解释器，也安装了 [Anaconda][1] 包管理器。建议用户使用Anaconda。
+ 我们建议用户使用 [Anaconda][1] 来管理Python。我们已经在 Anaconda 中安装好了常用的 Python 科学计算库，包括 jupyter、mpi4py、numpy、pandas、scikit-learn、xgboost等。
+
+ 对于深度学习技术的用户，由于大多数深度学习框架对操作系统版本要求高，我们建议使用Singularity容器来运行你的计算任务。你可以忽略下文的教程，直接跳转到[Singularity](singularity.md)的页面。
 
 # 使用 conda 管理 Python 环境
 加载 Anaconda

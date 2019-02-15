@@ -1,4 +1,4 @@
-<h1>登录集群</h1><hr></hr>
+# 登录方法
 
 集群操作系统为CentOS Linux操作系统，需要使用可以SSH远程登录的软件来登录集群。
 
@@ -6,7 +6,7 @@
 
 登录节点后，用户默认将进入账户对应的家目录（home目录），对于某个用户，其家目录为`/home/your-cluster-username/`一般情况下，用户的个人数据都应存放在个人家目录中，包括代码、可执行文件和部分数据。
 
-# Windows用户
+## Windows用户
 
 Windows下的登录软件有 XShell 、SecureCRT、 [Putty][0] 和 [MobaXterm][4] ，其中 XShell 和 SecureCRT 是付费商业软件，功能强大，简单易用，用户众多，因此也有很多破解版本；Putty 是免费软件，但功能相对简单。[文章][2]列举了使用上述几种软件连接集群的具体使用方法。我们不建议使用盗版破解的 XShell 和 SecureCRT ，有些别有用心的人会修改软件，在其中植入木马，窃取你的用户名密码等信息。
 
@@ -14,7 +14,7 @@ Windows下的登录软件有 XShell 、SecureCRT、 [Putty][0] 和 [MobaXterm][4
 
 用户需要从本地上传代码或数据时，Windows用户可使用 [Winscp][3] 或 xftp 等支持文件上传的软件。[Winscp][3] 主要功能是在用户的本地与计算集群间复制、编辑文件，使用方法可参考其[官方文档][5]。MobaXterm 已经集成了文件上传的功能(sftp)，已经安装 MobaXterm 的用户可不必再安装 Winscp。
 
-# Linux和Mac用户
+## Linux和Mac用户
 
 Mac OS X下建议使用 [iTerm][1] ，Ubuntu 等 Linux 系统可以使用自带的终端软件。
 
@@ -53,7 +53,7 @@ rsync -r README.md linpack@183.174.229.251:/home/~your-cluster-username~/example
 !!! tip "文件夹同步"
     `scp` 和 `rsync` 的 "-r" 模式可以同步整个文件夹。
 
-## 免密码登录
+### 免密码登录
 
 本节仅针对Linxu和Mac用户。
 
