@@ -104,10 +104,27 @@
             
     <li class="toctree-l3"><a href="#singularity">Singularity容器</a></li>
     
+        <ul>
+        
+            <li><a class="toctree-l4" href="#singularity_1">Singularity 教程</a></li>
+        
+            <li><a class="toctree-l4" href="#pre-built">下载一个 pre-built 镜像</a></li>
+        
+            <li><a class="toctree-l4" href="#_1">使用镜像运行作业</a></li>
+        
+            <li><a class="toctree-l4" href="#singularity_2">在调度系统中使用singularity启动作业</a></li>
+        
+        </ul>
+    
 
     </ul>
                 </li>
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../reference/">参考资料</a>
 	    </li>
           
         </ul>
@@ -147,14 +164,58 @@
             <div class="section">
               
                 <h1 id="singularity">Singularity容器</h1>
-<p><a href="https://www.sylabs.io/docs/">Singularity</a> 是一种针对高性能计算而设计的的 Linux 容器，它完美支持了并行计算、深度学习等科学计算技术，被广泛部署在全球各大高性能计算中心，包括斯坦福、哈佛、耶鲁、普林斯顿等大学的高性能计算中心均已采用这项技术。</p>
-<p>和 Docker 及其相似，Singularity 是一种容器技术。容器将用户所需的操作系统和应用软件打包到一个“镜像”中。用户需要计算环境时，镜像可以被 Singularity 以类似一台“虚拟机”的方式启动。例如，用户可以在一台CentOS上启动一台基于Ubuntu的容器，且容器中已经安装好指定版本的深度学习框架。但不同于虚拟机，容器启动速度极快。相比在物理机上运行程序而言，在容器上运行程序的性能损失几乎可忽略不计。Singularity 允许用户间共享镜像，如果你的工作需要和其他研究人员合作，或者你的工作经常在不同的计算机环境上切换，那 Singularity 将大大提高你的工作效率。</p>
+<p><a href="https://en.wikipedia.org/wiki/Singularity_(software)">Singularity</a> 是一种针对高性能计算而设计的的 Linux 容器，它完美支持了并行计算、深度学习等科学计算技术，被广泛部署在全球各大高性能计算中心，包括斯坦福、哈佛、耶鲁、普林斯顿等大学的高性能计算中心均已采用这项技术。</p>
+<p>和 Docker 极其相似，Singularity 是一种容器技术。容器将用户所需的操作系统和应用软件打包到一个“镜像”中。当用户需要执行计算作业时，可以启动这个打包好的镜像，镜像以类似<a href="https://baike.baidu.com/item/%E8%99%9A%E6%8B%9F%E6%9C%BA/104440">虚拟机</a>的方式运行在物理机器上。例如，深度学习框架 TensorFlow 的用户可以在一台CentOS上启动一台基于Ubuntu的容器，且容器中已经安装好指定版本的 TensorFlow。但不同于传统的虚拟机，容器启动速度极快。相比在物理机上运行程序而言，在容器上运行程序的性能损失几乎可忽略不计。</p>
+<p>Singularity 允许用户间共享镜像，如果你的工作需要和其他研究人员合作，或者你的工作经常在不同的计算机环境上切换，那 Singularity 将大大提高你的工作效率。</p>
+<h2 id="singularity_1">Singularity 教程</h2>
+<p>Singularity 的使用主要分为创建或下载镜像和使用镜像运行计算作业。我们安装的版本为2.6.1，用户可以参考官方提供的<a href="https://www.sylabs.io/guides/2.6/user-guide/index.html">在线文档</a>。</p>
+<h2 id="pre-built">下载一个 pre-built 镜像</h2>
+<p>Singularity 兼容 docker 镜像，用户可以直接在 dockerhub 上别人已经安装好的镜像。这里直接使用一款已经安装好所有深度学习框架的 docker 镜像：</p>
+<pre><code class="bash">singularity build all-py36-jupyter-cpu docker://ufoym/deepo:all-py36-jupyter-cpu
+</code></pre>
+
+<div class="admonition warning">
+<p class="admonition-title">镜像存放位置</p>
+<p>由于镜像文件比较大，请将所需要的镜像放在 <code>/mnt/data</code> 下。通用的几个镜像已经放置在了 <code>/mnt/data/container_library</code> 下。用户自己创建的镜像也请放置在自己的相关目录下。</p>
+</div>
+<h2 id="_1">使用镜像运行作业</h2>
+<h3 id="shell">shell 交互模式</h3>
+<pre><code class="bash">/usr/local/bin/singularity shell /mnt/data/container_library/deep_learning/tensorflow-10.0-py3.simg
+Singularity: Invoking an interactive shell within container...
+
+python3 -c 'import tensorflow as tf; print(tf.__version__)'
+1.10.0
+</code></pre>
+
+<p>singularity启动了一个镜像，用户进入这个镜像，以命令行的方式与系统做交互。</p>
+<h3 id="exec">exec 执行命令</h3>
+<p>在宿主机器上使用 <code>exec</code> 命令，启动镜像：</p>
+<pre><code class="bash">/usr/local/bin/singularity exec /mnt/data/container_library/deep_learning/tensorflow-10.0-py3.simg python3 -c 'import tensorflow as tf; print(tf.__version__)'
+</code></pre>
+
+<p>结果直接返回到宿主机器命令行上。</p>
+<div class="admonition warning">
+<p class="admonition-title">注意！</p>
+<p>请不要在登录节点运行singularity镜像并在镜像中运行作业任务！登录节点连接了Internet，可以拉取dockerhub上的pre-built镜像。计算节点不可连接外网，无法直接拉取外网镜像。可以从登录节点ssh到某台计算节点上启动镜像并运行作业任务。</p>
+</div>
+<h2 id="singularity_2">在调度系统中使用singularity启动作业</h2>
+<p>这里以 TensorFlow 提供的官方tutorials中<a href="https://github.com/tensorflow/models/blob/master/tutorials/image/mnist/convolutional.py">使用卷积网络对mnist数据进行分类的代码 convolutional.py</a>为例。将代码和数据下载到个人文件夹后，编辑pbs文件为：</p>
+<pre><code class="bash">#PBS -N mnist_tf_singularity
+### use one node for this job
+#PBS -l nodes=1
+#PBS -q default
+cd $PBS_O_WORKDIR
+
+/usr/local/bin/singularity exec /mnt/data/container_library/deep_learning/tensorflow-10.0-py3.simg python convolutional.py
+</code></pre>
               
             </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../reference/" class="btn btn-neutral float-right" title="参考资料">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../jupyter/" class="btn btn-neutral" title="Jupyter"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -185,6 +246,8 @@
       
         <span><a href="../jupyter/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../../reference/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
