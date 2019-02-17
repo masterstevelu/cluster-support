@@ -149,4 +149,8 @@ mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 
 参见 [Jupyter使用方法](manual/jupyter.md)。
 
+### Singularity
+
+参见 [Singularity使用方法](manual/singularity.md)
+
 [1]: http://modules.sourceforge.net/

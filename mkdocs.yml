@@ -19,6 +19,7 @@ nav:
       - 'Julia': 'manual/julia.md'
       - 'Jupyter': 'manual/jupyter.md'
       - 'Singularity': 'manual/singularity.md'
+    - '参考资料': 'reference.md'
 
 
 markdown_extensions:
