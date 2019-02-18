@@ -19,6 +19,8 @@ nav:
       - 'Julia': 'manual/julia.md'
       - 'Jupyter': 'manual/jupyter.md'
       - 'Singularity': 'manual/singularity.md'
+      - '分子模拟软件': 'manual/chem.md' 
+      - '数学库': 'manual/math-lib.md'
     - '参考资料': 'reference.md'
 
 

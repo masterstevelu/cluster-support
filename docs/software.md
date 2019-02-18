@@ -1,6 +1,8 @@
 # 软件支持
 
-我们在集群上安装了常用的编译器、MPI库、数学库、解释语言与科学计算库，涵盖了绝大多数科学计算应用场景。本文将介绍如何使用这些软件。
+我们在集群上安装了常用的编译器、MPI库、数学库、解释语言与科学计算库，涵盖了绝大多数科学计算应用场景。如开发环境 Intel Parallel Studio，MPI库，分子动力学模拟软件 Amber、Gromacs 和 NAMD，数据科学语言 Python、R、Julia 及包管理器 Anaconda，机器学习框架 TensorFlow、PyTorch、xgboost 和 scikit-learn，singularity 容器等软件。本文将介绍如何使用这些软件。
+
+我们鼓励用户使用我们统一安装的软件，包括 MPI库、[Anaconda](manual/python.md) 和 [Singularity](manual/singularity.md)。用户也可以自己编译源代码安装软件到个人目录上，在编译过程中如遇任何问题，请及时联系我们获取帮助。
 
 !!! note "什么是 Linux 环境变量"
     在Linux系统下使用软件需要了解“环境变量”这个概念。不同的软件会被安装在不同的目录下，环境变量决定了Linux系统将到哪个目录中寻找安装好的软件。用户在命令行或脚本中使用软件时，Linux 系统会从环境变量的所有路径下，从前到后寻找用户输入的软件，调用该目录的软件执行程序。一些常用的软件，如 `ssh` 已经被默认添加在系统的环境变量中。一些用户安装的软件一般要将该软件所在目录手动加载到系统的环境变量。
@@ -124,6 +126,10 @@ mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 |           	|           	| 3.1.1            	| `source /public/software/intel/etc/env.openmpi.3.1.1`        	|
 | Intel MPI 	| Intel MPI 	| 2015             	| `source /public/software/intel/etc/env.intel.2015`           	|
 
+### 数学库
+
+我们安装了 Intel MKL 和 GSL，具体编译方法请参考我们提供的[数学库文档](manual/math-lib.md)。
+
 ### 分子动力学软件
 
 | 软件类型 	| 简介                                           	| 加载方法                                              	|
@@ -132,6 +138,8 @@ mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 |          	| 使用openmpi编译的并行版                        	| `source /public/software/gnu/etc/env.amber18.openmpi` 	|
 | gromacs  	| gromacs 4.5.7 使用openmpi 1.6.5和 fftw double精度编译 	| `source /public/software/gnu/etc/env.gromacs.4.5.7`   	|
 | namd     	| namd 2.12                                      	| `source /public/software/gnu/etc/env.namd.2.12`       	|
+
+更多请参见 [分子动力学软件](manual/chem.md)。
 
 ### Python
 
@@ -152,5 +160,9 @@ mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 ### Singularity
 
 参见 [Singularity使用方法](manual/singularity.md)
+
+### 深度学习
+
+由于目前深度学习框架所需操作版本较高，无法直接在集群上运行，这里必须使用容器，在容器中运行深度学习作业。具体用法请参见[使用Singularity容器运行作业](manual/singularity.md)。
 
 [1]: http://modules.sourceforge.net/

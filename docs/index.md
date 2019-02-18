@@ -6,7 +6,7 @@
 
 集群由55台计算节点、1台存储节点和1台管理节点组成，总CPU核数1456颗，内存共4608GB，存储空间150TB，理论计算峰值25625flops。
 
-集群的中间件和软件覆盖比较全面，包括了常用的科学计算语言、程序包、编译器和常用软件。
+集群的中间件和软件覆盖比较全面，包括了科学计算语言、程序包、编译器和常用软件，如开发环境 Intel Parallel Studio，MPI库，分子动力学模拟软件 Amber、Gromacs 和 NAMD，数据科学语言 Python、R、Julia 及包管理器 Anaconda，机器学习框架 TensorFlow、PyTorch、xgboost 和 scikit-learn，singularity 容器等软件。软件使用方法请参见我们提供的[软件支持文档](software.md)。
 
 ## 运行状况
 
@@ -33,3 +33,4 @@
 2. 邮箱：<yiqipingtai@126.com>
 
 我们也会定期举办相关workshop，分享集群的使用指南和高性能计算相关的技术。
+

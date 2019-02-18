@@ -1,6 +1,13 @@
-  [Anaconda][1] 是一个用于科学计算的Python发行版，支持 Linux, Mac, Windows系统以及 Python、R等科学计算语言，提供了包管理与环境管理的功能，可以很方便地解决多版本python并存、切换以及各种第三方包安装问题。Anaconda 利用 `conda` 命令来进行package和environment的管理，并且已经包含了Python和相关的配套工具。在集群上，我们建议用户使用 Anaconda 来管理和使用Python。我们已经在集群的 Anaconda 中安装好了常用的科学计算库，包括 jupyter、mpi4py、numpy、pandas、scikit-learn、xgboost等。
+[Anaconda][1] 是一个用于科学计算的Python发行版，支持 Linux, Mac, Windows系统以及 Python、R等科学计算语言，提供了包管理与环境管理的功能，可以很方便地解决多版本python并存、切换以及各种第三方包安装问题。Anaconda 利用 `conda` 命令来进行package和environment的管理，并且已经包含了Python和相关的配套工具。在集群上，我们建议用户使用 Anaconda 来管理和使用Python。我们已经在集群的 Anaconda 中安装好了常用的科学计算库，包括 jupyter、mpi4py、numpy、pandas、scikit-learn、xgboost等。
 
- 对于使用深度学习框架的用户，由于大多数框架对 Linux 操作系统版本要求高，我们建议使用Singularity容器来运行你的计算任务。你可以忽略下文的教程，直接跳转到[Singularity](singularity.md)的页面。
+Python 入门教程请参考：
+
+* [廖雪峰的Python教程][3]
+* [菜鸟教程 Python2][4]
+* [菜鸟教程 Python3][5]
+
+!!! warning "注意"
+        对于使用深度学习框架的用户，由于大多数框架对 Linux 操作系统版本要求高，目前无法直接在集群的操作系统上安装 TensorFlow 或 PyTorch 框架。网络上提供的修改GLIBC的方法也非常不安全，有可能导致你的环境崩溃，这里非常不建议。我们建议使用Singularity容器来运行你的计算任务。你可以忽略下文的教程，直接跳转到[Singularity](singularity.md)的页面。
 
 # 使用 conda 管理 Python 环境
 
@@ -146,3 +153,9 @@ python3 iris_with_xgb.py
 ```
 
 [1]: https://www.anaconda.com/
+
+[3]: https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000
+
+[4]: http://www.runoob.com/python/python-tutorial.html
+
+[5]: http://www.runoob.com/python3/python3-tutorial.html
