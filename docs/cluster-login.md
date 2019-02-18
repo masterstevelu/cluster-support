@@ -8,9 +8,11 @@
 
 ## Windows用户
 
-Windows下的登录软件有 XShell 、SecureCRT、 [Putty][0] 和 [MobaXterm][4] ，其中 XShell 和 SecureCRT 是付费商业软件，功能强大，简单易用，用户众多，因此也有很多破解版本；Putty 是免费软件，但功能相对简单。[文章][2]列举了使用上述几种软件连接集群的具体使用方法。我们不建议使用盗版破解的 XShell 和 SecureCRT ，有些别有用心的人会修改软件，在其中植入木马，窃取你的用户名密码等信息。
+Windows下的登录软件有 XShell 、SecureCRT、 [Putty][0] 和 [MobaXterm][4] ，其中 SecureCRT 是付费商业软件，功能强大，简单易用，用户众多，因此也有很多破解版本。Putty 是免费软件，但功能相对简单。[文章][2]列举了使用上述几种软件连接集群的具体使用方法。
 
-我们推荐使用 MobaXterm ，这是一款功能强大的客户端，集成了命令行和文件上传等功能，并且提供官方免费版，足以覆盖日常需求 。
+我们不建议使用盗版破解的软件，有些别有用心的人会修改软件，在其中植入木马，窃取你的用户名密码等信息。
+
+我们推荐使用 MobaXterm ，这是一款功能强大的客户端，集成了命令行和文件上传等功能，并且提供官方免费版，足以覆盖日常需求 。此外，XShell 和 XFtp 有[家庭学生免费版][7]，也是非常不错的选择。
 
 用户需要从本地上传代码或数据时，Windows用户可使用 [Winscp][3] 或 xftp 等支持文件上传的软件。[Winscp][3] 主要功能是在用户的本地与计算集群间复制、编辑文件，使用方法可参考其[官方文档][5]。MobaXterm 已经集成了文件上传的功能(sftp)，已经安装 MobaXterm 的用户可不必再安装 Winscp。
 
@@ -108,3 +110,4 @@ cat /home/~your-cluster-username~/id_rsa.pub >> ~/.ssh/authorized_keys
 [4]: https://mobaxterm.mobatek.net/
 [5]: https://winscp.net/eng/docs/introduction
 [6]: http://www.runoob.com/linux/linux-comm-scp.html
+[7]: https://www.netsarang.com/zh/free-for-home-school/

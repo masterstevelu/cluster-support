@@ -13,16 +13,18 @@
 
 1. 选择所需要的编程语言或软件，了解该软件在集群上的加载和使用方法。准备源代码和数据。如需使用源代码编译执行的，使用相应编译工具进行编译。
 
-
 2. 在调度系统中提交计算任务，任务将被调度执行。
-
 
 3. 查看任务状态，等待任务执行完成，查看输出结果。
 
-更多HPC入门知识，推荐阅读下面两个小教程，可以帮助快速了解相关知识。
+!!! tip "从零到一"
 
-* [Introduction to High-Performance Computing][1] (Software Carpentry Foundation)
-* [HPC in a day][2] (Software Carpentry Foundation)
+    下面两个小教程以一个HPC小白用户为第一人称，模拟了用户使用HPC从零到一可能遇到的各种问题，可以你帮助快速了解HPC相关知识，我们非常推荐集群新用户先阅读这两个教程。
+
+    教程由Carpentry提供，Carpentry是一个志愿者组织，它旨在开发编程课程，帮助不同科研领域的研究者学习使用计算服务。这两个教程中作业调度和文件系统部分与人大集群选择的技术方案不同，部分作业调度命令在人大集群上无法运行，你可以结合我们的人大集群教程相关部分一起学习。
+
+    - [Introduction to High-Performance Computing][1] (Software Carpentry Foundation)
+    - [HPC in a day][2] (Software Carpentry Foundation)
 
 [1]: https://hpc-carpentry.github.io/hpc-intro/
 [2]: https://psteinb.github.io/hpc-in-a-day/
@@ -87,4 +89,3 @@
 | - 	| node-3-1~2 	| - 	|
 | - 	| pnode-1~5 	| 大内存、高性能计算 	|
 | 存储节点 	| io-0-1 	| 文件存储 	|
-
