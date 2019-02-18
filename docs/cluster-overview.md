@@ -19,7 +19,7 @@
 
 3. 查看任务状态，等待任务执行完成，查看输出结果。
 
-更多HPC入门知识：
+更多HPC入门知识，推荐阅读下面两个小教程，可以帮助
 
 * [Introduction to High-Performance Computing][1] (Software Carpentry Foundation)
 * [HPC in a day][2] (Software Carpentry Foundation)
@@ -49,7 +49,7 @@
 
 ## 人大集群技术细节
 
-中国人民大学高性能计算集群由55台计算节点、1台存储节点和1台登录节点组成，总CPU核数1456颗，内存共4608GB，存储空间190TB，理论计算峰值25625flops。
+中国人民大学高性能计算集群由55台计算节点、1台存储节点和1台登录节点组成，总CPU核数1456颗，内存共4608GB，存储空间190TB，理论计算峰值25625 GFLOPs。
 
 集群中所有节点均为CentOS 6.6 Linux操作系统，为用户提供了标准的64位Linux操作系统环境。这要求用户需具有一定的Linux操作基础，包括Linux shell命令行知识、vi编辑器操作基础等相关知识。一些Linux入门知识可以学习[参考资料](reference.md#linux)中Linux部分内容。集群使用了NFS文件系统以支持用户的存储需求。使用了Torque/PBS作业调度系统支持集群计算资源调度。PBS调度系统入门可以学习[作业调度器使用指南](job-scheduler.md)中的内容。
 
@@ -57,8 +57,8 @@
 
 | 配置              	| 参数                                      	|
 |-------------------	|-------------------------------------------	|
-|    理论峰值性能   	|                 25625flops                	|
-|  linpack实测性能  	|                 21000flops                	|
+|    理论峰值性能   	|                 25625 GFLOPs                	|
+|  linpack实测性能  	|                 21000 GFLOPs                	|
 | 双路刀片节点 50台 	| 24 * Intel Xeon E5 2650 2.2G Hz / 64GB 内存 	|
 |   四路胖节点 5台  	| 40 * Intel Xeon E5 4620 2.0G Hz / 256GB内存 	|
 |      登录节点     	|                    1台                    	|
