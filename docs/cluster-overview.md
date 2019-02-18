@@ -19,7 +19,7 @@
 
 3. 查看任务状态，等待任务执行完成，查看输出结果。
 
-更多HPC入门知识，推荐阅读下面两个小教程，可以帮助
+更多HPC入门知识，推荐阅读下面两个小教程，可以帮助快速了解相关知识。
 
 * [Introduction to High-Performance Computing][1] (Software Carpentry Foundation)
 * [HPC in a day][2] (Software Carpentry Foundation)
