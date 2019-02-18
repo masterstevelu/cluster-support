@@ -3,8 +3,7 @@
 Python 入门教程请参考：
 
 * [廖雪峰的Python教程][3]
-* [菜鸟教程 Python2][4]
-* [菜鸟教程 Python3][5]
+* [菜鸟教程 Python2][4] / [菜鸟教程 Python3][5]
 
 !!! warning "注意"
         对于使用深度学习框架的用户，由于大多数框架对 Linux 操作系统版本要求高，目前无法直接在集群的操作系统上安装 TensorFlow 或 PyTorch 框架。网络上提供的修改GLIBC的方法也非常不安全，有可能导致你的环境崩溃，这里非常不建议。我们建议使用Singularity容器来运行你的计算任务。你可以忽略下文的教程，直接跳转到[Singularity](singularity.md)的页面。

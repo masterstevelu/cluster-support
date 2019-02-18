@@ -106,7 +106,7 @@ module load mpi/openmpi-1.6.5
 mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 ```
 
-## 已安装软件及其加载方法
+## 软件列表
 
 ### 编译器
 

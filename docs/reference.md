@@ -9,8 +9,7 @@
 
 ### Python入门
 * [廖雪峰的Python教程][3]
-* [菜鸟教程 Python2][4]
-* [菜鸟教程 Python3][5]
+* [菜鸟教程 Python2][4] / [菜鸟教程 Python3][5]
 
 ### Python并行编程
 
@@ -19,7 +18,7 @@
 
 ## R
 
-### Robert I. Kabacoff 《R语言实战》
+* Robert I. Kabacoff 《R语言实战》
 
 ## 并行算法
 

@@ -9,7 +9,7 @@ extra_css:
 nav:
     - '首页': 'index.md'
     - '使用指南':
-      - '入门指南': 'cluster-overview.md'
+      - '快速开始': 'cluster-overview.md'
       - '登录方法': 'cluster-login.md'
       - '作业调度': 'job-scheduler.md'
       - '软件支持': 'software.md'

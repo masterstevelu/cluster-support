@@ -54,7 +54,7 @@ singularity启动了一个镜像，用户进入这个镜像，相当于进入了
 
 ## 在调度系统中使用singularity启动作业
 
-这里以 TensorFlow 提供的官方tutorials中[使用卷积网络对mnist数据进行分类的代码 convolutional.py][4]为例。将代码和数据下载到个人文件夹后，编辑pbs文件为：
+这里以 TensorFlow 提供的官方tutorials中使用卷积网络对mnist数据进行分类的代码[convolutional.py][4]为例。将代码和数据下载到个人文件夹后，编辑pbs文件为：
 
 ```bash
 #PBS -N mnist_tf_singularity
