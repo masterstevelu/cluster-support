@@ -172,8 +172,9 @@
 <p>当用户从集群管理员获取到用户名和密码后，使用登录软件，连接登录节点rmdx-cluster（183.174.229.251）。</p>
 <p>登录节点后，用户默认将进入账户对应的家目录（home目录），对于某个用户，其家目录为<code>/home/your-cluster-username/</code>一般情况下，用户的个人数据都应存放在个人家目录中，包括代码、可执行文件和部分数据。</p>
 <h2 id="windows">Windows用户</h2>
-<p>Windows下的登录软件有 XShell 、SecureCRT、 <a href="https://putty.org/">Putty</a> 和 <a href="https://mobaxterm.mobatek.net/">MobaXterm</a> ，其中 XShell 和 SecureCRT 是付费商业软件，功能强大，简单易用，用户众多，因此也有很多破解版本；Putty 是免费软件，但功能相对简单。<a href="https://blog.csdn.net/ValDC_Morning/article/details/79051615">文章</a>列举了使用上述几种软件连接集群的具体使用方法。我们不建议使用盗版破解的 XShell 和 SecureCRT ，有些别有用心的人会修改软件，在其中植入木马，窃取你的用户名密码等信息。</p>
-<p>我们推荐使用 MobaXterm ，这是一款功能强大的客户端，集成了命令行和文件上传等功能，并且提供官方免费版，足以覆盖日常需求 。</p>
+<p>Windows下的登录软件有 XShell 、SecureCRT、 <a href="https://putty.org/">Putty</a> 和 <a href="https://mobaxterm.mobatek.net/">MobaXterm</a> ，其中 SecureCRT 是付费商业软件，功能强大，简单易用，用户众多，因此也有很多破解版本。Putty 是免费软件，但功能相对简单。<a href="https://blog.csdn.net/ValDC_Morning/article/details/79051615">文章</a>列举了使用上述几种软件连接集群的具体使用方法。</p>
+<p>我们不建议使用盗版破解的软件，有些别有用心的人会修改软件，在其中植入木马，窃取你的用户名密码等信息。</p>
+<p>我们推荐使用 MobaXterm ，这是一款功能强大的客户端，集成了命令行和文件上传等功能，并且提供官方免费版，足以覆盖日常需求 。此外，XShell 和 XFtp 有<a href="https://www.netsarang.com/zh/free-for-home-school/">家庭学生免费版</a>，也是非常不错的选择。</p>
 <p>用户需要从本地上传代码或数据时，Windows用户可使用 <a href="https://winscp.net/eng/index.php">Winscp</a> 或 xftp 等支持文件上传的软件。<a href="https://winscp.net/eng/index.php">Winscp</a> 主要功能是在用户的本地与计算集群间复制、编辑文件，使用方法可参考其<a href="https://winscp.net/eng/docs/introduction">官方文档</a>。MobaXterm 已经集成了文件上传的功能(sftp)，已经安装 MobaXterm 的用户可不必再安装 Winscp。</p>
 <h2 id="linuxmac">Linux和Mac用户</h2>
 <p>Mac OS X下建议使用 <a href="https://www.iterm2.com/">iTerm</a> ，Ubuntu 等 Linux 系统可以使用自带的终端软件。</p>
