@@ -195,7 +195,7 @@
 <p>查看任务状态，等待任务执行完成，查看输出结果。</p>
 </li>
 </ol>
-<p>更多HPC入门知识：</p>
+<p>更多HPC入门知识，推荐阅读下面两个小教程，可以帮助快速了解相关知识。</p>
 <ul>
 <li><a href="https://hpc-carpentry.github.io/hpc-intro/">Introduction to High-Performance Computing</a> (Software Carpentry Foundation)</li>
 <li><a href="https://psteinb.github.io/hpc-in-a-day/">HPC in a day</a> (Software Carpentry Foundation)</li>
@@ -211,7 +211,7 @@
 <h2 id="_7">数据管理</h2>
 <p>用户登录后将进入账户对应的家目录（home），对于某个用户，其家目录为<code>/home/your-cluster-username/</code>一般情况下，用户的个人数据都应存放在个人家目录中，包括代码、可执行文件和部分数据。较大的规模的数据必须放置在 <code>/mnt/data/</code> 目录下。该目录可用容量为150TB。鉴于存储空间有限，出于数据安全的考虑，请用户务必及时备份和下载代码数据和计算结果，并定期清理存储空间。</p>
 <h2 id="_8">人大集群技术细节</h2>
-<p>中国人民大学高性能计算集群由55台计算节点、1台存储节点和1台登录节点组成，总CPU核数1456颗，内存共4608GB，存储空间190TB，理论计算峰值25625flops。</p>
+<p>中国人民大学高性能计算集群由55台计算节点、1台存储节点和1台登录节点组成，总CPU核数1456颗，内存共4608GB，存储空间190TB，理论计算峰值25625 GFLOPs。</p>
 <p>集群中所有节点均为CentOS 6.6 Linux操作系统，为用户提供了标准的64位Linux操作系统环境。这要求用户需具有一定的Linux操作基础，包括Linux shell命令行知识、vi编辑器操作基础等相关知识。一些Linux入门知识可以学习<a href="../reference/#linux">参考资料</a>中Linux部分内容。集群使用了NFS文件系统以支持用户的存储需求。使用了Torque/PBS作业调度系统支持集群计算资源调度。PBS调度系统入门可以学习<a href="../job-scheduler/">作业调度器使用指南</a>中的内容。</p>
 <p>由于校园网网关的限制以及安全的考虑，目前集群不支持从校外登陆。需要校外登录的用户可以考虑使用TeamViewer软件，在校外远程登录到校内机器上。</p>
 <table>
@@ -224,11 +224,11 @@
 <tbody>
 <tr>
 <td>理论峰值性能</td>
-<td>25625flops</td>
+<td>25625 GFLOPs</td>
 </tr>
 <tr>
 <td>linpack实测性能</td>
-<td>21000flops</td>
+<td>21000 GFLOPs</td>
 </tr>
 <tr>
 <td>双路刀片节点 50台</td>

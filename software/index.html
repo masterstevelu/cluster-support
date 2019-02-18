@@ -170,11 +170,11 @@
                 <h1 id="_1">软件支持</h1>
 <p>我们在集群上安装了常用的编译器、MPI库、数学库、解释语言与科学计算库，涵盖了绝大多数科学计算应用场景。如开发环境 Intel Parallel Studio，MPI库，分子动力学模拟软件 Amber、Gromacs 和 NAMD，数据科学语言 Python、R、Julia 及包管理器 Anaconda，机器学习框架 TensorFlow、PyTorch、xgboost 和 scikit-learn，singularity 容器等软件。本文将介绍如何使用这些软件。</p>
 <p>我们鼓励用户使用我们统一安装的软件，包括 MPI库、<a href="../manual/python/">Anaconda</a> 和 <a href="../manual/singularity/">Singularity</a>。用户也可以自己编译源代码安装软件到个人目录上，在编译过程中如遇任何问题，请及时联系我们获取帮助。</p>
+<h2 id="_2">软件加载方法</h2>
 <div class="admonition note">
 <p class="admonition-title">什么是 Linux 环境变量</p>
 <p>在Linux系统下使用软件需要了解“环境变量”这个概念。不同的软件会被安装在不同的目录下，环境变量决定了Linux系统将到哪个目录中寻找安装好的软件。用户在命令行或脚本中使用软件时，Linux 系统会从环境变量的所有路径下，从前到后寻找用户输入的软件，调用该目录的软件执行程序。一些常用的软件，如 <code>ssh</code> 已经被默认添加在系统的环境变量中。一些用户安装的软件一般要将该软件所在目录手动加载到系统的环境变量。</p>
 </div>
-<h2 id="_2">软件加载方法</h2>
 <h3 id="source">使用source加载软件</h3>
 <p>我们在公共目录下准备好了添加环境变量的脚本，可以使用 <code>source &lt;env_script&gt;</code> 来添加环境变量。</p>
 <p>比如，使用 openmpi 3.1.1：</p>
@@ -380,7 +380,7 @@ mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 <h3 id="jupyter">Jupyter</h3>
 <p>参见 <a href="../manual/jupyter/">Jupyter使用方法</a>。</p>
 <h3 id="singularity">Singularity</h3>
-<p>参见 <a href="../manual/singularity/">Singularity使用方法</a></p>
+<p>参见 <a href="../manual/singularity/">Singularity使用方法</a>。</p>
 <h3 id="_7">深度学习</h3>
 <p>由于目前深度学习框架所需操作版本较高，无法直接在集群上运行，这里必须使用容器，在容器中运行深度学习作业。具体用法请参见<a href="../manual/singularity/">使用Singularity容器运行作业</a>。</p>
               
