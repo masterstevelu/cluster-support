@@ -60,7 +60,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../cluster-overview/">入门指南</a>
+    <a class="" href="../../cluster-overview/">快速开始</a>
                 </li>
                 <li class="">
                     
@@ -211,7 +211,7 @@ python3 -c 'import tensorflow as tf; print(tf.__version__)'
 <p>请不要在登录节点运行singularity镜像并在镜像中运行作业任务！登录节点连接了Internet，可以拉取dockerhub上的pre-built镜像。计算节点不可连接外网，无法直接拉取外网镜像。可以从登录节点ssh到某台计算节点上启动镜像并运行作业任务。</p>
 </div>
 <h2 id="singularity_2">在调度系统中使用singularity启动作业</h2>
-<p>这里以 TensorFlow 提供的官方tutorials中<a href="https://github.com/tensorflow/models/blob/master/tutorials/image/mnist/convolutional.py">使用卷积网络对mnist数据进行分类的代码 convolutional.py</a>为例。将代码和数据下载到个人文件夹后，编辑pbs文件为：</p>
+<p>这里以 TensorFlow 提供的官方tutorials中使用卷积网络对mnist数据进行分类的代码<a href="https://github.com/tensorflow/models/blob/master/tutorials/image/mnist/convolutional.py">convolutional.py</a>为例。将代码和数据下载到个人文件夹后，编辑pbs文件为：</p>
 <pre><code class="bash">#PBS -N mnist_tf_singularity
 ### use one node for this job
 #PBS -l nodes=1

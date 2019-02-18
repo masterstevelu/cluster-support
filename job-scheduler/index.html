@@ -60,7 +60,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../cluster-overview/">入门指南</a>
+    <a class="" href="../cluster-overview/">快速开始</a>
                 </li>
                 <li class="">
                     
@@ -90,6 +90,8 @@
             <li><a class="toctree-l4" href="#_4">通用脚本样例</a></li>
         
             <li><a class="toctree-l4" href="#qstat">使用qstat查看作业</a></li>
+        
+            <li><a class="toctree-l4" href="#_5">队列配置</a></li>
         
         </ul>
     
@@ -187,7 +189,7 @@
 </div>
 <h2 id="pbs">PBS简介</h2>
 <p>集群基于 PBS（Portable Batch System）作业管理系统来管理和调度计算任务。PBS是由NASA开发的作业调度管理系统。它被用于集群系统、超级计算机和大规模并行系统。PBS后来又发展出openPBS、PBS Pro和Torque三大分支。其中Torque是目前使用比较广泛的PBS开源实现。本集群使用Torque作为作业调度器。集群用户需要使用 PBS 脚本和命令提交计算任务。</p>
-<p>PBS系统的命令包括作业控制、作业检测和节点状态等几大部分。下面将介绍如何使用PBS系统来提交作业，其他命令的具体使用可参考<a href="../manual/torque/">PBS使用手册</a>相关内容。</p>
+<p>PBS系统的命令包括作业控制、作业检测和节点状态等几大部分。下面将介绍如何使用PBS系统来提交作业。</p>
 <h2 id="_2">作业提交流程</h2>
 <p>一个标准的作业提交步骤将包含以下流程：</p>
 <ol>
@@ -199,6 +201,7 @@
 <li>查询和调整：当作业在运行时，用户可以使用监控命令 <code>qstat</code> 进行状态查询。用户发现作业提交错误时，可以使用作业删除命令 <code>qdel</code> 删除正在运行的作业。</li>
 <li>查看结果：使用 <code>qpeek</code> 查看作业运行时的标准输出。</li>
 </ol>
+<p>本文所展示的案例已经能够涵盖绝大多数作业管理操作，一些命令的进阶使用可参考<a href="http://docs.adaptivecomputing.com/torque/4-2-10/help.htm">PBS使用手册</a>中“Submitting and managing jobs”章节相关内容。</p>
 <h2 id="qsub">使用qsub提交作业</h2>
 <p>在PBS调度系统中提交任务需要使用 <code>qsub</code> 命令，<code>qsub</code> 命令是整个调度系统中使用最多的命令。</p>
 <pre><code class="shell">qsub [options] &lt;script&gt;
@@ -301,8 +304,7 @@ echo end time is `date`
 </code></pre>
 
 <p>也可以将这些参数拆开，分行写成</p>
-<pre><code class="bash">#PBS -l nodes=4
-#PBS -l ppn=2
+<pre><code class="bash">#PBS -l nodes=4:ppn=2
 #PBS -l pmem=1024mb
 </code></pre>
 
@@ -433,6 +435,33 @@ mpirun -np $NP -machinefile $PBS_NODEFILE python example_mpi4py.py
 <p>这个样例脚本基本上能覆盖了绝大多数的功能，用户可以根据这个样例脚本做一些修改，生成适合自己的提交作业脚本。</p>
 <h2 id="qstat">使用qstat查看作业</h2>
 <p>直接执行 <code>qstat</code> 可以看到当前用户所有提交作业，使用 <code>qstat -f &lt;job_id&gt;</code> 可以查看某个job的信息。</p>
+<h2 id="_5">队列配置</h2>
+<p>目前集群配置了两个主要队列，其中 pnode 队列主要用于高计算负荷的任务，普通任务请不要随便占用这个队列，以便有真正需求的用户使用。我们也会根据用户需求的变化不断调整队列的配置。</p>
+<table>
+<thead>
+<tr>
+<th>队列名</th>
+<th>计算资源</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>50台 * 24核处理器 / 64GB内存</td>
+<td>普通计算任务</td>
+</tr>
+<tr>
+<td>pnode</td>
+<td>5台 * 40核处理器/ 256GB内存</td>
+<td>高负荷计算任务</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">注意<p>集群是一个共享的公共服务，大家在这个公共空间也要做一名合格的公民。请大家根据自己的科研进展情况，合理安排作业任务，尽量不要突然提交很多作业，占用大量计算资源，否则妨碍其他用户的使用。目前已经限制单个用户最多提交25个任务。</p>
+</p>
+</div>
               
             </div>
           </div>
