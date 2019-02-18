@@ -108,9 +108,11 @@
         
             <li><a class="toctree-l4" href="#singularity_1">Singularity 教程</a></li>
         
-            <li><a class="toctree-l4" href="#pre-built">下载一个 pre-built 镜像</a></li>
+            <li><a class="toctree-l4" href="#_1">下载别人提供的镜像</a></li>
         
-            <li><a class="toctree-l4" href="#_1">使用镜像运行作业</a></li>
+            <li><a class="toctree-l4" href="#_2">创建自己的镜像</a></li>
+        
+            <li><a class="toctree-l4" href="#_3">使用镜像运行作业</a></li>
         
             <li><a class="toctree-l4" href="#singularity_2">在调度系统中使用singularity启动作业</a></li>
         
@@ -118,6 +120,14 @@
     
 
     </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../chem/">分子模拟软件</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../math-lib/">数学库</a>
                 </li>
     </ul>
 	    </li>
@@ -165,32 +175,34 @@
               
                 <h1 id="singularity">Singularity容器</h1>
 <p><a href="https://en.wikipedia.org/wiki/Singularity_(software)">Singularity</a> 是一种针对高性能计算而设计的的 Linux 容器，它完美支持了并行计算、深度学习等科学计算技术，被广泛部署在全球各大高性能计算中心，包括斯坦福、哈佛、耶鲁、普林斯顿等大学的高性能计算中心均已采用这项技术。</p>
-<p>和 Docker 极其相似，Singularity 是一种容器技术。容器将用户所需的操作系统和应用软件打包到一个“镜像”中。当用户需要执行计算作业时，可以启动这个打包好的镜像，镜像以类似<a href="https://baike.baidu.com/item/%E8%99%9A%E6%8B%9F%E6%9C%BA/104440">虚拟机</a>的方式运行在物理机器上。例如，深度学习框架 TensorFlow 的用户可以在一台CentOS上启动一台基于Ubuntu的容器，且容器中已经安装好指定版本的 TensorFlow。但不同于传统的虚拟机，容器启动速度极快。相比在物理机上运行程序而言，在容器上运行程序的性能损失几乎可忽略不计。</p>
+<p>和 Docker 极其相似，Singularity 是一种容器技术。容器将用户所需的操作系统和应用软件打包到一个“镜像”中。当用户需要执行计算作业时，可以启动这个打包好的镜像，镜像以类似<a href="https://baike.baidu.com/item/%E8%99%9A%E6%8B%9F%E6%9C%BA/104440">虚拟机</a>的方式运行在物理机器上。例如，深度学习框架 TensorFlow 的用户可以在一台CentOS上启动一台Ubuntu系统的容器，并运行容器中已经安装好的 TensorFlow。但不同于传统的虚拟机，容器启动速度极快。相比在物理机上运行程序而言，在容器上运行程序的性能损失几乎可忽略不计。</p>
 <p>Singularity 允许用户间共享镜像，如果你的工作需要和其他研究人员合作，或者你的工作经常在不同的计算机环境上切换，那 Singularity 将大大提高你的工作效率。</p>
 <h2 id="singularity_1">Singularity 教程</h2>
-<p>Singularity 的使用主要分为创建或下载镜像和使用镜像运行计算作业。我们安装的版本为2.6.1，用户可以参考官方提供的<a href="https://www.sylabs.io/guides/2.6/user-guide/index.html">在线文档</a>。</p>
-<h2 id="pre-built">下载一个 pre-built 镜像</h2>
-<p>Singularity 兼容 docker 镜像，用户可以直接在 dockerhub 上别人已经安装好的镜像。这里直接使用一款已经安装好所有深度学习框架的 docker 镜像：</p>
-<pre><code class="bash">singularity build all-py36-jupyter-cpu docker://ufoym/deepo:all-py36-jupyter-cpu
+<p>Singularity 的使用主要分为创建或下载镜像和在镜像运行计算作业两大部分。我们安装的版本为2.6.1，关于一些高级操作，请参考官方提供的<a href="https://www.sylabs.io/guides/2.6/user-guide/index.html">在线文档</a>。</p>
+<h2 id="_1">下载别人提供的镜像</h2>
+<p>Singularity 兼容 docker 镜像，用户可以直接在 dockerhub 上下载别人已经安装好的镜像。这里直接使用一款 TensorFlow 官方提供的docker镜像，并命名为 <code>tf-1.10.0-py35</code>：</p>
+<pre><code class="bash">singularity build tf-1.10.0-py35 docker://tensorflow/tensorflow:1.10.0-py3
 </code></pre>
 
+<h2 id="_2">创建自己的镜像</h2>
+<p>你也可以个性化定制你的镜像环境，将你自己所需要的操作系统和依赖软件打包到自己的镜像中。这时，你需要编辑一个叫做 <code>recipe</code> 的文件，它类似 Docker 的 <code>Dockerfile</code>。制作镜像时，你需要一台装有singularity且具有管理员权限的机器。你可以在自己的计算机上<a href="https://www.sylabs.io/guides/2.6/user-guide/installation.html">安装singularity</a>，根据Singularity的官方提供的<a href="https://www.sylabs.io/guides/2.6/user-guide/container_recipes.html">制作镜像recipe文件方法</a>，制作镜像。如制作镜像期间有任何问题，请联系我们获取帮助。</p>
 <div class="admonition warning">
 <p class="admonition-title">镜像存放位置</p>
 <p>由于镜像文件比较大，请将所需要的镜像放在 <code>/mnt/data</code> 下。通用的几个镜像已经放置在了 <code>/mnt/data/container_library</code> 下。用户自己创建的镜像也请放置在自己的相关目录下。</p>
 </div>
-<h2 id="_1">使用镜像运行作业</h2>
+<h2 id="_3">使用镜像运行作业</h2>
 <h3 id="shell">shell 交互模式</h3>
-<pre><code class="bash">/usr/local/bin/singularity shell /mnt/data/container_library/deep_learning/tensorflow-10.0-py3.simg
+<pre><code class="bash">/usr/local/bin/singularity shell /mnt/data/container_library/deep_learning/tf-1.10.0-py35
 Singularity: Invoking an interactive shell within container...
 
 python3 -c 'import tensorflow as tf; print(tf.__version__)'
 1.10.0
 </code></pre>
 
-<p>singularity启动了一个镜像，用户进入这个镜像，以命令行的方式与系统做交互。</p>
+<p>singularity启动了一个镜像，用户进入这个镜像，相当于进入了一个新的系统，在新系统中以命令行的方式与系统交互。</p>
 <h3 id="exec">exec 执行命令</h3>
-<p>在宿主机器上使用 <code>exec</code> 命令，启动镜像：</p>
-<pre><code class="bash">/usr/local/bin/singularity exec /mnt/data/container_library/deep_learning/tensorflow-10.0-py3.simg python3 -c 'import tensorflow as tf; print(tf.__version__)'
+<p>在宿主机器上使用 <code>exec</code> 执行命令：</p>
+<pre><code class="bash">/usr/local/bin/singularity exec /mnt/data/container_library/deep_learning/tf-1.10.0-py35 python3 -c 'import tensorflow as tf; print(tf.__version__)'
 </code></pre>
 
 <p>结果直接返回到宿主机器命令行上。</p>
@@ -206,7 +218,7 @@ python3 -c 'import tensorflow as tf; print(tf.__version__)'
 #PBS -q default
 cd $PBS_O_WORKDIR
 
-/usr/local/bin/singularity exec /mnt/data/container_library/deep_learning/tensorflow-10.0-py3.simg python convolutional.py
+/usr/local/bin/singularity exec /mnt/data/container_library/deep_learning/tf-1.10.0-py35 python convolutional.py
 </code></pre>
               
             </div>
@@ -215,7 +227,7 @@ cd $PBS_O_WORKDIR
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../reference/" class="btn btn-neutral float-right" title="参考资料">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../chem/" class="btn btn-neutral float-right" title="分子模拟软件">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../jupyter/" class="btn btn-neutral" title="Jupyter"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -247,7 +259,7 @@ cd $PBS_O_WORKDIR
         <span><a href="../jupyter/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../reference/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../chem/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
