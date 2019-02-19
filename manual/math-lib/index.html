@@ -110,10 +110,17 @@
     <a class="current" href="./">数学库</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#mkl">MKL 加载办法</a></li>
+    <li class="toctree-l3"><a href="#_1">数学库</a></li>
     
-
-    <li class="toctree-l3"><a href="#mkl_1">MKL 编译选项</a></li>
+        <ul>
+        
+            <li><a class="toctree-l4" href="#intel-mkl">Intel MKL</a></li>
+        
+            <li><a class="toctree-l4" href="#gsl-cc">GSL C/C++数学库</a></li>
+        
+            <li><a class="toctree-l4" href="#fftw">FFTW 快速傅里叶变换</a></li>
+        
+        </ul>
     
 
     </ul>
@@ -162,12 +169,24 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="mkl">MKL 加载办法</h2>
+                <h1 id="_1">数学库</h1>
+<h2 id="intel-mkl">Intel MKL</h2>
+<p>加载MKL：</p>
 <pre><code class="bash">source /public/software/intel/etc/env.intel.2015
 </code></pre>
 
-<h2 id="mkl_1">MKL 编译选项</h2>
-<p>编译参数请使用 <a href="https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor">Intel® Math Kernel Library Link Line Advisor</a>。如编译和链接过程中遇到任何问题，请联系我们获取帮助。</p>
+<p>链接参数请使用 <a href="https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor">Intel® Math Kernel Library Link Line Advisor</a>。如编译和链接过程中遇到任何问题，请联系我们获取帮助。</p>
+<p>Fortran 90链接样例：</p>
+<pre><code class="bash">ifort example.f90 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread
+</code></pre>
+
+<h2 id="gsl-cc">GSL C/C++数学库</h2>
+<pre><code class="bash">source /public/software/intel/etc/env.gsl.2.5
+</code></pre>
+
+<h2 id="fftw">FFTW 快速傅里叶变换</h2>
+<pre><code class="bash">source /public/software/intel/etc/env.fftw.3.3.8
+</code></pre>
               
             </div>
           </div>
