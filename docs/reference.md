@@ -10,15 +10,18 @@
 ### Python入门
 * [廖雪峰的Python教程][3]
 * [菜鸟教程 Python2][4] / [菜鸟教程 Python3][5]
+* [Plotting and Programming in Python][10]
 
 ### Python并行编程
 
 * [mpi4py][6]
 * [Parallel Programming with Python][7]
 
+
 ## R
 
 * Robert I. Kabacoff 《R语言实战》
+* [Programming with R][9]
 
 ## 并行算法
 
@@ -45,3 +48,7 @@
 [7]: https://chryswoods.com/parallel_python/index.html
 
 [8]: https://exacity.github.io/deeplearningbook-chinese/
+
+[9]: http://swcarpentry.github.io/r-novice-inflammation/
+
+[10]: http://swcarpentry.github.io/python-novice-gapminder/
