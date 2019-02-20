@@ -5,7 +5,7 @@ theme:
 
   custom_dir: 'custom_theme/'
   
-extra_javascript:
+copyright: Copyright © 中国人民大学大型科学仪器共享平台
 
 nav:
     - '首页': 'index.md'

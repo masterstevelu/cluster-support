@@ -1,3 +1,5 @@
+# Python
+
 [Anaconda][1] 是一个用于科学计算的Python发行版，支持 Linux, Mac, Windows系统以及 Python、R等科学计算语言，提供了包管理与环境管理的功能，可以很方便地解决多版本python并存、切换以及各种第三方包安装问题。Anaconda 利用 `conda` 命令来进行package和environment的管理，并且已经包含了Python和相关的配套工具。在集群上，我们建议用户使用 Anaconda 来管理和使用Python。我们已经在集群的 Anaconda 中安装好了常用的科学计算库，包括 jupyter、mpi4py、numpy、pandas、scikit-learn、xgboost等。
 
 Python 入门教程请参考：
@@ -8,7 +10,7 @@ Python 入门教程请参考：
 !!! tip "深度学习用户请使用容器"
         对于使用深度学习框架的用户，由于大多数框架对 Linux 操作系统版本要求高，目前无法直接在集群的操作系统上安装 TensorFlow 或 PyTorch 框架。网络上提供的修改GLIBC的方法也非常不安全，有可能导致你的环境崩溃，这里非常不建议。我们建议使用Singularity容器来运行你的计算任务。你可以忽略下文的教程，直接跳转到[Singularity](singularity.md)的页面。
 
-# 使用 conda 管理 Python 环境
+## 使用 conda 管理 Python 环境
 
 加载 Anaconda：
 ```bash
@@ -73,7 +75,7 @@ conda remove --name test_env_2 --all
 !!! warning "注意！"
     如不激活任何环境，系统使用默认的基础环境（base）。有时会因为忘记执行激活用户环境的命令，导致程序因依赖包版本不对而报错，这时应该检查自己是否激活正确的环境。
 
-# 在调度系统中提交 Python 作业
+## 在调度系统中提交 Python 作业
 
 准备好一个 Python 程序，程序使用 xgboost 算法对 iris 数据集进行分类预测，输出准确度：
 
@@ -150,6 +152,10 @@ source activate test_env_2
 
 python3 iris_with_xgb.py
 ```
+
+## 使用Jupyter
+
+Jupyter的使用请参考 [Jupyter使用方法](jupyter.md)。
 
 [1]: https://www.anaconda.com/
 

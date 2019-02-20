@@ -52,7 +52,22 @@ singularity启动了一个镜像，用户进入这个镜像，相当于进入了
 !!! warning "注意！"
     请不要在登录节点运行singularity镜像并在镜像中运行作业任务！登录节点连接了Internet，可以拉取dockerhub上的pre-built镜像。计算节点不可连接外网，无法直接拉取外网镜像。可以从登录节点ssh到某台计算节点上启动镜像并运行作业任务。
 
-## 在调度系统中使用singularity启动作业
+## 现有深度学习镜像
+
+我们给用户准备了一些常用的深度学习的镜像，放置在了 `/mnt/data/container_library/deep_learning/` 下，几个镜像的信息如下。
+
+| .          	| [all-py36-jupyter-cpu](https://github.com/ufoym/deepo) 	| tf-1.10.0-py35 	| tf-1.12.0-py35 	| pytorch-1.0.0-py36 	|
+|------------	|--------------------------------------------------------	|----------------	|----------------	|--------------------	|
+| ubuntu     	| 16.04                                                  	| 16.04          	| 16.04          	| 16.04              	|
+| python     	| 3.6                                                    	| 3.5            	| 3.5            	| 3.6                	|
+| theano     	| 1.0.1                                                  	|                	|                	|                    	|
+| tensorflow 	| 1.8.0                                                  	| 1.10.0         	| 1.12.0         	|                    	|
+| pytorch    	| 0.4.0                                                  	|                	|                	| 1.0.0              	|
+| keras      	| 2.1.6 TensorFlow                                       	|                	|                	|                    	|
+| mxnet      	| 1.1.0                                                  	|                	|                	|                    	|
+| cntk       	| 2.5.1                                                  	|                	|                	|                    	|
+
+## 在集群上使用singularity启动TensorFlow作业
 
 这里以 TensorFlow 提供的官方tutorials中使用卷积网络对mnist数据进行分类的代码[convolutional.py][4]为例。将代码和数据下载到个人文件夹后，编辑pbs文件为：
 

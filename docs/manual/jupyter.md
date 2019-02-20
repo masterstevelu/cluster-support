@@ -1,3 +1,5 @@
+# Jupyter
+
 [Jupyter][1] Notebook可以允许在网页页面中直接编写代码和运行代码，得到运行结果，用户在网页界面中可以完成整个数据科学的工作流程，包括数据清理、统计建模、构建和训练机器学习模型、可视化数据等等。这种交互界面大大方便了研究人员进行数据科学的开发和调试。
 
 由于集群上计算节点是无法被用户直接访问，用户只能访问集群的登录节点，而登录节点原则上不允许直接运行 Jupyter 等程序。因此，在集群上使用 Jupyter 暂时不需要向作业调度系统提交作业，而是直接在计算节点上启动作业。
@@ -17,13 +19,25 @@ ssh node-0-1
 
 ## 启动Jupyter
 
-2. 在计算节点node-0-1上加载anaconda和相应python或r环境，使用命令启动Jupyter Notebook。
+2. 在计算节点node-0-1上加载相应python或r环境，使用命令启动Jupyter Notebook。
+
+### 使用 Anaconda  
 
 ```bash
 module load anaconda/5.3.0
 source activate python36
-jupyter notebook --no-browser --port=9030 --ip=node-0-1
+jupyter notebook --no-browser --port=9030 --ip=0.0.0.0
 ```
+
+### 使用容器进行深度学习
+
+对于有深度学习需求的用户，目前我们的操作系统版本不支持直接安装 TensorFlow 或者 PyTorch，请使用Singularity容器进行深度学习。
+
+```bash
+singularity exec --home ${HOME} --bind ${HOME}/.local:/home/username/.local /mnt/data/container_library/deep_learning/all-py36-jupyter-cpu jupyter notebook --no-browser --port=9030 --ip=0.0.0.0
+```
+
+这里加载了一个将所有深度学习框架打包的镜像，包含了TensorFlow、PyTorch等框架。用户也可以自己创建并使用自己的镜像，更多关于singularity的内容，请参考我们的[文档](singularity.md)。
 
 !!! tip "IP和端口号"
     为避免端口号冲突，port要设置成9000~9999中的某个值。如这个端口被占用，系统会提示 `The port 9030 is already in use, trying another port.` 。请选择另外一个端口号尝试重启 Jupyter。启动成功后记住这个端口号。IP目前暂时只支持 node-0-1。
