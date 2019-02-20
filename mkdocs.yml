@@ -4,7 +4,7 @@ theme:
   highlightjs: true
 
   custom_dir: 'custom_theme/'
-  
+
 copyright: Copyright © 中国人民大学大型科学仪器共享平台
 
 nav:
@@ -20,7 +20,8 @@ nav:
       - 'Julia': 'manual/julia.md'
       - 'Jupyter': 'manual/jupyter.md'
       - 'Singularity': 'manual/singularity.md'
-      - '分子模拟软件': 'manual/chem.md' 
+      - 'TensorFlow': 'manual/tensorflow.md'
+      - '分子模拟软件': 'manual/chem.md'
       - '数学库': 'manual/math-lib.md'
     - '参考资料': 'reference.md'
 
