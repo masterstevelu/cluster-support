@@ -102,7 +102,7 @@
     <a class="current" href="./">Singularity</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#singularity">Singularity容器</a></li>
+    <!-- <li class="toctree-l3"><a href="#singularity">Singularity容器</a></li> -->
     
         <ul>
         
@@ -114,7 +114,9 @@
         
             <li><a class="toctree-l4" href="#_3">使用镜像运行作业</a></li>
         
-            <li><a class="toctree-l4" href="#singularity_2">在调度系统中使用singularity启动作业</a></li>
+            <li><a class="toctree-l4" href="#_4">现有深度学习镜像</a></li>
+        
+            <li><a class="toctree-l4" href="#singularitytensorflow">在集群上使用singularity启动TensorFlow作业</a></li>
         
         </ul>
     
@@ -210,7 +212,78 @@ python3 -c 'import tensorflow as tf; print(tf.__version__)'
 <p class="admonition-title">注意！</p>
 <p>请不要在登录节点运行singularity镜像并在镜像中运行作业任务！登录节点连接了Internet，可以拉取dockerhub上的pre-built镜像。计算节点不可连接外网，无法直接拉取外网镜像。可以从登录节点ssh到某台计算节点上启动镜像并运行作业任务。</p>
 </div>
-<h2 id="singularity_2">在调度系统中使用singularity启动作业</h2>
+<h2 id="_4">现有深度学习镜像</h2>
+<p>我们给用户准备了一些常用的深度学习的镜像，放置在了 <code>/mnt/data/container_library/deep_learning/</code> 下，几个镜像的信息如下。</p>
+<table>
+<thead>
+<tr>
+<th>.</th>
+<th><a href="https://github.com/ufoym/deepo">all-py36-jupyter-cpu</a></th>
+<th>tf-1.10.0-py35</th>
+<th>tf-1.12.0-py35</th>
+<th>pytorch-1.0.0-py36</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ubuntu</td>
+<td>16.04</td>
+<td>16.04</td>
+<td>16.04</td>
+<td>16.04</td>
+</tr>
+<tr>
+<td>python</td>
+<td>3.6</td>
+<td>3.5</td>
+<td>3.5</td>
+<td>3.6</td>
+</tr>
+<tr>
+<td>theano</td>
+<td>1.0.1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tensorflow</td>
+<td>1.8.0</td>
+<td>1.10.0</td>
+<td>1.12.0</td>
+<td></td>
+</tr>
+<tr>
+<td>pytorch</td>
+<td>0.4.0</td>
+<td></td>
+<td></td>
+<td>1.0.0</td>
+</tr>
+<tr>
+<td>keras</td>
+<td>2.1.6 TensorFlow</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>mxnet</td>
+<td>1.1.0</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>cntk</td>
+<td>2.5.1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="singularitytensorflow">在集群上使用singularity启动TensorFlow作业</h2>
 <p>这里以 TensorFlow 提供的官方tutorials中使用卷积网络对mnist数据进行分类的代码<a href="https://github.com/tensorflow/models/blob/master/tutorials/image/mnist/convolutional.py">convolutional.py</a>为例。将代码和数据下载到个人文件夹后，编辑pbs文件为：</p>
 <pre><code class="bash">#PBS -N mnist_tf_singularity
 ### use one node for this job
@@ -240,9 +313,10 @@ cd $PBS_O_WORKDIR
   <div role="contentinfo">
     <!-- Copyright etc -->
     
+      <p>Copyright © 中国人民大学大型科学仪器共享平台</p>
+    
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>

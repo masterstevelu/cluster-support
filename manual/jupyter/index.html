@@ -98,20 +98,24 @@
     <a class="current" href="./">Jupyter</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#node-0-1">登录到计算节点 node-0-1</a></li>
-    
-
-    <li class="toctree-l3"><a href="#jupyter">启动Jupyter</a></li>
-    
-
-    <li class="toctree-l3"><a href="#ssh">建立SSH隧道</a></li>
-    
-
-    <li class="toctree-l3"><a href="#jupyter_1">在个人浏览器打开Jupyter界面</a></li>
+    <!-- <li class="toctree-l3"><a href="#jupyter">Jupyter</a></li> -->
     
         <ul>
         
-            <li><a class="toctree-l4" href="#jupyter_2">关闭Jupyter</a></li>
+            <li><a class="toctree-l4" href="#node-0-1">登录到计算节点 node-0-1</a></li>
+        
+            <li><a class="toctree-l4" href="#jupyter_1">启动Jupyter</a></li>
+        
+            <li><a class="toctree-l4" href="#ssh">建立SSH隧道</a></li>
+        
+        </ul>
+    
+
+    <!-- <li class="toctree-l3"><a href="#jupyter_2">在个人浏览器打开Jupyter界面</a></li> -->
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#jupyter_3">关闭Jupyter</a></li>
         
         </ul>
     
@@ -174,7 +178,8 @@
           <div role="main">
             <div class="section">
               
-                <p><a href="https://jupyter.org/">Jupyter</a> Notebook可以允许在网页页面中直接编写代码和运行代码，得到运行结果，用户在网页界面中可以完成整个数据科学的工作流程，包括数据清理、统计建模、构建和训练机器学习模型、可视化数据等等。这种交互界面大大方便了研究人员进行数据科学的开发和调试。</p>
+                <h1 id="jupyter">Jupyter</h1>
+<p><a href="https://jupyter.org/">Jupyter</a> Notebook可以允许在网页页面中直接编写代码和运行代码，得到运行结果，用户在网页界面中可以完成整个数据科学的工作流程，包括数据清理、统计建模、构建和训练机器学习模型、可视化数据等等。这种交互界面大大方便了研究人员进行数据科学的开发和调试。</p>
 <p>由于集群上计算节点是无法被用户直接访问，用户只能访问集群的登录节点，而登录节点原则上不允许直接运行 Jupyter 等程序。因此，在集群上使用 Jupyter 暂时不需要向作业调度系统提交作业，而是直接在计算节点上启动作业。</p>
 <ol>
 <li>登录到计算节点node-0-1</li>
@@ -187,15 +192,22 @@
 <pre><code class="bash">ssh node-0-1
 </code></pre>
 
-<h2 id="jupyter">启动Jupyter</h2>
+<h2 id="jupyter_1">启动Jupyter</h2>
 <ol>
-<li>在计算节点node-0-1上加载anaconda和相应python或r环境，使用命令启动Jupyter Notebook。</li>
+<li>在计算节点node-0-1上加载相应python或r环境，使用命令启动Jupyter Notebook。</li>
 </ol>
+<h3 id="anaconda">使用 Anaconda</h3>
 <pre><code class="bash">module load anaconda/5.3.0
 source activate python36
-jupyter notebook --no-browser --port=9030 --ip=node-0-1
+jupyter notebook --no-browser --port=9030 --ip=0.0.0.0
 </code></pre>
 
+<h3 id="_1">使用容器进行深度学习</h3>
+<p>对于有深度学习需求的用户，目前我们的操作系统版本不支持直接安装 TensorFlow 或者 PyTorch，请使用Singularity容器进行深度学习。</p>
+<pre><code class="bash">singularity exec --home ${HOME} --bind ${HOME}/.local:/home/username/.local /mnt/data/container_library/deep_learning/all-py36-jupyter-cpu jupyter notebook --no-browser --port=9030 --ip=0.0.0.0
+</code></pre>
+
+<p>这里加载了一个将所有深度学习框架打包的镜像，包含了TensorFlow、PyTorch等框架。用户也可以自己创建并使用自己的镜像，更多关于singularity的内容，请参考我们的<a href="../singularity/">文档</a>。</p>
 <div class="admonition tip">
 <p class="admonition-title">IP和端口号</p>
 <p>为避免端口号冲突，port要设置成9000~9999中的某个值。如这个端口被占用，系统会提示 <code>The port 9030 is already in use, trying another port.</code> 。请选择另外一个端口号尝试重启 Jupyter。启动成功后记住这个端口号。IP目前暂时只支持 node-0-1。</p>
@@ -212,11 +224,11 @@ jupyter notebook --no-browser --port=9030 --ip=node-0-1
 <p><strong>Windows用户</strong></p>
 <p>MobaXterm 用户 可以在“Tools”下“MobaSSHTunnel (port forwarding)”中选择“New SSH Tunnel”，选择“Local port forwarding” 选项，在Remote Server处将端口号和服务器填写进去。然后启动这个SSH隧道。</p>
 <p>其他SSH客户端用户可以根据上述原理配置SSH隧道的转发规则。</p>
-<h1 id="jupyter_1">在个人浏览器打开Jupyter界面</h1>
+<h1 id="jupyter_2">在个人浏览器打开Jupyter界面</h1>
 <p>刚才启动Jupyter的时候，系统会返回一个登录的URL：</p>
 <p><code>http://node-0-1:9030/?token=a6f9113aef92aafaed458917ebcc43de5c77483572fdf484</code></p>
 <p>把URL中的node-0-1换成localhost即可，访问该URL即可使用Jupyter服务。</p>
-<h2 id="jupyter_2">关闭Jupyter</h2>
+<h2 id="jupyter_3">关闭Jupyter</h2>
 <p>不需要时，请在node-0-1的命令行使用<code>Control-C</code>及时关闭你的Jupyter服务。</p>
               
             </div>
@@ -238,9 +250,10 @@ jupyter notebook --no-browser --port=9030 --ip=node-0-1
   <div role="contentinfo">
     <!-- Copyright etc -->
     
+      <p>Copyright © 中国人民大学大型科学仪器共享平台</p>
+    
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
