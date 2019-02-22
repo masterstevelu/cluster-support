@@ -2,61 +2,104 @@
 
 [Jupyter][1] Notebook可以允许在网页页面中直接编写代码和运行代码，得到运行结果，用户在网页界面中可以完成整个数据科学的工作流程，包括数据清理、统计建模、构建和训练机器学习模型、可视化数据等等。这种交互界面大大方便了研究人员进行数据科学的开发和调试。
 
-由于集群上计算节点是无法被用户直接访问，用户只能访问集群的登录节点，而登录节点原则上不允许直接运行 Jupyter 等程序。因此，在集群上使用 Jupyter 暂时不需要向作业调度系统提交作业，而是直接在计算节点上启动作业。
+![Jupyter](../img/jupyter_example.png)
 
-1. 登录到计算节点node-0-1
-2. 启动Jupyter
-3. 建立SSH隧道
-4. 在个人浏览器打开Jupyter界面
+由于集群上计算节点是无法被用户直接访问，用户只能访问集群的登录节点，而登录节点原则上不允许直接运行 Jupyter 等程序，这里使用了SSH隧道技术来支持Jupyter。
 
-## 登录到计算节点 node-0-1
+1. 使用我们提供的脚本启动Jupyter
+2. 建立SSH隧道
+3. 在个人浏览器打开Jupyter界面
+4. 不用时，及时杀死Jupyter作业和SSH隧道进程
 
-从登录节点ssh到集群计算节点 node-0-1，集群目前暂时只支持 node-0-1 使用 jupyter，如用户太多，计算需求无法被满足，可与我们联系，我们会根据情况进行扩容。
+## 设置Jupyter登录密码
 
-```bash
-ssh node-0-1
-```
-
-## 启动Jupyter
-
-2. 在计算节点node-0-1上加载相应python或r环境，使用命令启动Jupyter Notebook。
-
-### 使用 Anaconda  
+在开始之前先设置Jupyter的登录密码：
 
 ```bash
 module load anaconda/5.3.0
-source activate python36
-jupyter notebook --no-browser --port=9030 --ip=0.0.0.0
+jupyter notebook --generate-config
+jupyter notebook password
+Enter password:  ****
+Verify password: ****
+[NotebookPasswordApp] Wrote hashed password to .../.jupyter/jupyter_notebook_config.json
 ```
+
+## 使用我们提供的脚本启动Jupyter
+
+从GitHub上克隆我们提供的样例，其中 `cluster-tutorials/jupyter` 为启动脚本程序。用户可以根据需要将这个目录copy到自己指定的目录。
+
+
+```bash
+git clone https://github.com/masterstevelu/cluster-tutorials.git
+cd cluster-tutorials/jupyter/
+```
+
+### 使用 Anaconda 的Jupyter
+
+```bash
+module load anaconda/5.3.0
+sh jupyter.sh
+Enter a number between 9001 and 9999: 9001
+valid port_number
+
+
+SSH Tunnel INFO:
+
+Mac/Linux:
+ssh -N -L 9002:node-2-12:9002 luweizheng@183.174.229.251
+
+Windows:
+Remote server: node-2-12
+Remote port: 9002
+SSH server: 183.174.229.251
+SSH login: luweizheng
+SSH port: 22
+```
+
+脚本打印出使用SSH隧道的帮助信息。
 
 ### 使用容器进行深度学习
 
-对于有深度学习需求的用户，目前我们的操作系统版本不支持直接安装 TensorFlow 或者 PyTorch，请使用Singularity容器进行深度学习。
+对于有深度学习需求的用户，目前我们的操作系统版本不支持直接安装 TensorFlow 或者 PyTorch，请使用Singularity容器进行深度学习。请根据提示输入容器镜像位置和端口号。
 
 ```bash
-singularity exec --home ${HOME} --bind ${HOME}/.local:/home/username/.local /mnt/data/container_library/deep_learning/all-py36-jupyter-cpu jupyter notebook --no-browser --port=9030 --ip=0.0.0.0
+sh singularity_jupyter.sh
+Enter singularity image path: /mnt/data/container_library/deep_learning/all-py36-jupyter-cpu
+Image exists!
+Enter a number between 9001 and 9999: 9001
+valid port_number
+
+SSH Tunnel INFO:
+
+Mac/Linux:
+ssh -N -L 9001:node-2-12:9001 luweizheng@183.174.229.251
+
+Windows:
+Remote server: node-2-12
+Remote port: 9001
+SSH server: 183.174.229.251
+SSH login: luweizheng
+SSH port: 22
 ```
 
 这里加载了一个将所有深度学习框架打包的镜像，包含了TensorFlow、PyTorch等框架。用户也可以自己创建并使用自己的镜像，更多关于singularity的内容，请参考我们的[文档](singularity.md)。
 
-!!! tip "IP和端口号"
-    为避免端口号冲突，port要设置成9000~9999中的某个值。如这个端口被占用，系统会提示 `The port 9030 is already in use, trying another port.` 。请选择另外一个端口号尝试重启 Jupyter。启动成功后记住这个端口号。IP目前暂时只支持 node-0-1。
 
-## 建立SSH隧道
+## 建立SSH隧道		
 
-SSH隧道的原理如图所示，我们为了访问原本无法访问的 node-0-1，需要建立一个隧道。刚刚启动Jupyter所用的端口号9030，即为Remote Server Port。
+SSH隧道的原理如图所示，我们为了访问原本无法访问的 node-0-1，需要建立一个隧道。刚刚启动Jupyter所用的端口号9001，即为Remote Server Port。
 
 ![SSH隧道](../img/local-port-forwarding.png)
 
 **Mac和Linux用户**
 
-直接使用ssh命令
+直接使用刚才屏幕上打出来的ssh命令
 
 ```bash
-ssh -NL 9030:node-0-1:9030 linpack@183.174.229.251
+ssh -N -L 9001:node-2-12:9001 luweizheng@183.174.229.251
 ```
 
-记得这里为将9030修改为你刚才启动Jupyter的端口号。
+记得这里为拷贝为刚才启动脚本打印出来的命令代码。
 
 **Windows用户**
 
@@ -64,16 +107,19 @@ MobaXterm 用户 可以在“Tools”下“MobaSSHTunnel (port forwarding)”中
 
 其他SSH客户端用户可以根据上述原理配置SSH隧道的转发规则。
 
-# 在个人浏览器打开Jupyter界面
+# 在个人电脑浏览器打开Jupyter界面
 
-刚才启动Jupyter的时候，系统会返回一个登录的URL：
+访问该URL即可使用Jupyter服务：
 
-`http://node-0-1:9030/?token=a6f9113aef92aafaed458917ebcc43de5c77483572fdf484`
-
-把URL中的node-0-1换成localhost即可，访问该URL即可使用Jupyter服务。
+`http://localhost:9001/`
 
 ## 关闭Jupyter
 
-不需要时，请在node-0-1的命令行使用`Control-C`及时关闭你的Jupyter服务。
+不需要时，请在使用 `qstat` 查看 jupyter 作业号，并及时使用 `qdel` 杀死作业。
+
+SSH客户端要及时杀死之前启动的隧道。
+
+!!! note "启动Jupyter作业"
+		我们提供的作业脚本限制了一个用户只能启动一个Jupyter作业。这样是为了避免用户因为疏忽，忘记自己之前开启过的Jupyter，造成计算资源的浪费。如需启动多个Jupyter界面，可以自行修改启动脚本，或者联系我们获取帮助。
 
 [1]: https://jupyter.org/
