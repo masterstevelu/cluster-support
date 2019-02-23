@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>作业调度 - 中国人民大学高性能计算集群</title>
+  <title>提交作业 - 中国人民大学高性能计算集群</title>
   <!-- <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'> -->
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u4f5c\u4e1a\u8c03\u5ea6";
+    var mkdocs_page_name = "\u63d0\u4ea4\u4f5c\u4e1a";
     var mkdocs_page_input_path = "job-scheduler.md";
     var mkdocs_page_url = null;
   </script>
@@ -60,7 +60,11 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../cluster-overview/">快速开始</a>
+    <a class="" href="../getting-started/">快速开始</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../intro/">入门知识</a>
                 </li>
                 <li class="">
                     
@@ -68,10 +72,10 @@
                 </li>
                 <li class=" current">
                     
-    <a class="current" href="./">作业调度</a>
+    <a class="current" href="./">提交作业</a>
     <ul class="subnav">
             
-    <!-- <li class="toctree-l3"><a href="#_1">作业调度</a></li> -->
+    <!-- <li class="toctree-l3"><a href="#_1">提交作业</a></li> -->
     
         <ul>
         
@@ -93,6 +97,8 @@
         
             <li><a class="toctree-l4" href="#_5">作业提交流程</a></li>
         
+            <li><a class="toctree-l4" href="#_6">交互模式</a></li>
+        
         </ul>
     
 
@@ -100,7 +106,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../software/">软件支持</a>
+    <a class="" href="../software/">软件使用</a>
                 </li>
     </ul>
 	    </li>
@@ -175,7 +181,7 @@
         
       
     
-    <li>作业调度</li>
+    <li>提交作业</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -185,8 +191,8 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">作业调度</h1>
-<p>高性能计算集群配有较高的计算资源，同时拥有较多用户，是一个多用户共享的服务。为了有效利用众多处理器核心所提供的计算能力，需要一个作业管理调度系统，统一用户作业提交，合理分配计算资源，将用户的作业指派到最合适的资源上执行。</p>
+                <h1 id="_1">提交作业</h1>
+<p>高性能计算集群配有较高的计算资源，同时拥有较多用户，就像共享单车一样，是一个多用户共享的服务。为了有效利用众多处理器核心所提供的计算能力，需要一个作业管理调度系统，统一用户作业提交，合理分配计算资源，将用户的作业指派到最合适的资源上执行。</p>
 <div class="admonition note">
 <p class="admonition-title">调度器与队列</p>
 <p>如果把向集群提交作业比作前往银行办理业务，那么作业调度器就是银行门口的取号机，用户需要排队，根据叫号来办理业务。用户一般需要告知取号机自己办理哪种服务，比如存取款的普通柜台、对公柜台、VIP柜台、理财顾问等等。取号机在相应的柜台服务上生成排队号码。调度器中的队列与之相似，用户在提交作业时，一般要告知调度器作业所属的队列，调度器会把用户作业放在该队列里排队。</p>
@@ -465,6 +471,18 @@ mpirun -np $NP -machinefile $PBS_NODEFILE python example_mpi4py.py
 <li>查询和调整：当作业在运行时，用户可以使用监控命令 <code>qstat</code> 进行状态查询。用户发现作业提交错误时，可以使用作业删除命令 <code>qdel</code> 删除正在运行的作业。</li>
 <li>查看结果：打开输出文件，查看输出结果。</li>
 </ol>
+<h2 id="_6">交互模式</h2>
+<p>前文主要描述了一种提交作业、等待结果的工作模式，用户也可以使用交互模式来与集群交互。</p>
+<p>申请1个节点上10个核心，时长共5分钟的交互作业：</p>
+<pre><code class="bash">qsub -I -l walltime=00:05:00 -l nodes=1:ppn=10
+
+qsub: waiting for job 5906.rmdx-cluster.edu.com.cn to start
+qsub: job 5906.rmdx-cluster.edu.com.cn ready
+
+</code></pre>
+
+<p>用户可以用这种方式使用R、Python或Julia等提供所见即所得功能的语言，或者使用Jupyter Notebook。当超过walltime所设置的5分钟后，这个作业会自动被杀死。输入<code>exit</code>退出交互模式作业。</p>
+<p>一般地，我们不推荐使用这种交互模式，建议将代码调试好后，使用作业提交模式。</p>
 <p>本文所展示的案例已经能够涵盖绝大多数作业管理操作，一些命令的进阶使用可参考<a href="http://docs.adaptivecomputing.com/torque/4-2-10/help.htm">PBS使用手册</a>中“Submitting and managing jobs”章节相关内容。</p>
               
             </div>
@@ -473,7 +491,7 @@ mpirun -np $NP -machinefile $PBS_NODEFILE python example_mpi4py.py
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../software/" class="btn btn-neutral float-right" title="软件支持">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../software/" class="btn btn-neutral float-right" title="软件使用">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../cluster-login/" class="btn btn-neutral" title="登录方法"><span class="icon icon-circle-arrow-left"></span> Previous</a>

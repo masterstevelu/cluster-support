@@ -60,7 +60,11 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../cluster-overview/">快速开始</a>
+    <a class="" href="../../getting-started/">快速开始</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../intro/">入门知识</a>
                 </li>
                 <li class="">
                     
@@ -68,11 +72,11 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../job-scheduler/">作业调度</a>
+    <a class="" href="../../job-scheduler/">提交作业</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../software/">软件支持</a>
+    <a class="" href="../../software/">软件使用</a>
                 </li>
     </ul>
 	    </li>
@@ -95,6 +99,20 @@
     <ul class="subnav">
             
     <!-- <li class="toctree-l3"><a href="#julia">Julia</a></li> -->
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#julia_1">首次安装Julia</a></li>
+        
+            <li><a class="toctree-l4" href="#julia_2">Julia包</a></li>
+        
+            <li><a class="toctree-l4" href="#jupyterjulia">在Jupyter中使用Julia</a></li>
+        
+            <li><a class="toctree-l4" href="#_1">提交作业</a></li>
+        
+            <li><a class="toctree-l4" href="#_2">并行计算</a></li>
+        
+        </ul>
     
 
     </ul>
@@ -164,26 +182,94 @@
             <div class="section">
               
                 <h1 id="julia">Julia</h1>
-<p><a href="https://julialang.org/">Julia</a> 是MIT主导开发的一款新的编程语言，这个编程语言将 C 语言的速度、Matlab 的矩阵和数学计算能力、Python 的通用性前所未有地结合在一起，支持并行处理，易于学习和使用，尤其适合科学和工程计算，因其开源和免费，最近得到数据科学界的广泛关注。</p>
-<p>虽然在公共目录上安装了Julia，但与 <a href="../python/">Python使用方法</a> 类似，我们推荐使用 Anaconda 来安装和管理 Julia 语言环境。目前，Anaconda上 <code>base</code> 和 <code>julia_base</code> 两个环境都已经安装了 Julia 1.0.3 环境。</p>
-<p>用户如需要安装其他依赖库，可以联系我们，由管理员在安装在基础环境上，也自己可以从 <code>julia_base</code> 环境上克隆出自己的环境，或者重新创建一个新的Julia环境。</p>
-<p>克隆Julia基础环境</p>
-<pre><code class="bash">conda create --name julia_my_evn --clone julia_base
+<p><a href="https://julialang.org/">Julia</a> 是MIT主导开发的一款新的编程语言，这个编程语言将 C 语言的速度、Matlab 的矩阵和数学计算能力、Python 的通用性前所未有地结合在一起，支持并行处理，易于学习和使用，尤其适合科学计算和大数据处理。因其开源免费，且性能优越，其用户量每九个月就翻一翻，得到数据科学界的广泛关注。一些研究机构甚至抛弃了matlab和R，转而投向Julia的怀抱。</p>
+<h2 id="julia_1">首次安装Julia</h2>
+<p>我们推荐使用 Anaconda 来安装和管理 Julia 语言环境，更多Anaconda管理环境的内容可以参考<a href="../python/">Python部分</a>。</p>
+<p>创建自己的Julia环境，环境名为julia：</p>
+<pre><code class="bash">module load anaconda/5.3.0
+conda create -n julia -c conda-forge julia
 </code></pre>
 
-<p>创建自己的Julia环境：</p>
-<pre><code class="bash">conda create -n julia_my_evn
-conda install -c conda-forge julia -n julia_my_env
+<p>也可以将Julia安装到你已有的conda环境中：</p>
+<pre><code class="bash">conda install -n your_env_name -c conda-forge julia
 </code></pre>
 
-<p>进入的julia的交互模式，在命令行中输入：</p>
-<pre><code class="bash">source activate julia_my_env
+<p>激活Julia环境，进入的julia的交互模式，在命令行中输入：</p>
+<pre><code class="bash">source activate julia
 julia
 </code></pre>
 
-<p>安装包：</p>
+<h2 id="julia_2">Julia包</h2>
+<p>在Julia中安装包非常简单，只需要使用系统自带的<code>Pkg</code>模块来安装自己需要的包。</p>
+<pre><code class="julia">julia&gt; import Pkg
+
+julia&gt; Pkg.status()
+    Status `~/.julia/environments/v1.0/Project.toml`
+
+julia&gt; Pkg.add(&quot;Calculus&quot;)s
+</code></pre>
+
+<p>其他包名可以根据需要自己安装，包将安装在 <code>~/.julia</code> 目录，即个人家目录下的一个隐藏目录中。</p>
+<h2 id="jupyterjulia">在Jupyter中使用Julia</h2>
+<p>如果使用Jupyter的话，首先需要在Julia中安装支持Jupyter的包：</p>
 <pre><code class="julia">using Pkg
-Pkg.add(&quot;Flux&quot;)
+Pkg.add(&quot;IJulia&quot;)
+</code></pre>
+
+<p>然后按照我们提供的<a href="../jupyter/">Jupyter教程</a>来启动Jupyter，记住要先使用<code>source activate</code>命令加载你的 julia 环境。Jupyter启动后，右侧的 “NEW” 按钮新建文件的时候，就可以选择 Julia 作为编程语言了。</p>
+<h2 id="_1">提交作业</h2>
+<p>生成一个 Hello World 代码：</p>
+<pre><code class="julia">println(&quot;hello world&quot;)
+</code></pre>
+
+<p>生成一个提交 julia 作业的脚本 <code>submit_julia.pbs</code> ：</p>
+<pre><code class="bash">#!/bin/bash
+
+#PBS -N julia_example
+### use one node for this job
+#PBS -l nodes=1
+#PBS -q default
+
+cd $PBS_O_WORKDIR
+module load anaconda/5.3.0
+source activate julia
+
+julia hello.jl
+</code></pre>
+
+<p>使用 <code>qsub submit_julia.pbs</code> 来提交作业。</p>
+<h2 id="_2">并行计算</h2>
+<p>比起 Python 和 R，Julia在设计之初就考虑了并行，而且不用使用 MPI 那样复杂的编程接口。</p>
+<p>一个并行的例子 <code>julia_parallel_test.jl</code>：</p>
+<pre><code class="julia">@everywhere println(&quot;process: $(myid()) on host $(gethostname())&quot;)
+</code></pre>
+
+<p>PBS脚本为：</p>
+<pre><code class="bash">#!/bin/bash
+
+#PBS -N julia_example
+### use one node for this job
+#PBS -l nodes=2:ppn=4
+#PBS -q default
+
+cd $PBS_O_WORKDIR
+module load anaconda/5.3.0
+source activate julia
+
+julia --machine-file $PBS_NODEFILE ./julia_parallel_test.jl
+</code></pre>
+
+<p>注意这里使用了 <code>--machine-file</code> 这个参数。脚本向调度系统申请了2个节点，每个节点4个核心，共8个核心。</p>
+<p>输出结果为：</p>
+<pre><code class="bash">process: 1 on host node-3-2.local
+      From worker 3:    process: 3 on host node-2-11.local
+      From worker 2:    process: 2 on host node-3-2.local
+      From worker 5:    process: 5 on host node-2-11.local
+      From worker 6:    process: 6 on host node-2-11.local
+      From worker 4:    process: 4 on host node-2-11.local
+      From worker 8:    process: 8 on host node-3-2.local
+      From worker 7:    process: 7 on host node-3-2.local
+      From worker 9:    process: 9 on host node-3-2.local
 </code></pre>
               
             </div>
