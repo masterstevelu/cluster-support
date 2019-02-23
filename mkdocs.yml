@@ -10,10 +10,11 @@ copyright: Copyright © 中国人民大学大型科学仪器共享平台
 nav:
     - '首页': 'index.md'
     - '使用指南':
-      - '快速开始': 'cluster-overview.md'
+      - '快速开始': 'getting-started.md'
+      - '入门知识': 'intro.md'
       - '登录方法': 'cluster-login.md'
-      - '作业调度': 'job-scheduler.md'
-      - '软件支持': 'software.md'
+      - '提交作业': 'job-scheduler.md'
+      - '软件使用': 'software.md'
     - '软件使用':
       - 'Python': 'manual/python.md'
       - 'R': 'manual/r.md'
