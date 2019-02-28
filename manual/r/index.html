@@ -178,13 +178,14 @@
             <div class="section">
               
                 <h1 id="r">R</h1>
-<p>虽然在公共目录上安装了R，但是使用该环境安装其他 package 的时候，会出现一些依赖错误。与 <a href="../python/">Python使用方法</a> 类似，我们推荐使用 Anaconda 来使用和管理 R 语言环境，这个环境不会出现安装依赖错误。</p>
+<p>虽然在公共目录上安装了R，但是使用该环境安装其他 package 的时候，会出现一些依赖错误。我们推荐使用 Anaconda 来使用和管理 R 语言环境，这个环境不会出现安装依赖错误。不熟悉 Anaconda 的用户可以先阅读 <a href="../python/">Anaconda使用方法</a> ，了解 <code>conda</code> 命令和相关知识。</p>
 <h2 id="r_1">R语言环境</h2>
 <p>Anaconda基础环境（base）包含了R 3.5所需的基础库，能够满足绝大多数计算需求，我们建议直接使用这个环境下的R。用户如需要安装其他版本的R，可以重新创建一个新的R环境。</p>
 <p>安装自己的环境：</p>
 <pre><code class="bash">conda create -n test_r_env r-essentials r-base
 </code></pre>
 
+<p>其中 <code>-n test_r_env</code> 表示创建新的环境名，记得这里要改成你自己的R环境名。</p>
 <h2 id="r_2">管理R包</h2>
 <p>其他所依赖的包可以进入交互模式后使用 <code>install.packages('your_package')</code> 根据命令行提示来进行安装，使用 <code>update.packages('your_package')</code> 更新包，使用 <code>remove.packages('your_package')</code> 来删除。</p>
 <p>首次安装时，R会提示你包的安装位置，默认位置是用户HOME目录的R文件夹下。</p>

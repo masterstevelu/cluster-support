@@ -184,12 +184,13 @@
                 <h1 id="julia">Julia</h1>
 <p><a href="https://julialang.org/">Julia</a> 是MIT主导开发的一款新的编程语言，这个编程语言将 C 语言的速度、Matlab 的矩阵和数学计算能力、Python 的通用性前所未有地结合在一起，支持并行处理，易于学习和使用，尤其适合科学计算和大数据处理。因其开源免费，且性能优越，其用户量每九个月就翻一翻，得到数据科学界的广泛关注。一些研究机构甚至抛弃了matlab和R，转而投向Julia的怀抱。</p>
 <h2 id="julia_1">首次安装Julia</h2>
-<p>我们推荐使用 Anaconda 来安装和管理 Julia 语言环境，更多Anaconda管理环境的内容可以参考<a href="../python/">Python部分</a>。</p>
+<p>我们推荐使用 Anaconda 来安装和管理 Julia 语言环境。不熟悉 Anaconda 的用户可以先阅读 <a href="../python/">Anaconda 使用方法</a> ，了解 <code>conda</code> 命令和相关知识。</p>
 <p>创建自己的Julia环境，环境名为julia：</p>
 <pre><code class="bash">module load anaconda/5.3.0
 conda create -n julia -c conda-forge julia
 </code></pre>
 
+<p>其中 <code>-n julia</code> 表示创建环境名。</p>
 <p>也可以将Julia安装到你已有的conda环境中：</p>
 <pre><code class="bash">conda install -n your_env_name -c conda-forge julia
 </code></pre>
