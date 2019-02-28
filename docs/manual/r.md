@@ -1,6 +1,6 @@
 # R
 
-虽然在公共目录上安装了R，但是使用该环境安装其他 package 的时候，会出现一些依赖错误。与 [Python使用方法](python.md) 类似，我们推荐使用 Anaconda 来使用和管理 R 语言环境，这个环境不会出现安装依赖错误。
+虽然在公共目录上安装了R，但是使用该环境安装其他 package 的时候，会出现一些依赖错误。我们推荐使用 Anaconda 来使用和管理 R 语言环境，这个环境不会出现安装依赖错误。不熟悉 Anaconda 的用户可以先阅读 [Anaconda使用方法](python.md) ，了解 `conda` 命令和相关知识。
 
 ## R语言环境
 
@@ -11,6 +11,8 @@ Anaconda基础环境（base）包含了R 3.5所需的基础库，能够满足绝
 ```bash
 conda create -n test_r_env r-essentials r-base
 ```
+
+其中 `-n test_r_env` 表示创建新的环境名，记得这里要改成你自己的R环境名。
 
 ## 管理R包
 
