@@ -4,7 +4,7 @@
 
 ## 首次安装Julia
 
-我们推荐使用 Anaconda 来安装和管理 Julia 语言环境，更多Anaconda管理环境的内容可以参考[Python部分](python.md)。
+我们推荐使用 Anaconda 来安装和管理 Julia 语言环境。不熟悉 Anaconda 的用户可以先阅读 [Anaconda 使用方法](python.md) ，了解 `conda` 命令和相关知识。
 
 创建自己的Julia环境，环境名为julia：
 
@@ -12,6 +12,8 @@
 module load anaconda/5.3.0
 conda create -n julia -c conda-forge julia
 ```
+
+其中 `-n julia` 表示创建环境名。
 
 也可以将Julia安装到你已有的conda环境中：
 
