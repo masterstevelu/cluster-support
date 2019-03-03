@@ -2,6 +2,13 @@
 
 [Anaconda][1] 是一个用于科学计算的Python发行版，支持 Linux, Mac, Windows系统以及 Python、R等科学计算语言，提供了包管理与环境管理的功能，可以很方便地解决多版本python并存、切换以及各种第三方包安装问题。Anaconda 利用 `conda` 命令来进行package和environment的管理，并且已经包含了Python和相关的配套工具。在集群上，我们建议用户使用 Anaconda 来管理和使用Python。我们已经在集群的 Anaconda 中安装好了常用的科学计算库，包括 jupyter、mpi4py、numpy、pandas、scikit-learn、xgboost等。
 
+Anaconda环境需要几个G的存储空间，每个用户都自己安装一套Anaconda，将造成存储空间的浪费。用户自己编译安装的Python很有可能出现依赖错误，GCC版本过低等各种问题，且所编译的numpy等科学计算软件没有mkl加速，速度将会很慢。因此，这里推荐大家使用我们统一安装的Anaconda版的Python。如有其他个性化需求，请联系我们获取更多信息。
+
+加载 Anaconda：
+```bash
+module load anaconda/5.3.0
+```
+
 Python 入门教程请参考：
 
 * [廖雪峰的Python教程][3]
@@ -10,12 +17,42 @@ Python 入门教程请参考：
 !!! tip "深度学习用户请使用容器"
         对于使用深度学习框架的用户，由于大多数框架对 Linux 操作系统版本要求高，目前无法直接在集群的操作系统上安装 TensorFlow 或 PyTorch 框架。网络上提供的修改GLIBC的方法也非常不安全，有可能导致你的环境崩溃，这里非常不建议。我们建议使用Singularity容器来运行你的计算任务。你可以忽略下文的教程，直接跳转到[Singularity](singularity.md)的页面。
 
+## 已安装依赖包
+
+我们推荐用户使用我们在Anaconda中已经安装好的基础环境（base）。加载 Anaconda 后，默认使用的就是基础环境。基础环境中一些常用科学计算相关包如下所示：
+
+| 包         	| 版本   	| 包           	| 版本   	|
+|------------	|--------	|--------------	|--------	|
+| gensim     	| 3.7.1  	| nltk         	| 3.3.0  	|
+| gsl        	| 2.4    	| numpy        	| 1.15.4 	|
+| hdf5       	| 1.10.2 	| openblas     	| 0.3.3  	|
+| jieba      	| 0.39   	| pandas       	| 0.23.4 	|
+| jupyter    	| 1.0.0  	| python       	| 3.7.0  	|
+| matplotlib 	| 3.0.2  	| scikit-learn 	| 0.20.2 	|
+| mkl        	| 2019.1 	| scipy        	| 1.2.0  	|
+| mpi4py     	| 3.0.0  	| seaborn      	| 0.9.0  	|
+| networkx   	| 2.1    	| xgboost      	| 0.81   	|
+
+*表 base环境常用科学计算包*
+
+可以使用 `conda list -n base` 查看基础环境已经安装的包。
+
+## 安装自己所需包
+
+普通用户可以使用`pip`命令来安装包。
+
+```base
+pip install --user jieba -i https://pypi.douban.com/simple
+```
+
+!!! tip "国内源"
+    pip默认使用的官方源服务器在国外，相对比较慢。`-i https://pypi.douban.com/simple` 使用了豆瓣提供的国内Python安装源，可以大大加快安装速度。
+
+用户可以将常用包告知我们，我们统一安装，也可以根据需要创建自己安装，或从基础环境上克隆出自己的环境再进行修改。
+
 ## 使用 conda 管理 Python 环境
 
-加载 Anaconda：
-```bash
-module load anaconda/5.3.0
-```
+如基础环境无法满足用户需求，也可以根据我们下面的教程来创建自己的环境。这里要使用 `conda` 来管理环境。
 
 接下来我们用 `conda` 来安装和管理一个针对自己的Python环境：
 
@@ -44,9 +81,6 @@ conda install -n test_env numpy
 pip3 install jieba -i https://pypi.douban.com/simple
 ```
 
-!!! tip "国内源"
-    pip默认使用的官方源服务器在国外，相对比较慢。`-i https://pypi.douban.com/simple` 使用了豆瓣提供的国内Python安装源，可以大大加快安装速度。
-
 退出该环境：
 
 ```bash
@@ -55,12 +89,6 @@ source deactivate
 
 !!! note "为什么要创建虚拟环境"
     conda 的虚拟环境提供了环境隔离。不同用户可以使用不同的包，同一用户也可以使用不同版本的包。对于 Python 这样一个发展非常快的开源社区，某个包很可能在短时间内有较大更新。用户编写的代码很可能是基于历史上某个特定版本的包，为保证用户代码正确执行，最好也要保证环境中所使用的包版本一致。虚拟环境为用户提供了一个可以解决上述问题的方案。虚拟环境隔离的功能也可以保证用户之间、环境和环境之间互相不冲突。
-
-用户可以根据我们本教程来创建自己的环境，也可以使用我们已经安装好的基础环境（base）。基础环境包含了常见的数据科学库，包括mpi4py、numpy 、 pandas 、 scikit-learn 、 xgboost等。
-
-使用 `conda list -n base` 查看基础环境已经安装的包。
-
-普通用户无root权限，无法在基础环境（base）上安装或修改包。用户将常用包告知我们，我们统一安装，也可以根据需要创建自己的环境，或从基础环境上克隆出自己的环境再进行修改：
 
 ```bash
 conda create --name test_env_2 --clone base

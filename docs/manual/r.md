@@ -124,3 +124,7 @@ Rscript ols.R
 ```
 
 程序将输出生成到了标准输出，并生成了相应的图片。
+
+## 使用 Jupyter
+
+Jupyter的使用请参考 [Jupyter使用方法](jupyter.md)。

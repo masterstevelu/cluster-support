@@ -124,7 +124,8 @@ process: 1 on host node-3-2.local
       From worker 9:	process: 9 on host node-3-2.local
 ```
 
+## 使用Jupyter
 
-
+Jupyter的使用请参考 [Jupyter使用方法](jupyter.md)。
 
 [1]: https://julialang.org/
