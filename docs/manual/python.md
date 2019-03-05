@@ -4,11 +4,6 @@
 
 Anaconda环境需要几个G的存储空间，每个用户都自己安装一套Anaconda，将造成存储空间的浪费。用户自己编译安装的Python很有可能出现依赖错误，GCC版本过低等各种问题，且所编译的numpy等科学计算软件没有mkl加速，速度将会很慢。因此，这里推荐大家使用我们统一安装的Anaconda版的Python。如有其他个性化需求，请联系我们获取更多信息。
 
-加载 Anaconda：
-```bash
-module load anaconda/5.3.0
-```
-
 Python 入门教程请参考：
 
 * [廖雪峰的Python教程][3]
@@ -16,6 +11,13 @@ Python 入门教程请参考：
 
 !!! tip "深度学习用户请使用容器"
         对于使用深度学习框架的用户，由于大多数框架对 Linux 操作系统版本要求高，目前无法直接在集群的操作系统上安装 TensorFlow 或 PyTorch 框架。网络上提供的修改GLIBC的方法也非常不安全，有可能导致你的环境崩溃，这里非常不建议。我们建议使用Singularity容器来运行你的计算任务。你可以忽略下文的教程，直接跳转到[Singularity](singularity.md)的页面。
+
+加载 Anaconda：
+```bash
+module load anaconda/5.3.0
+```
+
+执行完此命令后，你已经可以使用我们提供的Python 3.7基础环境，此环境也安装有R 3.5和Julia 1.03。
 
 ## 已安装依赖包
 
@@ -39,7 +41,7 @@ Python 入门教程请参考：
 
 ## 安装自己所需包
 
-普通用户可以使用`pip`命令来安装包。
+普通用户可以使用`pip`命令来安装包，因为不是管理员权限，所以注意要使用`--user`参数，将安装包安装到自己的家目录中。
 
 ```base
 pip install --user jieba -i https://pypi.douban.com/simple
@@ -48,7 +50,7 @@ pip install --user jieba -i https://pypi.douban.com/simple
 !!! tip "国内源"
     pip默认使用的官方源服务器在国外，相对比较慢。`-i https://pypi.douban.com/simple` 使用了豆瓣提供的国内Python安装源，可以大大加快安装速度。
 
-用户可以将常用包告知我们，我们统一安装，也可以根据需要创建自己安装，或从基础环境上克隆出自己的环境再进行修改。
+用户可以将常用包告知我们，我们统一安装，也可以根据需要创建自己安装。一些新开发的包可能依赖更高版本的GLIBC，使用时会遇到 `version 'GLIBC_2.xx' not found` 错误，这时请使用Singularity容器，使用容器来运行你的计算任务，请参考我们的[Singularity](singularity.md)的页面。
 
 ## 使用 conda 管理 Python 环境
 
@@ -80,6 +82,8 @@ conda install -n test_env numpy
 ```bash
 pip3 install jieba -i https://pypi.douban.com/simple
 ```
+
+由于这个环境已经安装到了你自己的目录，可以不用 `--user` 参数。
 
 退出该环境：
 

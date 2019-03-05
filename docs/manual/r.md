@@ -4,7 +4,24 @@
 
 ## R语言环境
 
-Anaconda基础环境（base）包含了R 3.5所需的基础库，能够满足绝大多数计算需求，我们建议直接使用这个环境下的R。用户如需要安装其他版本的R，可以重新创建一个新的R环境。
+Anaconda基础环境（base）包含了R 3.5所需的基础库，能够满足绝大多数计算需求，我们建议直接使用这个环境下的R。
+
+加载 Anaconda：
+```bash
+module load anaconda/5.3.0
+```
+
+执行完此命令后，你已经可以使用我们提供的R 3.5基础环境，此环境也安装有Python 3.7和Julia 1.03。环境中已经安装好了。
+
+此环境已经安装了data.table、dplyr、ggplot2、Rcpp等常用软件包。
+
+进入R，使用下面的命令查看已安装包。
+
+```r
+print(as.data.frame(installed.packages()[,c(1,3)]))
+```
+
+用户如需要安装其他版本的R，可以重新创建一个新的R环境。
 
 安装自己的环境：
 
@@ -12,7 +29,13 @@ Anaconda基础环境（base）包含了R 3.5所需的基础库，能够满足绝
 conda create -n test_r_env r-essentials r-base
 ```
 
-其中 `-n test_r_env` 表示创建新的环境名，记得这里要改成你自己的R环境名。
+其中 `-n test_r_env` 表示创建新的环境名，记得这里要改成你自己的R环境名。这就创建了一个名为`test_r_env`的基础环境。
+
+使用 `source` 来激活这个环境。
+
+```bash
+source activate test_r_env
+```
 
 ## 管理R包
 

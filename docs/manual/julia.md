@@ -38,7 +38,7 @@ julia> import Pkg
 julia> Pkg.status()
     Status `~/.julia/environments/v1.0/Project.toml`
 
-julia> Pkg.add("Calculus")s
+julia> Pkg.add("Calculus")
 ```
 
 其他包名可以根据需要自己安装，包将安装在 `~/.julia` 目录，即个人家目录下的一个隐藏目录中。
@@ -123,9 +123,5 @@ process: 1 on host node-3-2.local
       From worker 7:	process: 7 on host node-3-2.local
       From worker 9:	process: 9 on host node-3-2.local
 ```
-
-## 使用Jupyter
-
-Jupyter的使用请参考 [Jupyter使用方法](jupyter.md)。
 
 [1]: https://julialang.org/
