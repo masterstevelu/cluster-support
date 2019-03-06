@@ -181,7 +181,7 @@
 <p>这里以 TensorFlow 提供的官方tutorials中使用卷积网络对mnist数据进行分类的代码<a href="https://github.com/tensorflow/models/blob/master/tutorials/image/mnist/convolutional.py">convolutional.py</a>为例。将代码和数据下载到个人文件夹后，编辑pbs文件为：</p>
 <pre><code class="bash">#PBS -N mnist_tf_singularity
 ### use one node for this job
-#PBS -l nodes=1
+#PBS -l nodes=1:ppn=10
 #PBS -q default
 cd $PBS_O_WORKDIR
 
