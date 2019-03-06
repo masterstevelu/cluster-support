@@ -9,7 +9,7 @@
 ```bash
 #PBS -N mnist_tf_singularity
 ### use one node for this job
-#PBS -l nodes=1
+#PBS -l nodes=1:ppn=10
 #PBS -q default
 cd $PBS_O_WORKDIR
 
