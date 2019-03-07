@@ -19,8 +19,7 @@ Windows下的登录软件有 XShell 、SecureCRT、 [Putty][0] 和 [MobaXterm][4
 为方便校内用户下载，我们提供了校内的下载链接。
 
 * [MobaXterm](files/MobaXterm_Portable_v11.1.zip)
-* [Xshell](files/Xshell-6.0.0118p.exe)
-* [Xftp](files/Xftp-6.0.0111p.exe)
+* [Xshell+Xftp](files/Xshell+Xftp.zip)
 
 ## Linux和Mac用户
 
