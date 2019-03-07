@@ -12,9 +12,15 @@ Windows下的登录软件有 XShell 、SecureCRT、 [Putty][0] 和 [MobaXterm][4
 
 我们不建议使用盗版破解的软件，有些别有用心的人会修改软件，在其中植入木马，窃取你的用户名密码等信息。
 
-我们推荐使用 MobaXterm ，这是一款功能强大的客户端，集成了命令行和文件上传等功能，并且提供官方免费版，足以覆盖日常需求 。此外，XShell 和 XFtp 有[家庭学生免费版][7]，也是非常不错的选择。
+我们推荐使用 MobaXterm ，这是一款功能强大的客户端，集成了命令行和文件上传等功能，并且提供官方免费版，足以覆盖日常需求 。此外，Xshell 和 Xftp 有[家庭学生免费版][7]，也是非常不错的选择。
 
-用户需要从本地上传代码或数据时，Windows用户可使用 [Winscp][3] 或 xftp 等支持文件上传的软件。[Winscp][3] 主要功能是在用户的本地与计算集群间复制、编辑文件，使用方法可参考其[官方文档][5]。MobaXterm 已经集成了文件上传的功能(sftp)，已经安装 MobaXterm 的用户可不必再安装 Winscp。
+用户需要从本地上传代码或数据时，Windows用户可使用 [Winscp][3] 或 xftp 等支持文件传输的软件。MobaXterm 已经集成了文件上传的功能(sftp)，已经安装 MobaXterm 的用户可不必再安装 Winscp。
+
+为方便校内用户下载，我们提供了校内的下载链接。
+
+* [MobaXterm](files/MobaXterm_Portable_v11.1.zip)
+* [Xshell](files/Xshell-6.0.0118p.exe)
+* [Xftp](files/Xftp-6.0.0111p.exe)
 
 ## Linux和Mac用户
 
