@@ -25,6 +25,8 @@ Windows下的登录软件有 XShell 、SecureCRT、 [Putty][0] 和 [MobaXterm][4
 
 Mac OS X下建议使用 [iTerm][1] ，Ubuntu 等 Linux 系统可以使用自带的终端软件。
 
+* [iTerm校内下载](files/iTerm2-3_2_7.zip)
+
 用户可以直接终端中使用 `ssh` 和 `scp` 或 `rsync` 命令来登录集群和上传文件。
 
 ```bash
