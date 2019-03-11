@@ -453,7 +453,16 @@ mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 </div>
 <h2 id="qstat">使用qstat查看作业</h2>
 <p>直接执行 <code>qstat</code> 可以看到当前用户所有提交作业，使用 <code>qstat -f &lt;job_id&gt;</code> 可以查看某个job的具体信息。</p>
-<p>用户提交作业后，使用<code>qstat</code>来查询作业情况。如果发现返回为空，那么说明作业已经执行完毕。一般有如下三种可能：</p>
+<p><code>qstat</code> 命令返回的结果为：</p>
+<pre><code class="bash">Job ID                    Name             User            Time Use S Queue
+------------------------- ---------------- --------------- -------- - -----
+6458.rmdx-cluster         6-TZ-CCSDT-4.0-1 jh2017102784    188:34:4 R default
+</code></pre>
+
+<p>其中，6458为作业的id，"Time Use" 列为CPU使用时间，比如使用10个核心，每个CPU使用了10秒，那时间将为 100秒，转换成可读模式为00:01:40。</p>
+<p>"S" 那一列为状态列，表示作业运行的状态，一般有三种状态：R(Running)运行，C(Complete)结束，Q(Queue)排队。</p>
+<p><code>qstat -f 6458</code> 能查看这个作业的详细信息。例如，<code>exec_host</code> 为作业执行的机器及占用的CPU核代号。 </p>
+<p>用户提交作业后，如果发现<code>qstat</code>返回为空，那么说明作业已经执行完毕。一般有如下三种可能：</p>
 <ol>
 <li>作业正常运行结束。</li>
 <li>代码有误，程序会生成错误日志，请根据输出文件内容，检查代码。</li>
@@ -505,10 +514,14 @@ mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 qsub: waiting for job 5906.rmdx-cluster.edu.com.cn to start
 qsub: job 5906.rmdx-cluster.edu.com.cn ready
 
+module load anaconda/5.3.0
+python test.py
 </code></pre>
 
-<p>用户可以用这种方式使用R、Python或Julia等提供所见即所得功能的语言，或者使用Jupyter Notebook。当超过walltime所设置的5分钟后，这个作业会自动被杀死。输入<code>exit</code>退出交互模式作业。</p>
-<p>我们不推荐使用这种交互模式，建议将代码调试好后，使用作业提交模式。</p>
+<p>用户可以用这种方式使用R、Python或Julia等提供所见即所得功能的语言，或者使用Jupyter Notebook。<strong>用户需要调试自己的某个程序时，不能直接在登录节点执行作业，可以使用这种交互方式</strong>，然后执行自己想执行的作业命令。</p>
+<p>当超过walltime所设置的5分钟后，这个作业会自动被杀死。</p>
+<p>交互模式中，输入<code>exit</code>退出交互模式作业。</p>
+<p>当代码调试好后，最好还是使用作业提交模式来批量地提交作业。</p>
 <p>本文所展示的案例已经能够涵盖绝大多数作业管理操作，一些命令的进阶使用可参考<a href="http://docs.adaptivecomputing.com/torque/4-2-10/help.htm">PBS使用手册</a>中“Submitting and managing jobs”章节相关内容。如有其它问题，请联系我们：</p>
 <ol>
 <li>电话：010-82503969</li>
