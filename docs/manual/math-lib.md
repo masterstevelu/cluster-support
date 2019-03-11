@@ -2,7 +2,7 @@
 
 ## Intel MKL
 
-Intel Math Kernel Library（MKL）是一套针对Intel CPU高度优化的数学库，提供了一系列线性代数等计算密集型数学函数。很多高级语言如Anaconda版Python的numpy就使用了MKL进行加速，有近10倍左右性能提升。直接使用MKL，需要使用C/C++或Fortran。
+Intel Math Kernel Library（MKL）是一套针对Intel CPU高度优化的数学库，提供了一系列线性代数等计算密集型数学函数。很多高级语言如Anaconda版Python的numpy底层就使用了MKL进行加速，有近10倍左右性能提升。直接使用MKL，需要使用C/C++或Fortran。
 
 加载MKL：
 

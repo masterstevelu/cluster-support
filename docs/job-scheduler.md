@@ -195,7 +195,21 @@ mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 
 直接执行 `qstat` 可以看到当前用户所有提交作业，使用 `qstat -f <job_id>` 可以查看某个job的具体信息。
 
-用户提交作业后，使用`qstat`来查询作业情况。如果发现返回为空，那么说明作业已经执行完毕。一般有如下三种可能：
+`qstat` 命令返回的结果为：
+
+```bash
+Job ID                    Name             User            Time Use S Queue
+------------------------- ---------------- --------------- -------- - -----
+6458.rmdx-cluster         6-TZ-CCSDT-4.0-1 jh2017102784    188:34:4 R default
+```
+
+其中，6458为作业的id，"Time Use" 列为CPU使用时间，比如使用10个核心，每个CPU使用了10秒，那时间将为 100秒，转换成可读模式为00:01:40。
+
+"S" 那一列为状态列，表示作业运行的状态，一般有三种状态：R(Running)运行，C(Complete)结束，Q(Queue)排队。
+
+`qstat -f 6458` 能查看这个作业的详细信息。例如，`exec_host` 为作业执行的机器及占用的CPU核代号。 
+
+用户提交作业后，如果发现`qstat`返回为空，那么说明作业已经执行完毕。一般有如下三种可能：
 
 1. 作业正常运行结束。
 2. 代码有误，程序会生成错误日志，请根据输出文件内容，检查代码。
@@ -237,11 +251,17 @@ qsub -I -l walltime=00:05:00 -l nodes=1:ppn=10
 qsub: waiting for job 5906.rmdx-cluster.edu.com.cn to start
 qsub: job 5906.rmdx-cluster.edu.com.cn ready
 
+module load anaconda/5.3.0
+python test.py
 ```
 
-用户可以用这种方式使用R、Python或Julia等提供所见即所得功能的语言，或者使用Jupyter Notebook。当超过walltime所设置的5分钟后，这个作业会自动被杀死。输入`exit`退出交互模式作业。
+用户可以用这种方式使用R、Python或Julia等提供所见即所得功能的语言，或者使用Jupyter Notebook。**用户需要调试自己的某个程序时，不能直接在登录节点执行作业，可以使用这种交互方式**，然后执行自己想执行的作业命令。
 
-我们不推荐使用这种交互模式，建议将代码调试好后，使用作业提交模式。
+当超过walltime所设置的5分钟后，这个作业会自动被杀死。
+
+交互模式中，输入`exit`退出交互模式作业。
+
+当代码调试好后，最好还是使用作业提交模式来批量地提交作业。
 
 本文所展示的案例已经能够涵盖绝大多数作业管理操作，一些命令的进阶使用可参考[PBS使用手册][1]中“Submitting and managing jobs”章节相关内容。如有其它问题，请联系我们：
 
