@@ -243,6 +243,9 @@ qsub: job 5906.rmdx-cluster.edu.com.cn ready
 
 我们不推荐使用这种交互模式，建议将代码调试好后，使用作业提交模式。
 
-本文所展示的案例已经能够涵盖绝大多数作业管理操作，一些命令的进阶使用可参考[PBS使用手册][1]中“Submitting and managing jobs”章节相关内容。
+本文所展示的案例已经能够涵盖绝大多数作业管理操作，一些命令的进阶使用可参考[PBS使用手册][1]中“Submitting and managing jobs”章节相关内容。如有其它问题，请联系我们：
+
+1. 电话：010-82503969
+2. 邮箱：<hpc@ruc.edu.cn>
 
 [1]: http://docs.adaptivecomputing.com/torque/4-2-10/help.htm
