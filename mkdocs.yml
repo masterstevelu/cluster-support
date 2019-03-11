@@ -25,6 +25,7 @@ nav:
       - '分子模拟软件': 'manual/chem.md'
       - '数学库': 'manual/math-lib.md'
     - '参考资料': 'reference.md'
+    - '培训资料': 'tutorials.md'
 
 
 markdown_extensions:
