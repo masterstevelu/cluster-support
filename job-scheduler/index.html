@@ -70,6 +70,10 @@
                     
     <a class="" href="../cluster-login/">登录方法</a>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../file/">文件管理</a>
+                </li>
                 <li class=" current">
                     
     <a class="current" href="./">提交作业</a>
@@ -201,6 +205,8 @@
 <div class="admonition note">
 <p class="admonition-title">调度器与队列</p>
 <p>如果把向集群提交作业比作前往银行办理业务，那么作业调度器就是银行门口的取号机，用户需要排队，根据叫号来办理业务。用户一般需要告知取号机自己办理哪种服务，比如存取款的普通柜台、对公柜台、VIP柜台、理财顾问等等。取号机在相应的柜台服务上生成排队号码。调度器中的队列与之相似，用户在提交作业时，一般要告知调度器作业所属的队列，调度器会把用户作业放在该队列里排队。</p>
+<p>下图展示了作业通过调取器来排队的情况。queue A和queue B是两个队列，某个作业会在这两个队列中排队并执行，两个队列里的作业互不干扰，不会互相占用资源。</p>
+<p><img alt="队列示意图" src="../img/queue.png" /></p>
 </div>
 <h2 id="pbs">PBS简介</h2>
 <p>集群基于 PBS（Portable Batch System）作业管理系统来管理和调度计算任务。PBS是由NASA开发的作业调度管理系统。它被用于集群系统、超级计算机和大规模并行系统。PBS后来又发展出openPBS、PBS Pro和Torque三大分支。其中Torque是目前使用比较广泛的PBS开源实现。本集群使用Torque作为作业调度器。集群用户需要使用 PBS 脚本和命令提交计算任务。</p>
@@ -466,7 +472,7 @@ mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 
 <p>其中，6458为作业的id，"Time Use" 列为CPU使用时间，比如使用10个核心，每个CPU使用了10秒，那时间将为 100秒，转换成可读模式为00:01:40。</p>
 <p>"S" 那一列为状态列，表示作业运行的状态，一般有三种状态：R(Running)运行，C(Complete)结束，Q(Queue)排队。</p>
-<p><code>qstat -f 6458</code> 能查看这个作业的详细信息。例如，<code>exec_host</code> 为作业执行的机器及占用的CPU核代号。 </p>
+<p><code>qstat -f 6458</code> 能查看这个作业的详细信息。例如，<code>exec_host</code> 为作业执行的机器及占用的CPU核代号。</p>
 <p>用户提交作业后，如果发现<code>qstat</code>返回为空，那么说明作业已经执行完毕。一般有如下三种可能：</p>
 <ol>
 <li>作业正常运行结束。</li>
@@ -542,7 +548,7 @@ python test.py
         <a href="../software/" class="btn btn-neutral float-right" title="软件使用">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../cluster-login/" class="btn btn-neutral" title="登录方法"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../file/" class="btn btn-neutral" title="文件管理"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -569,7 +575,7 @@ python test.py
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../cluster-login/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../file/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../software/" style="color: #fcfcfc">Next &raquo;</a></span>

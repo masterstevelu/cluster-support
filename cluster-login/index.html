@@ -86,6 +86,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../file/">文件管理</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../job-scheduler/">提交作业</a>
                 </li>
                 <li class="">
@@ -185,15 +189,18 @@
 <p>当用户从集群管理员获取到用户名和密码后，使用登录软件，连接登录节点rmdx-cluster（183.174.229.251）。</p>
 <p>登录节点后，用户默认将进入账户对应的家目录（home目录），对于某个用户，其家目录为<code>/home/your-cluster-username/</code>一般情况下，用户的个人数据都应存放在个人家目录中，包括代码、可执行文件和部分数据。</p>
 <h2 id="windows">Windows用户</h2>
-<p>Windows下的登录软件有 XShell 、SecureCRT、 <a href="https://putty.org/">Putty</a> 和 <a href="https://mobaxterm.mobatek.net/">MobaXterm</a> ，其中 SecureCRT 是付费商业软件，功能强大，简单易用，用户众多，因此也有很多破解版本。Putty 是免费软件，但功能相对简单。<a href="https://blog.csdn.net/ValDC_Morning/article/details/79051615">文章</a>列举了使用上述几种软件连接集群的具体使用方法。</p>
-<p>我们不建议使用盗版破解的软件，有些别有用心的人会修改软件，在其中植入木马，窃取你的用户名密码等信息。</p>
-<p>我们推荐使用 MobaXterm ，这是一款功能强大的客户端，集成了命令行和文件上传等功能，并且提供官方免费版，足以覆盖日常需求 。此外，Xshell 和 Xftp 有<a href="https://www.netsarang.com/zh/free-for-home-school/">家庭学生免费版</a>，也是非常不错的选择。</p>
-<p>用户需要从本地上传代码或数据时，Windows用户可使用 <a href="https://winscp.net/eng/index.php">Winscp</a> 或 xftp 等支持文件传输的软件。MobaXterm 已经集成了文件上传的功能(sftp)，已经安装 MobaXterm 的用户可不必再安装 Winscp。</p>
+<p>Windows下的登录软件推荐 XShell+Xftp 或者 <a href="https://mobaxterm.mobatek.net/">MobaXterm</a>。 MobaXterm 是一款功能强大的客户端，集成了命令行和文件上传等功能，并且提供官方免费版，足以覆盖日常需求。此外，Xshell 和 Xftp 有<a href="https://www.netsarang.com/zh/free-for-home-school/">家庭学生免费版</a>，在国内的用户非常多，网络上教程也很多，也是非常不错的选择。。我们不建议使用盗版破解的软件，如破解版SecureCRT等，有些别有用心的人会修改软件，在其中植入木马，窃取你的用户名密码等信息。</p>
 <p>为方便校内用户下载，我们提供了校内的下载链接。</p>
 <ul>
 <li><a href="../files/MobaXterm_Portable_v11.1.zip">MobaXterm</a></li>
 <li><a href="../files/Xshell+Xftp.zip">Xshell+Xftp</a></li>
 </ul>
+<p><a href="https://jingyan.baidu.com/article/948f5924f63745d80ff5f9e1.html">文章</a>展示了如何使用xshell登录，记住IP为183.174.229.251，端口号为默认的22，密码为我们提供的密码。</p>
+<p><a href="https://jingyan.baidu.com/article/86f4a73e98c37137d65269ce.html">文章</a>展示了如何使用MobaXterm登录集群，其中IP为183.174.229.251，密码为我们提供的密码。</p>
+<h3 id="_2">上传数据</h3>
+<p>用户需要从本地上传代码或数据时，Windows用户可使用前面下载的 xftp 或 <a href="https://winscp.net/eng/index.php">Winscp</a> 等支持文件传输的软件。MobaXterm 已经集成了文件上传的功能(sftp)，已经安装 MobaXterm 的用户可不必再安装其他软件。</p>
+<p><a href="https://jingyan.baidu.com/article/19192ad820877be53e5707e3.html">文章</a>展示了如何使用xftp来上传数据，这里同样要注意，IP为183.174.229.251，密码为我们提供的密码。</p>
+<p><a href="https://blog.csdn.net/ValDC_Morning/article/details/79051615">文章</a>展示了如何使用Winscp来上传数据。</p>
 <h2 id="linuxmac">Linux和Mac用户</h2>
 <p>Mac OS X下建议使用 <a href="https://www.iterm2.com/">iTerm</a> ，Ubuntu 等 Linux 系统可以使用自带的终端软件。</p>
 <ul>
@@ -224,7 +231,7 @@
 <p class="admonition-title">文件夹同步</p>
 <p><code>scp</code> 和 <code>rsync</code> 的 "-r" 模式可以同步整个文件夹。</p>
 </div>
-<h3 id="_2">免密码登录</h3>
+<h3 id="_3">免密码登录</h3>
 <p>本节仅针对Linxu和Mac用户。</p>
 <p>每次使用<code>ssh</code> 和 <code>scp</code> 命令时都需要用户输入密码，对于频繁操作来说有些麻烦，好在ssh协议提供了免密码登录的功能。ssh免密码登录需要一对密钥对，其中一个私钥放在用户本机，一个公钥放在集群的公钥目录：<code>~/.ssh/authorized_keys</code>。下次登录时，用户本机的私钥和远程集群的公钥通过加密协议的配对，验证成功后将不需要密码直接登录成功。所以这里需要生成公私钥，并将公钥上传到集群指定位置。</p>
 <ol>
@@ -264,7 +271,7 @@ Overwrite (y/n)?
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../job-scheduler/" class="btn btn-neutral float-right" title="提交作业">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../file/" class="btn btn-neutral float-right" title="文件管理">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../intro/" class="btn btn-neutral" title="入门知识"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -297,7 +304,7 @@ Overwrite (y/n)?
         <span><a href="../intro/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../job-scheduler/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../file/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

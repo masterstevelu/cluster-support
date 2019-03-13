@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>培训资料 - 中国人民大学高性能计算集群</title>
+  <title>文件管理 - 中国人民大学高性能计算集群</title>
   <!-- <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'> -->
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u57f9\u8bad\u8d44\u6599";
-    var mkdocs_page_input_path = "tutorials.md";
+    var mkdocs_page_name = "\u6587\u4ef6\u7ba1\u7406";
+    var mkdocs_page_input_path = "file.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -70,9 +70,27 @@
                     
     <a class="" href="../cluster-login/">登录方法</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../file/">文件管理</a>
+    <a class="current" href="./">文件管理</a>
+    <ul class="subnav">
+            
+    <!-- <li class="toctree-l3"><a href="#_1">文件管理</a></li> -->
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#windows">Windows</a></li>
+        
+            <li><a class="toctree-l4" href="#mac">Mac</a></li>
+        
+            <li><a class="toctree-l4" href="#_2">数据管理</a></li>
+        
+            <li><a class="toctree-l4" href="#_3">下载网络上的文件</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
                 <li class="">
                     
@@ -129,15 +147,9 @@
     <a class="" href="../reference/">参考资料</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">培训资料</a>
-    <ul class="subnav">
-            
-    <!-- <li class="toctree-l2"><a href="#_1">培训资料</a></li> -->
-    
-
-    </ul>
+    <a class="" href="../tutorials/">培训资料</a>
 	    </li>
           
         </ul>
@@ -161,8 +173,12 @@
     <li><a href="..">人大集群</a> &raquo;</li>
     
       
+        
+          <li>使用指南 &raquo;</li>
+        
+      
     
-    <li>培训资料</li>
+    <li>文件管理</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -172,10 +188,52 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">培训资料</h1>
-<ul>
-<li><a href="../files/20190312_hpc_intro.pdf">20190312_高性能计算入门</a></li>
-</ul>
+                <h1 id="_1">文件管理</h1>
+<h2 id="windows">Windows</h2>
+<p>用户需要从本地上传代码或数据时，Windows用户先在<a href="../cluster-login/">软件下载页面</a>下载的 xftp 或 MobaXterm。</p>
+<p><a href="https://jingyan.baidu.com/article/19192ad820877be53e5707e3.html">文章</a>展示了如何使用xftp来上传数据文件，这里同样要注意，IP为183.174.229.251，密码为我们提供的密码。</p>
+<p><a href="https://jingyan.baidu.com/article/86f4a73e98c37137d65269ce.html">文章</a>展示了如何使用MobaXterm来上传数据。</p>
+<h2 id="mac">Mac</h2>
+<p>用户可以直接终端中使用 <code>ssh</code> 和 <code>scp</code> 或 <code>rsync</code> 命令来登录集群和上传文件。</p>
+<pre><code class="bash">ssh yourusername@183.174.229.251
+</code></pre>
+
+<p>scp可以将数据同步到集群，也可以从远程复制到本地。命令的基本模式为：</p>
+<pre><code class="bash">scp [source_location] [destination]
+</code></pre>
+
+<p>将本地当前文件夹下 README.md 上传到集群 <code>/home/~your-cluster-username~/examples/</code> 位置下：</p>
+<pre><code class="bash">scp README.md ~your-cluster-username~@183.174.229.251:/home/~your-cluster-username~/examples/
+</code></pre>
+
+<p>将集群 <code>/home/~your-cluster-username~/examples/</code> 同步到本地当前目录：</p>
+<pre><code class="bash">scp -r ~your-cluster-username~@183.174.229.251:/home/~your-cluster-username~/examples/ ./
+</code></pre>
+
+<p>更多<code>scp</code> 命令使用方法可参考[文章][6]。</p>
+<p><code>rsync</code> 是一个比 <code>scp</code> 更快的命令，比起 <code>scp</code> 将整个文件进行传输，它是增量传输文件，即只传输文件中被修改的部分。<code>rsync</code> 可被用来文件夹之间以及机器之间同步数据。</p>
+<pre><code class="bash">rsync -r README.md linpack@183.174.229.251:/home/~your-cluster-username~/examples
+</code></pre>
+
+<div class="admonition tip">
+<p class="admonition-title">文件夹同步</p>
+<p><code>scp</code> 和 <code>rsync</code> 的 "-r" 模式可以同步整个文件夹。</p>
+</div>
+<h2 id="_2">数据管理</h2>
+<p>用户登录后将进入账户对应的家目录（home），对于某个用户，其家目录为<code>/home/your-cluster-username/</code>一般情况下，用户的个人数据都应存放在个人家目录中，包括安装的软件、代码、可执行文件和部分数据。家目录所的可用空间较小，较大的规模的数据或软件必须放置在 <code>/mnt/data/</code> 目录下，该目录可用容量为150TB。例如，用户需要创建自己的目录：</p>
+<pre><code class="bash">mkdir /mnt/data/your-cluster-name
+</code></pre>
+
+<p>然后将科研所需数据和软件拷贝到这个目录，拷贝时可以使用 <code>mv</code> 命令。</p>
+<p>鉴于存储空间有限，出于数据安全的考虑，请用户务必及时备份和下载代码数据和计算结果，并定期清理存储空间。长时间不使用的用户和目录，我们将进行清理。</p>
+<div class="admonition warning">
+<p class="admonition-title">注意！</p>
+<p>对于长期不使用且占用较大存储资源的文件，我们可能会删除。如不需要使用该文件，请及时清理你自己的磁盘空间。</p>
+</div>
+<h2 id="_3">下载网络上的文件</h2>
+<p>登录到集群后，使用<code>wget</code>命令下载网上的数据集或代码到当前目录，例如：</p>
+<pre><code class="bash">wget https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data
+</code></pre>
               
             </div>
           </div>
@@ -183,8 +241,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="../job-scheduler/" class="btn btn-neutral float-right" title="提交作业">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-        <a href="../reference/" class="btn btn-neutral" title="参考资料"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+        <a href="../cluster-login/" class="btn btn-neutral" title="登录方法"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -211,8 +271,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../reference/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../cluster-login/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../job-scheduler/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
