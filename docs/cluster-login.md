@@ -8,18 +8,24 @@
 
 ## Windows用户
 
-Windows下的登录软件有 XShell 、SecureCRT、 [Putty][0] 和 [MobaXterm][4] ，其中 SecureCRT 是付费商业软件，功能强大，简单易用，用户众多，因此也有很多破解版本。Putty 是免费软件，但功能相对简单。[文章][2]列举了使用上述几种软件连接集群的具体使用方法。
-
-我们不建议使用盗版破解的软件，有些别有用心的人会修改软件，在其中植入木马，窃取你的用户名密码等信息。
-
-我们推荐使用 MobaXterm ，这是一款功能强大的客户端，集成了命令行和文件上传等功能，并且提供官方免费版，足以覆盖日常需求 。此外，Xshell 和 Xftp 有[家庭学生免费版][7]，也是非常不错的选择。
-
-用户需要从本地上传代码或数据时，Windows用户可使用 [Winscp][3] 或 xftp 等支持文件传输的软件。MobaXterm 已经集成了文件上传的功能(sftp)，已经安装 MobaXterm 的用户可不必再安装 Winscp。
+Windows下的登录软件推荐 XShell+Xftp 或者 [MobaXterm][4]。 MobaXterm 是一款功能强大的客户端，集成了命令行和文件上传等功能，并且提供官方免费版，足以覆盖日常需求。此外，Xshell 和 Xftp 有[家庭学生免费版][7]，在国内的用户非常多，网络上教程也很多，也是非常不错的选择。。我们不建议使用盗版破解的软件，如破解版SecureCRT等，有些别有用心的人会修改软件，在其中植入木马，窃取你的用户名密码等信息。
 
 为方便校内用户下载，我们提供了校内的下载链接。
 
 * [MobaXterm](files/MobaXterm_Portable_v11.1.zip)
 * [Xshell+Xftp](files/Xshell+Xftp.zip)
+
+[文章][8]展示了如何使用xshell登录，记住IP为183.174.229.251，端口号为默认的22，密码为我们提供的密码。
+
+[文章][10]展示了如何使用MobaXterm登录集群，其中IP为183.174.229.251，密码为我们提供的密码。
+
+### 上传数据
+
+用户需要从本地上传代码或数据时，Windows用户可使用前面下载的 xftp 或 [Winscp][3] 等支持文件传输的软件。MobaXterm 已经集成了文件上传的功能(sftp)，已经安装 MobaXterm 的用户可不必再安装其他软件。
+
+[文章][9]展示了如何使用xftp来上传数据，这里同样要注意，IP为183.174.229.251，密码为我们提供的密码。
+
+[文章][2]展示了如何使用Winscp来上传数据。
 
 ## Linux和Mac用户
 
@@ -118,3 +124,6 @@ cat /home/~your-cluster-username~/id_rsa.pub >> ~/.ssh/authorized_keys
 [5]: https://winscp.net/eng/docs/introduction
 [6]: http://www.runoob.com/linux/linux-comm-scp.html
 [7]: https://www.netsarang.com/zh/free-for-home-school/
+[8]: https://jingyan.baidu.com/article/948f5924f63745d80ff5f9e1.html
+[9]: https://jingyan.baidu.com/article/19192ad820877be53e5707e3.html
+[10]: https://jingyan.baidu.com/article/86f4a73e98c37137d65269ce.html

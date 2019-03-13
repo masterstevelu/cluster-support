@@ -13,6 +13,7 @@ nav:
       - '快速开始': 'getting-started.md'
       - '入门知识': 'intro.md'
       - '登录方法': 'cluster-login.md'
+      - '文件管理': 'file.md'
       - '提交作业': 'job-scheduler.md'
       - '软件使用': 'software.md'
     - '软件使用':
