@@ -1,12 +1,14 @@
 # 文件管理
 
+## 上传数据
+
 ## Windows
 
-用户需要从本地上传代码或数据时，Windows用户先在[软件下载页面](cluster-login.md)下载的 xftp 或 MobaXterm。
+用户需要从本地上传代码或数据时，Windows用户先在[软件下载页面](cluster-login.md)下载 Xftp 或 MobaXterm。
 
-[文章][1]展示了如何使用xftp来上传数据文件，这里同样要注意，IP为183.174.229.251，密码为我们提供的密码。
+[文章][1]展示了如何使用xftp来上传数据文件，这里要注意，IP为183.174.229.251，密码为我们提供的密码。
 
-[文章][2]展示了如何使用MobaXterm来上传数据。
+[文章][2]展示了如何使用MobaXterm来上传数据，IP为183.174.229.251，密码为我们提供的密码。
 
 [1]: https://jingyan.baidu.com/article/19192ad820877be53e5707e3.html
 [2]: https://jingyan.baidu.com/article/86f4a73e98c37137d65269ce.html
