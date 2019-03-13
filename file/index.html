@@ -79,13 +79,15 @@
     
         <ul>
         
+            <li><a class="toctree-l4" href="#_2">上传数据</a></li>
+        
             <li><a class="toctree-l4" href="#windows">Windows</a></li>
         
             <li><a class="toctree-l4" href="#mac">Mac</a></li>
         
-            <li><a class="toctree-l4" href="#_2">数据管理</a></li>
+            <li><a class="toctree-l4" href="#_3">数据管理</a></li>
         
-            <li><a class="toctree-l4" href="#_3">下载网络上的文件</a></li>
+            <li><a class="toctree-l4" href="#_4">下载网络上的文件</a></li>
         
         </ul>
     
@@ -189,10 +191,11 @@
             <div class="section">
               
                 <h1 id="_1">文件管理</h1>
+<h2 id="_2">上传数据</h2>
 <h2 id="windows">Windows</h2>
-<p>用户需要从本地上传代码或数据时，Windows用户先在<a href="../cluster-login/">软件下载页面</a>下载的 xftp 或 MobaXterm。</p>
-<p><a href="https://jingyan.baidu.com/article/19192ad820877be53e5707e3.html">文章</a>展示了如何使用xftp来上传数据文件，这里同样要注意，IP为183.174.229.251，密码为我们提供的密码。</p>
-<p><a href="https://jingyan.baidu.com/article/86f4a73e98c37137d65269ce.html">文章</a>展示了如何使用MobaXterm来上传数据。</p>
+<p>用户需要从本地上传代码或数据时，Windows用户先在<a href="../cluster-login/">软件下载页面</a>下载 Xftp 或 MobaXterm。</p>
+<p><a href="https://jingyan.baidu.com/article/19192ad820877be53e5707e3.html">文章</a>展示了如何使用xftp来上传数据文件，这里要注意，IP为183.174.229.251，密码为我们提供的密码。</p>
+<p><a href="https://jingyan.baidu.com/article/86f4a73e98c37137d65269ce.html">文章</a>展示了如何使用MobaXterm来上传数据，IP为183.174.229.251，密码为我们提供的密码。</p>
 <h2 id="mac">Mac</h2>
 <p>用户可以直接终端中使用 <code>ssh</code> 和 <code>scp</code> 或 <code>rsync</code> 命令来登录集群和上传文件。</p>
 <pre><code class="bash">ssh yourusername@183.174.229.251
@@ -219,7 +222,7 @@
 <p class="admonition-title">文件夹同步</p>
 <p><code>scp</code> 和 <code>rsync</code> 的 "-r" 模式可以同步整个文件夹。</p>
 </div>
-<h2 id="_2">数据管理</h2>
+<h2 id="_3">数据管理</h2>
 <p>用户登录后将进入账户对应的家目录（home），对于某个用户，其家目录为<code>/home/your-cluster-username/</code>一般情况下，用户的个人数据都应存放在个人家目录中，包括安装的软件、代码、可执行文件和部分数据。家目录所的可用空间较小，较大的规模的数据或软件必须放置在 <code>/mnt/data/</code> 目录下，该目录可用容量为150TB。例如，用户需要创建自己的目录：</p>
 <pre><code class="bash">mkdir /mnt/data/your-cluster-name
 </code></pre>
@@ -230,7 +233,7 @@
 <p class="admonition-title">注意！</p>
 <p>对于长期不使用且占用较大存储资源的文件，我们可能会删除。如不需要使用该文件，请及时清理你自己的磁盘空间。</p>
 </div>
-<h2 id="_3">下载网络上的文件</h2>
+<h2 id="_4">下载网络上的文件</h2>
 <p>登录到集群后，使用<code>wget</code>命令下载网上的数据集或代码到当前目录，例如：</p>
 <pre><code class="bash">wget https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data
 </code></pre>
