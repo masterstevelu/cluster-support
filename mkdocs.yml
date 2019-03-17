@@ -21,6 +21,7 @@ nav:
       - 'R': 'manual/r.md'
       - 'Julia': 'manual/julia.md'
       - 'Jupyter': 'manual/jupyter.md'
+      - '机器学习': 'manual/ml.md'
       - 'Singularity': 'manual/singularity.md'
       - 'TensorFlow': 'manual/tensorflow.md'
       - '分子模拟软件': 'manual/chem.md'
