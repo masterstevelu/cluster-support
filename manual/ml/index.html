@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>分子模拟软件 - 中国人民大学高性能计算集群</title>
+  <title>机器学习 - 中国人民大学高性能计算集群</title>
   <!-- <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'> -->
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u5206\u5b50\u6a21\u62df\u8f6f\u4ef6";
-    var mkdocs_page_input_path = "manual/chem.md";
+    var mkdocs_page_name = "\u673a\u5668\u5b66\u4e60";
+    var mkdocs_page_input_path = "manual/ml.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -105,9 +105,31 @@
                     
     <a class="" href="../jupyter/">Jupyter</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../ml/">机器学习</a>
+    <a class="current" href="./">机器学习</a>
+    <ul class="subnav">
+            
+    <!-- <li class="toctree-l3"><a href="#_1">机器学习</a></li> -->
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#scikit-learn">scikit-learn</a></li>
+        
+            <li><a class="toctree-l4" href="#xgboost">XGBoost</a></li>
+        
+            <li><a class="toctree-l4" href="#lightgbm">LightGBM</a></li>
+        
+            <li><a class="toctree-l4" href="#tensorflow">TensorFlow</a></li>
+        
+            <li><a class="toctree-l4" href="#pytorch">PyTorch</a></li>
+        
+            <li><a class="toctree-l4" href="#prophet">Prophet</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
                 <li class="">
                     
@@ -117,15 +139,9 @@
                     
     <a class="" href="../tensorflow/">TensorFlow</a>
                 </li>
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">分子模拟软件</a>
-    <ul class="subnav">
-            
-    <!-- <li class="toctree-l3"><a href="#_1">化学软件</a></li> -->
-    
-
-    </ul>
+    <a class="" href="../chem/">分子模拟软件</a>
                 </li>
                 <li class="">
                     
@@ -170,7 +186,7 @@
         
       
     
-    <li>分子模拟软件</li>
+    <li>机器学习</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -180,41 +196,61 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">化学软件</h1>
-<p>我们已经在集群上安装了常用的分子动力学模拟软件。</p>
-<table>
-<thead>
-<tr>
-<th>软件类型</th>
-<th>简介</th>
-<th>加载方法</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>amber</td>
-<td>串行版amber18</td>
-<td><code>source /public/software/gnu/etc/env.amber18.serial</code></td>
-</tr>
-<tr>
-<td></td>
-<td>使用openmpi编译的并行版</td>
-<td><code>source /public/software/gnu/etc/env.amber18.openmpi</code></td>
-</tr>
-<tr>
-<td>gromacs</td>
-<td>gromacs 4.5.7 使用openmpi 1.6.5和 fftw double精度编译</td>
-<td><code>source /public/software/gnu/etc/env.gromacs.4.5.7</code></td>
-</tr>
-<tr>
-<td>namd</td>
-<td>namd 2.12</td>
-<td><code>source /public/software/gnu/etc/env.namd.2.12</code></td>
-</tr>
-</tbody>
-</table>
-<p>Amber 的使用方法请参考<a href="http://ambermd.org/tutorials/">Amber Tutorials</a>，gromacs 请参考 <a href="http://www.mdtutorials.com/gmx/">GROMACS Tutorials</a>，以及 <a href="https://www.ks.uiuc.edu/Training/Tutorials/namd/namd-tutorial-html/">namd</a>。</p>
-<p>化学系还采购了 Gaussian 等软件。</p>
+                <h1 id="_1">机器学习</h1>
+<p>机器学习(Machine Learning)是一门多领域交叉学科，涉及概率论、统计学、凸优化分析等多门学科，是人工智能的核心。本文将介绍集群所支持的机器学习工具。</p>
+<h2 id="scikit-learn">scikit-learn</h2>
+<p>scikit-learn是一款非常经典的基于 Python 的机器学习工具，它提供了常用机器学习算法、数据预处理和特征提取、模型评估等工具，现在已经提供了<a href="http://sklearn.apachecn.org/">中文文档</a>。用户可以使用它来进行监督学习如 Logitstic Regression 、 Support Vector Machine 、决策树等；进行无监督学习如聚类等。同时，它提供的数据预处理和特征提取模块和模型效果评估模块非常实用。</p>
+<p>目前我们在 Anaconda 的 <code>base</code> ，<code>python36</code> 和 <code>python27</code> 环境均已安装了 scikit-learn 。</p>
+<pre><code class="bash">module load anaconda/5.3.0
+</code></pre>
+
+<p>在你的 Python 代码中使用：</p>
+<pre><code class="python">import sklearn
+</code></pre>
+
+<h2 id="xgboost">XGBoost</h2>
+<p>XGBoost 一种是梯度提升决策树的实现，在算法上它做了正则化和剪枝处理。它能充分利用多核并行，速度极快，相比深度学习，它不需要大量的GPU计算资源。因其以上的有点，xgboost现在被大量应用于数据挖掘和机器学习领域。用户可以在其提供的<a href="https://xgboost.readthedocs.io/en/latest/">文档</a>中学习<a href="https://xgboost.readthedocs.io/en/latest/tutorials/model.html">决策树相关知识</a>以及xgboost的具体使用方法。</p>
+<h3 id="python">Python</h3>
+<p>在你的 Python 代码中使用：</p>
+<pre><code class="python">import xgboost
+</code></pre>
+
+<h3 id="r">R</h3>
+<ul>
+<li><a href="https://xgboost.readthedocs.io/en/latest/R-package/xgboostPresentation.html">XGBoost R tutorial</a></li>
+</ul>
+<h2 id="lightgbm">LightGBM</h2>
+<p>与 XGBoost 类似，LightGBM 也是一种梯度提升树模型的实现。其使用方法可参考<a href="https://lightgbm.readthedocs.io/en/latest/">官方文档</a>。</p>
+<p>在你的 Python 代码中使用：</p>
+<pre><code class="python">import lightgbm
+</code></pre>
+
+<h2 id="tensorflow">TensorFlow</h2>
+<p>TensorFlow 是 Google 开源的深度学习框架，被广泛应用于计算机视觉、自然语言处理、推荐系统等场景。</p>
+<p>TensorFlow 所依赖操作系统版本要求较高，目前可以使用 Singularity 容器，在容器中启动你的深度学习作业，具体做法请参看我们提供的<a href="../singularity/">文档</a>。</p>
+<h2 id="pytorch">PyTorch</h2>
+<p>PyTorch 是 Facebook 开源的深度学习框架，其设计理念更加先进，深受各大科研机构所欢迎。</p>
+<p>同样，PyTorch 所依赖操作系统版本要求较高，目前可以使用 Singularity 容器，在容器中启动你的深度学习作业，具体做法请参看我们提供的<a href="../singularity/">文档</a>。</p>
+<h2 id="prophet">Prophet</h2>
+<p><a href="https://facebook.github.io/prophet/">Prophet</a> 是一个由 Facebook 开源的专门针对时间序列预测框架。</p>
+<h3 id="python_1">Python</h3>
+<p>目前 Prophet 只支持 Python 3.6，我们安装在了 Anaconda 的 <code>python36</code> 环境里。</p>
+<pre><code class="bash">module load anaconda/5.3.0
+source activate python36
+</code></pre>
+
+<p>在你的 Python 代码中使用：</p>
+<pre><code class="python">from fbprophet import Prophet
+</code></pre>
+
+<h3 id="r_1">R</h3>
+<p>R语言用户要加载 Anaconda 环境：</p>
+<pre><code class="bash">module load anaconda/5.3.0
+</code></pre>
+
+<p>在你的 R 代码中使用：</p>
+<pre><code class="r">library(prophet)
+</code></pre>
               
             </div>
           </div>
@@ -222,10 +258,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../math-lib/" class="btn btn-neutral float-right" title="数学库">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../singularity/" class="btn btn-neutral float-right" title="Singularity">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../tensorflow/" class="btn btn-neutral" title="TensorFlow"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../jupyter/" class="btn btn-neutral" title="Jupyter"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -252,10 +288,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../tensorflow/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../jupyter/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../math-lib/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../singularity/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
