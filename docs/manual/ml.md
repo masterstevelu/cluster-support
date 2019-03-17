@@ -6,6 +6,8 @@
 module load anaconda/5.3.0
 ```
 
+部分包安装在了不同的环境上，使用前请先激活相应的环境。如 `source activate python36`激活 python36 环境。
+
 ## pandas
 
 pandas 可以轻松地从SQL数据库、CSV、Excel、JSON文件等不同来源获取数据，并对数据进行操作。
