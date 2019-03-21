@@ -64,7 +64,7 @@ conda create -n test_env python=3.6
 
 conda 会在用户个人目录 `/home/~your-cluster-username~/.conda/envs/test_env` 里创建 Python 3.6 的环境，安装Python 3.6解释器、pip等软件。
 
-使用 conda 继续安装所需软件包 `numpy`，-n 表示安装到所创建的test_env的Python环境。
+使用 conda 继续安装所需软件包 `numpy`，-n 表示安装到刚刚创建的test_env的Python环境。
 
 ```bash
 conda install -n test_env numpy
@@ -85,6 +85,8 @@ pip3 install jieba -i https://pypi.douban.com/simple
 
 由于这个环境已经安装到了你自己的目录，可以不用 `--user` 参数。
 
+conda 和 pip 都可以在你的环境中安装软件，这里推荐优先使用 conda 来安装，conda 会帮你安装所依赖的一些包，而 pip 却不会。
+
 退出该环境：
 
 ```bash
@@ -93,6 +95,9 @@ source deactivate
 
 !!! note "为什么要创建虚拟环境"
     conda 的虚拟环境提供了环境隔离。不同用户可以使用不同的包，同一用户也可以使用不同版本的包。对于 Python 这样一个发展非常快的开源社区，某个包很可能在短时间内有较大更新。用户编写的代码很可能是基于历史上某个特定版本的包，为保证用户代码正确执行，最好也要保证环境中所使用的包版本一致。虚拟环境为用户提供了一个可以解决上述问题的方案。虚拟环境隔离的功能也可以保证用户之间、环境和环境之间互相不冲突。
+
+直接将base环境克隆，并起名为 test_env_2 ：
+
 
 ```bash
 conda create --name test_env_2 --clone base
