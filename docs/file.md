@@ -72,3 +72,9 @@ mkdir /mnt/data/your-cluster-name
 ```bash
 wget https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data
 ```
+
+## 编辑文件
+
+Linux 上一般使用 vi/vim 这个编辑器来编辑文件。所有的类Unix系统如 Mac OS、Ubuntu、CentOS等都会内置 vi，如果经常使用 Linux ，强烈建议学习好这个编辑器。网络上有大量的相关资料和教学视频，这里不再赘述。
+
+如果觉得 vim 上手比较慢，也可以先使用 `nano` 来编辑文件。

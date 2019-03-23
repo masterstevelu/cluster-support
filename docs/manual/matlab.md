@@ -5,7 +5,7 @@ MATLAB（矩阵实验室）是MATrix LABoratory的缩写，是一款由美国 Ma
 在集群上，一般不推荐使用Matlab的界面，而要用命令行提交批处理任务。
 
 !!! warning "不要直接在登录节点运行matlab！"
-        请不要直接在登录节点（rmdx-cluster节点）上运行 matlab 任务，而应该使用调度系统来提交任务。有关调度系统的介绍和使用，请参考我们提供的[文档](../job-scheduler.md)。
+        请不要直接在登录节点（IP为183.174.229.251，名为rmdx-cluster的节点）上运行 matlab 任务，而应该使用调度系统来提交任务，否则会影响其他用户使用集群。有关调度系统的介绍和使用，请参考我们提供的[文档](../job-scheduler.md)。
 
 ## 加载软件
 
@@ -13,7 +13,7 @@ MATLAB（矩阵实验室）是MATrix LABoratory的缩写，是一款由美国 Ma
 module load matlab/2016b
 ```
 
-## 在调度系统上提交matlab任务
+## 提交matlab作业
 
 准备好你的matlab代码，例如 `matlab_simple.m` 文件：
 
@@ -24,7 +24,7 @@ module load matlab/2016b
   exit
 ```
 
-准备一个作业提交脚本 `submit_matlab.pbs` ：
+准备一个作业提交脚本 `submit_matlab.pbs` ，其中 `-nodisplay` 表示不使用图形化界面， `-nosplash` 表示启动matlab时不显示闪屏版权信息：
 
 ```bash
 #!/bin/bash
@@ -36,7 +36,7 @@ module load matlab/2016b
 
 cd $PBS_O_WORKDIR
 module load matlab/2016b
-matlab -nodisplay < matlab_simple.m
+matlab -nodisplay -nosplash < matlab_simple.m
 ```
 
 提交这个任务：
@@ -51,11 +51,25 @@ qsub submit_matlab.pbs
 
 一般地，我们可以使用 `parfor` 来替换原来的 `for` 来做循环。大致步骤为：
 
-1. 创建一个matlab pool
+1. 创建一个 matlab pool
 2. 初始 pool 参数，包括并行处理器数，临时文件地址等
 3. 将代码中所有 `for` 替换为 `parfor` 
 
 注意代码中的 `parpool()` 函数第二个参数要输入并行所使用的CPU核心数。
+
+一个使用 `parfor` 的简单例子：
+
+```matlab
+% start the matlabpool with 24 workers
+pc = parcluster('local')
+
+parpool(pc, 24)
+
+% run a parfor loop, distributing the iterations to 24 workers
+parfor i = 1:100
+        ones(10,10)
+end
+```
 
 一个使用例子 `matlab_parfor.m` ：
 
@@ -128,7 +142,7 @@ function dy = stiffODEfun(t,y,c)
     dy = zeros(2,1);
     dy(1) = y(2);
     dy(2) = c*(1 - y(1)^2)*y(2) - y(1);
-  end
+end
 ```
 
 提交作业的脚本 `submit_parfor.pbs` ，其中使用了一个节点的24个核心，ppn即为所使用的核心数，这与matlab代码中的 `parpool()` 第二个参数要保持一致：
@@ -146,7 +160,7 @@ MATLAB_OUTPUT=${BASE_MFILE_NAME}.out
 
 cd $PBS_O_WORKDIR
 module load matlab/2016b
-matlab -nodisplay -r $BASE_MFILE_NAME > $MATLAB_OUTPUT
+matlab -nodisplay -nosplash -r $BASE_MFILE_NAME > $MATLAB_OUTPUT
 ```
 
 ## 运行多个并行任务
@@ -168,7 +182,7 @@ cd $PBS_O_WORKDIR
 # create a temporary dir for your parallel job
 mkdir -p $PBS_JOBID
 module load matlab/2016b
-matlab -nodisplay -r $BASE_MFILE_NAME > $MATLAB_OUTPUT
+matlab -nodisplay -nosplash -r $BASE_MFILE_NAME > $MATLAB_OUTPUT
 
 # clean up the temporary dir you just created before
 rm -rf $PBS_JOBID
@@ -188,9 +202,7 @@ parpool(pc, 24)
 
 % run a parfor loop, distributing the iterations to 24 workers
 parfor i = 1:100
-
         ones(10,10)
-
 end
 ```
 

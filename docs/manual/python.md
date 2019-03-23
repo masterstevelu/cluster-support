@@ -1,5 +1,7 @@
 # Python
 
+Python 是一种简单易用的编程语言，现被广泛应用在网络编程、操作系统运维、科学计算和人工智能等领域。
+
 [Anaconda][1] 是一个用于科学计算的Python发行版，支持 Linux, Mac, Windows系统以及 Python、R等科学计算语言，提供了包管理与环境管理的功能，可以很方便地解决多版本python并存、切换以及各种第三方包安装问题。Anaconda 利用 `conda` 命令来进行package和environment的管理，并且已经包含了Python和相关的配套工具。在集群上，我们建议用户使用 Anaconda 来管理和使用Python。我们已经在集群的 Anaconda 中安装好了常用的科学计算库，包括 jupyter、mpi4py、numpy、pandas、scikit-learn、xgboost等。
 
 Anaconda环境需要几个G的存储空间，每个用户都自己安装一套Anaconda，将造成存储空间的浪费。用户自己编译安装的Python很有可能出现依赖错误，GCC版本过低等各种问题，且所编译的numpy等科学计算软件没有mkl加速，速度将会很慢。因此，这里推荐大家使用我们统一安装的Anaconda版的Python。如有其他个性化需求，请联系我们获取更多信息。
