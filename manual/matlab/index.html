@@ -120,7 +120,7 @@
         
             <li><a class="toctree-l4" href="#_1">加载软件</a></li>
         
-            <li><a class="toctree-l4" href="#matlab_1">在调度系统上提交matlab任务</a></li>
+            <li><a class="toctree-l4" href="#matlab_1">提交matlab作业</a></li>
         
             <li><a class="toctree-l4" href="#_2">并行加速</a></li>
         
@@ -200,14 +200,14 @@
 <p>MATLAB（矩阵实验室）是MATrix LABoratory的缩写，是一款由美国 MathWorks 公司出品的商业数学软件。MATLAB是一种用于算法开发、数据可视化、数据分析以及数值计算的高级技术计算语言和交互式环境。MATLAB主要用于数值运算，但利用为数众多的附加工具箱（Toolbox）它也适合不同领域的应用，例如控制系统设计与分析、图像处理、信号处理与通讯、金融建模和分析等。</p>
 <p>在集群上，一般不推荐使用Matlab的界面，而要用命令行提交批处理任务。</p>
 <div class="admonition warning">
-<p class="admonition-title">不要直接在登录节点运行matlab！<p>请不要直接在登录节点（rmdx-cluster节点）上运行 matlab 任务，而应该使用调度系统来提交任务。有关调度系统的介绍和使用，请参考我们提供的<a href="../../job-scheduler/">文档</a>。</p>
+<p class="admonition-title">不要直接在登录节点运行matlab！<p>请不要直接在登录节点（IP为183.174.229.251，名为rmdx-cluster的节点）上运行 matlab 任务，而应该使用调度系统来提交任务，否则会影响其他用户使用集群。有关调度系统的介绍和使用，请参考我们提供的<a href="../../job-scheduler/">文档</a>。</p>
 </p>
 </div>
 <h2 id="_1">加载软件</h2>
 <pre><code class="bash">module load matlab/2016b
 </code></pre>
 
-<h2 id="matlab_1">在调度系统上提交matlab任务</h2>
+<h2 id="matlab_1">提交matlab作业</h2>
 <p>准备好你的matlab代码，例如 <code>matlab_simple.m</code> 文件：</p>
 <pre><code class="matlab">  % Creates a 10x10 Magic square
   M = magic(10);
@@ -215,7 +215,7 @@
   exit
 </code></pre>
 
-<p>准备一个作业提交脚本 <code>submit_matlab.pbs</code> ：</p>
+<p>准备一个作业提交脚本 <code>submit_matlab.pbs</code> ，其中 <code>-nodisplay</code> 表示不使用图形化界面， <code>-nosplash</code> 表示启动matlab时不显示闪屏版权信息：</p>
 <pre><code class="bash">#!/bin/bash
 
 #PBS -N matlab_example
@@ -225,7 +225,7 @@
 
 cd $PBS_O_WORKDIR
 module load matlab/2016b
-matlab -nodisplay &lt; matlab_simple.m
+matlab -nodisplay -nosplash &lt; matlab_simple.m
 </code></pre>
 
 <p>提交这个任务：</p>
@@ -236,11 +236,23 @@ matlab -nodisplay &lt; matlab_simple.m
 <p>为了利用集群机器的多个CPU核心，对于计算密集型的任务，可以考虑使用matlab提供的并行工具箱，一些使用方法请阅读官方文档：<a href="https://ww2.mathworks.cn/products/parallel-computing.html">Parallel Computing Toolbox</a>。</p>
 <p>一般地，我们可以使用 <code>parfor</code> 来替换原来的 <code>for</code> 来做循环。大致步骤为：</p>
 <ol>
-<li>创建一个matlab pool</li>
+<li>创建一个 matlab pool</li>
 <li>初始 pool 参数，包括并行处理器数，临时文件地址等</li>
 <li>将代码中所有 <code>for</code> 替换为 <code>parfor</code> </li>
 </ol>
 <p>注意代码中的 <code>parpool()</code> 函数第二个参数要输入并行所使用的CPU核心数。</p>
+<p>一个使用 <code>parfor</code> 的简单例子：</p>
+<pre><code class="matlab">% start the matlabpool with 24 workers
+pc = parcluster('local')
+
+parpool(pc, 24)
+
+% run a parfor loop, distributing the iterations to 24 workers
+parfor i = 1:100
+        ones(10,10)
+end
+</code></pre>
+
 <p>一个使用例子 <code>matlab_parfor.m</code> ：</p>
 <pre><code class="matlab">  %{
    This script samples a parameter of a stiff ODE and solves it both in
@@ -308,7 +320,7 @@ matlab -nodisplay &lt; matlab_simple.m
     dy = zeros(2,1);
     dy(1) = y(2);
     dy(2) = c*(1 - y(1)^2)*y(2) - y(1);
-  end
+end
 </code></pre>
 
 <p>提交作业的脚本 <code>submit_parfor.pbs</code> ，其中使用了一个节点的24个核心，ppn即为所使用的核心数，这与matlab代码中的 <code>parpool()</code> 第二个参数要保持一致：</p>
@@ -324,7 +336,7 @@ MATLAB_OUTPUT=${BASE_MFILE_NAME}.out
 
 cd $PBS_O_WORKDIR
 module load matlab/2016b
-matlab -nodisplay -r $BASE_MFILE_NAME &gt; $MATLAB_OUTPUT
+matlab -nodisplay -nosplash -r $BASE_MFILE_NAME &gt; $MATLAB_OUTPUT
 </code></pre>
 
 <h2 id="_3">运行多个并行任务</h2>
@@ -343,7 +355,7 @@ cd $PBS_O_WORKDIR
 # create a temporary dir for your parallel job
 mkdir -p $PBS_JOBID
 module load matlab/2016b
-matlab -nodisplay -r $BASE_MFILE_NAME &gt; $MATLAB_OUTPUT
+matlab -nodisplay -nosplash -r $BASE_MFILE_NAME &gt; $MATLAB_OUTPUT
 
 # clean up the temporary dir you just created before
 rm -rf $PBS_JOBID
@@ -361,9 +373,7 @@ parpool(pc, 24)
 
 % run a parfor loop, distributing the iterations to 24 workers
 parfor i = 1:100
-
         ones(10,10)
-
 end
 </code></pre>
               
