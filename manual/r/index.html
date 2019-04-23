@@ -115,6 +115,8 @@
         
             <li><a class="toctree-l4" href="#r_3">运行 R</a></li>
         
+            <li><a class="toctree-l4" href="#_4">并行加速</a></li>
+        
             <li><a class="toctree-l4" href="#jupyter">使用 Jupyter</a></li>
         
         </ul>
@@ -224,6 +226,7 @@
 <h2 id="r_2">管理R包</h2>
 <p>其他所依赖的包可以进入交互模式后使用 <code>install.packages('your_package')</code> 根据命令行提示来进行安装，使用 <code>update.packages('your_package')</code> 更新包，使用 <code>remove.packages('your_package')</code> 来删除。</p>
 <p>首次安装时，R会提示你包的安装位置，默认位置是用户HOME目录的R文件夹下。</p>
+<p>一些包会依赖其他底层包，需要使用较新的C++编译器来编译代码，因此会出现安装不成功的现象，conda 使用较新的编译环境，因此我们建议使用 conda 来和管理安装包。</p>
 <h2 id="_1">安装自己的环境</h2>
 <p>用户如需要使用Anaconda其他版本的R，可以重新创建一个新的R环境。不熟悉 Anaconda 的用户可以先阅读 <a href="../python/">Anaconda使用方法</a> ，了解 <code>conda</code> 命令和相关知识。</p>
 <p>安装一个R 3.3版本环境，命名环境为r33：</p>
@@ -235,6 +238,11 @@
 <pre><code class="bash">source activate r33
 </code></pre>
 
+<p>在刚刚创建的 r33 环境上安装 doSnow 包，注意 -n 表示将包安装到你所需的环境中：</p>
+<pre><code class="bash">conda install -n r33 -c conda-forge r-dosnow 
+</code></pre>
+
+<p>其他包的安装方法，可以在 https://anaconda.org/ 中搜索。</p>
 <h2 id="r_3">运行 R</h2>
 <h3 id="_2">交互模式</h3>
 <p>使用交互模式向集群申请一个节点，然后在该节点进入R：</p>
@@ -311,7 +319,7 @@ vcov(m)
 logLik(m)
 </code></pre>
 
-<p>编写提交作业脚本 submit_R.sh，将这个脚本跟你的代码放在同一个文件夹下。</p>
+<p>编写提交作业脚本 submit_R.sh，<font color=red >将这个脚本跟你的代码放在同一个文件夹下</font>。</p>
 <pre><code class="bash">#!/bin/bash
 
 #PBS -N R_job
@@ -325,12 +333,15 @@ module load anaconda/5.3.0
 Rscript ols.R
 </code></pre>
 
-<p>上面这个脚本中<code>#PBS -l nodes=1:ppn=1</code>这行设置了申请多少CPU计算资源。申请过多的资源不但不会加速你的程序，而且还会导致自己和他人的作业排队；申请过少的资源，会导致你自己的作业运行较慢。R语言默认只能使用多核处理器的单个核心，如果没有其他优化的话，ppn应该设置为1。如果你不确定自己应该申请多少计算资源，可以参考我们提供的<a href="../../resources/">资源申请指南</a>。</p>
+<p>上面这个脚本中<code>#PBS -l nodes=1:ppn=1</code>这行设置了申请多少CPU计算资源。申请过多的资源不但不会加速你的程序，而且还会导致自己和他人的作业排队；申请过少的资源，会导致你自己的作业运行较慢。<strong>R语言默认只能使用多核处理器的单个核心</strong>，如果没有其他优化的话，ppn应该设置为1。如果你不确定自己应该申请多少计算资源，可以参考我们提供的<a href="../../resources/">资源申请指南</a>。</p>
 <p>然后提交这个作业：</p>
 <pre><code class="bash">qsub submit_R.sh
 </code></pre>
 
-<p>程序将输出生成到了标准输出，并生成了相应的图片。</p>
+<p>程序的结果将写入同文件夹的 R_job.oXXXX 文件中，报错信息将写入 R_job.eXXXX 文件中，其中 XXXX 为作业的id。你可以将这两个文件同步到你的个人电脑上查看，也可以在集群上使用 <code>cat R_job.oXXXX</code> 命令查看输出结果。
+PBS脚本中 <code>#PBS -N R_job</code> 来修改作业名，不同的作业的运行结果会写到对应作业名的输出文件中。</p>
+<h2 id="_4">并行加速</h2>
+<p>在未做任何优化情况下，R只能使用服务器众多核心的单个核心，即只能利用服务器 1/20 的计算能力。即使在PBS脚本中申请多个核心，也并不能加速你的程序。如果想利用服务器的多核，需要做一些优化，例如调用 parallel、snow 等包，才能充分利用多个CPU核心。</p>
 <h2 id="jupyter">使用 Jupyter</h2>
 <p>Jupyter的使用请参考 <a href="../jupyter/">Jupyter使用方法</a>。</p>
               

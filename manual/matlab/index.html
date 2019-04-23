@@ -220,7 +220,7 @@ M
 exit
 </code></pre>
 
-<p>准备一个作业提交脚本 <code>submit_matlab.pbs</code>，将脚本跟你的代码放在同一个文件夹下。其中 <code>-nodisplay</code> 表示不使用图形化界面， <code>-nosplash</code> 表示启动matlab时不显示闪屏版权信息：</p>
+<p>准备一个作业提交脚本 <code>submit_matlab.pbs</code>，<font color=red >将脚本跟你的代码放在同一个文件夹下</font>。其中 <code>-nodisplay</code> 表示不使用图形化界面， <code>-nosplash</code> 表示启动matlab时不显示闪屏版权信息：</p>
 <pre><code class="bash">#!/bin/bash
 
 #PBS -N matlab_example
@@ -238,6 +238,8 @@ matlab -nodisplay -nosplash &lt; matlab_simple.m
 <pre><code class="bash">qsub submit_matlab.pbs
 </code></pre>
 
+<p>程序的结果将写入同文件夹的 matlab_example.oXXXX 文件中，报错信息将写入 matlab_example.eXXXX 文件中，其中 XXXX 为作业的id。你可以将这两个文件同步到你的个人电脑上查看，也可以在集群上使用 <code>cat matlab_example.oXXXX</code> 命令查看输出结果。
+PBS脚本中 <code>#PBS -N matlab_example</code> 来修改作业名，不同的作业的运行结果会写到对应作业名的输出文件中。</p>
 <h2 id="_2">并行加速</h2>
 <p>为了利用集群机器的多个CPU核心，对于计算密集型的任务，可以考虑使用matlab提供的并行工具箱，一些使用方法请阅读官方文档：<a href="https://ww2.mathworks.cn/products/parallel-computing.html">Parallel Computing Toolbox</a>。</p>
 <p>一般地，我们可以使用 <code>parfor</code> 来替换原来的 <code>for</code> 来做循环。大致步骤为：</p>
