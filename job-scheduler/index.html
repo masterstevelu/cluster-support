@@ -134,6 +134,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../manual/matlab/">matlab</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../manual/julia/">Julia</a>
                 </li>
                 <li class="">
@@ -143,10 +147,6 @@
                 <li class="">
                     
     <a class="" href="../manual/ml/">机器学习</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../manual/matlab/">matlab</a>
                 </li>
                 <li class="">
                     
@@ -226,14 +226,18 @@
 <p>PBS系统的命令包括作业控制、作业检测和节点状态等几大部分。下面将介绍如何使用PBS系统来提交作业。</p>
 <h2 id="qsub">使用qsub提交作业</h2>
 <p>在PBS调度系统中提交任务需要使用 <code>qsub</code> 命令，<code>qsub</code> 命令是整个调度系统中使用最多的命令。</p>
-<pre><code class="shell">qsub [options] &lt;script&gt;
+<pre><code class="shell">qsub &lt;submit_script&gt;
 </code></pre>
 
-<p>其中options表示参数列表，参数列表包括作业名称、作业需要申请的节点数等等参数，script为要执行的作业本身。</p>
-<p>例如，我们提交一个名为 hello.sh 的作业，其功能为要求每个节点睡眠10秒钟，并打印节点的主机名。</p>
+<p>例如，我们提交一个名为 hello.sh 的作业，其功能为每个计算节点睡眠10秒钟，并打印节点的主机名，程序运行在 debug 队列上。</p>
 <p>hello.sh的内容为</p>
 <pre><code class="bash">#!/bin/bash
 
+#PBS -N hello
+#PBS -l nodes=1:ppn=1
+#PBS -q debug
+
+# the code you want to execute
 sleep 10
 hostname
 </code></pre>
@@ -311,12 +315,13 @@ hostname
 ### set job name
 #PBS -N hello
 ### set job queue
-#PBS -q daopian
+#PBS -q default
 
 ### print job id and job queue
 echo &quot;This jobs is &quot;$PBS_JOBID@$PBS_QUEUE
 echo begin time is `date`
-sh hello.sh
+sleep 10
+hostname
 echo end time is `date`
 </code></pre>
 
@@ -332,13 +337,8 @@ echo end time is `date`
 </div>
 <h2 id="_4">申请计算资源</h2>
 <p>作业提交脚本中最为重要的参数为计算资源申请部分。</p>
-<p>如请求4个节点，每个节点上使用2个CPU，每个核心的最大内存为1024mb，那么-l参数应该写为:</p>
-<pre><code class="bash">#PBS -l nodes=4:ppn=2,pmem=1024mb
-</code></pre>
-
-<p>也可以将这些参数拆开，分行写成</p>
-<pre><code class="bash">#PBS -l nodes=4:ppn=2
-#PBS -l pmem=1024mb
+<p>如请求1个节点，每个节点上使用2个CPU核:</p>
+<pre><code class="bash">#PBS -l nodes=1:ppn=2
 </code></pre>
 
 <table>
@@ -470,7 +470,7 @@ module load mpi/intelmpi-2015
 mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 </code></pre>
 
-<p>这个样例脚本基本上能覆盖了绝大多数的功能，用户可以根据这个样例脚本做一些修改，生成适合自己的提交作业脚本。</p>
+<p>这个样例脚本基本上能覆盖了绝大多数的功能，用户可以根据这个样例脚本做一些修改，生成适合自己的提交作业脚本，并将脚本保存在你的代码所在的同一个文件夹下。</p>
 <div class="admonition note">
 <p class="admonition-title">提示</p>
 <p>作业运行完后才会产生输出文件。用户一般使用某一个提交作业脚本运行提交多次作业，如不设置-e和-o选项，系统会将stdout文件输出到“作业名.o+作业id”，将stderr文件输出到“作业名.e+作业id”两个文件中。使用-e和-o来设定文件路径时，新提交的作业会将上一次的作业输出直接覆盖。使用 <code>ls -al</code>可以看到这些文件的输出时间。</p>
@@ -493,7 +493,9 @@ mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 <li>提交作业的脚本有误，比如未加载环境变量，未安装所依赖的包，请根据输出的日志，检查提交作业脚本。</li>
 </ol>
 <h2 id="_6">队列配置</h2>
-<p>目前集群配置了两个主要队列，其中 pnode 队列主要用于高计算负荷的任务，普通任务请不要随便占用这个队列，以便有真正需求的用户使用。我们也会根据用户需求的变化不断调整队列的配置。考虑未来来自不同院系的老师增多，不同学科对计算资源的依赖程度不同，我们可能会根据不同学科对计算资源的使用情况，根据院系来设置队列，保证不同学科用户都不会过多等待。</p>
+<p>目前集群配置了两个主要队列。其中 pnode 队列主要用于高计算负荷的任务，普通任务请不要随便占用这个队列，以便有真正需求的用户使用。</p>
+<p>其中 default 为默认计算队列，队列每台机器有24核心CPU和64GB内存，用以执行绝大多数普通计算任务；pnode 为胖节点队列，队列每台机器有40核心CPU和256GB内存，胖节点资源非常有限，如无特殊需求，请不要使用这个队列，以便有真正需求的用户使用；debug 队列专门为调试程序使用，对于新的程序，建议先使用debug队列来调试，调试无问题后，改为 default 队列来执行。</p>
+<p>未来我们也会根据用户需求的变化不断调整队列的配置。</p>
 <table>
 <thead>
 <tr>
@@ -505,7 +507,7 @@ mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 <tbody>
 <tr>
 <td>default</td>
-<td>50台 * 24核处理器 / 64GB内存</td>
+<td>49台 * 24核处理器 / 64GB内存</td>
 <td>普通计算任务</td>
 </tr>
 <tr>
@@ -513,10 +515,17 @@ mpirun -np $NP -machinefile $PBS_NODEFILE ./mpi
 <td>5台 * 40核处理器/ 256GB内存</td>
 <td>高负荷计算任务</td>
 </tr>
+<tr>
+<td>debug</td>
+<td>2台 * 24核处理器 / 64GB内存</td>
+<td>调试程序专用</td>
+</tr>
 </tbody>
 </table>
+<p>如对申请多少计算资源不确定，可以阅读我们的<a href="../resources/">资源申请指南</a>。</p>
 <div class="admonition warning">
-<p class="admonition-title">注意<p>集群是一个共享的公共服务，大家在这个公共空间也要做一名合格的公民。请大家根据自己的科研进展情况，合理安排作业任务，尽量不要突然提交很多作业，占用大量计算资源，否则妨碍其他用户的使用。如发现自己的程序错误，也请第一时间使用 <code>qdel</code> 停掉自己的作业。目前我们已经限制单个用户最多提交25个任务。</p>
+<p class="admonition-title">注意<p>集群是一个共享的公共服务，大家在这个公共空间也要做一名合格的公民。请大家根据自己的科研进展情况，合理安排作业任务，尽量不要突然提交很多作业，占用大量计算资源，否则妨碍其他用户的使用。如发现如发现自己的程序错误，也请第一时间使用 <code>qdel</code> 停掉自己的作业。</p>
+<p>集群禁止短时间内提交超过20个作业，尤其是运行时间超过三天且占用大量CPU资源的作业。第一次发现，管理员将发出警告。超过三次，管理员将停用该账号一段时间。如确实有特殊计算需求，请将需求邮件发送给 <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#112;&#99;&#64;&#114;&#117;&#99;&#46;&#101;&#100;&#117;&#46;&#99;&#110;">&#104;&#112;&#99;&#64;&#114;&#117;&#99;&#46;&#101;&#100;&#117;&#46;&#99;&#110;</a> 以报备。</p>
 </p>
 </div>
 <h2 id="_7">作业提交流程</h2>

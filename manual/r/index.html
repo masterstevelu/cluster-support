@@ -124,6 +124,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../matlab/">matlab</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../julia/">Julia</a>
                 </li>
                 <li class="">
@@ -133,10 +137,6 @@
                 <li class="">
                     
     <a class="" href="../ml/">机器学习</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../matlab/">matlab</a>
                 </li>
                 <li class="">
                     
@@ -215,6 +215,10 @@
 <p>此环境已经安装了data.table、dplyr、ggplot2、Rcpp等常用软件包。</p>
 <p>进入R，使用下面的命令查看已安装包。</p>
 <pre><code class="r">print(as.data.frame(installed.packages()[,c(1,3)]))
+</code></pre>
+
+<p>同时我们也提供了一个 R 3.5 的环境，此环境安装了parallel、snow等并行编程包。</p>
+<pre><code class="bash">source activate r35
 </code></pre>
 
 <h2 id="r_2">管理R包</h2>
@@ -307,12 +311,12 @@ vcov(m)
 logLik(m)
 </code></pre>
 
-<p>编写提交作业脚本 submit_R.pbs ：</p>
+<p>编写提交作业脚本 submit_R.sh，将这个脚本跟你的代码放在同一个文件夹下。</p>
 <pre><code class="bash">#!/bin/bash
 
 #PBS -N R_job
 ### use one node for this job
-#PBS -l nodes=1
+#PBS -l nodes=1:ppn=1
 #PBS -q default
 
 cd $PBS_O_WORKDIR
@@ -321,8 +325,9 @@ module load anaconda/5.3.0
 Rscript ols.R
 </code></pre>
 
+<p>上面这个脚本中<code>#PBS -l nodes=1:ppn=1</code>这行设置了申请多少CPU计算资源。申请过多的资源不但不会加速你的程序，而且还会导致自己和他人的作业排队；申请过少的资源，会导致你自己的作业运行较慢。R语言默认只能使用多核处理器的单个核心，如果没有其他优化的话，ppn应该设置为1。如果你不确定自己应该申请多少计算资源，可以参考我们提供的<a href="../../resources/">资源申请指南</a>。</p>
 <p>然后提交这个作业：</p>
-<pre><code class="bash">qsub submit_R.pbs
+<pre><code class="bash">qsub submit_R.sh
 </code></pre>
 
 <p>程序将输出生成到了标准输出，并生成了相应的图片。</p>
@@ -335,7 +340,7 @@ Rscript ols.R
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../julia/" class="btn btn-neutral float-right" title="Julia">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../matlab/" class="btn btn-neutral float-right" title="matlab">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../python/" class="btn btn-neutral" title="Python"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -368,7 +373,7 @@ Rscript ols.R
         <span><a href="../python/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../julia/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../matlab/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

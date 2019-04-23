@@ -102,6 +102,10 @@
                     
     <a class="" href="../r/">R</a>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../matlab/">matlab</a>
+                </li>
                 <li class=" current">
                     
     <a class="current" href="./">Julia</a>
@@ -133,10 +137,6 @@
                 <li class="">
                     
     <a class="" href="../ml/">机器学习</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../matlab/">matlab</a>
                 </li>
                 <li class="">
                     
@@ -250,7 +250,7 @@ Pkg.add(&quot;IJulia&quot;)
 
 #PBS -N julia_example
 ### use one node for this job
-#PBS -l nodes=1
+#PBS -l nodes=1:ppn=1
 #PBS -q default
 
 cd $PBS_O_WORKDIR
@@ -304,7 +304,7 @@ julia --machine-file $PBS_NODEFILE ./julia_parallel_test.jl
         <a href="../jupyter/" class="btn btn-neutral float-right" title="Jupyter">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../r/" class="btn btn-neutral" title="R"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../matlab/" class="btn btn-neutral" title="matlab"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -331,7 +331,7 @@ julia --machine-file $PBS_NODEFILE ./julia_parallel_test.jl
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../r/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../matlab/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../jupyter/" style="color: #fcfcfc">Next &raquo;</a></span>
