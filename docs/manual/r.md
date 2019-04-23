@@ -7,6 +7,7 @@ R是用于统计分析、可视化的语言，被广泛应用于各大科研机�
 Anaconda基础环境（base）包含了R 3.5所需的基础库，能够满足绝大多数计算需求，我们建议直接使用这个环境下的R。
 
 加载 Anaconda：
+
 ```bash
 module load anaconda/5.3.0
 ```
@@ -19,6 +20,12 @@ module load anaconda/5.3.0
 
 ```r
 print(as.data.frame(installed.packages()[,c(1,3)]))
+```
+
+同时我们也提供了一个 R 3.5 的环境，此环境安装了parallel、snow等并行编程包。
+
+```bash
+source activate r35
 ```
 
 ## 管理R包
@@ -130,14 +137,14 @@ vcov(m)
 logLik(m)
 ```
 
-编写提交作业脚本 submit_R.pbs ：
+编写提交作业脚本 submit_R.sh，将这个脚本跟你的代码放在同一个文件夹下。
 
 ```bash
 #!/bin/bash
 
 #PBS -N R_job
 ### use one node for this job
-#PBS -l nodes=1
+#PBS -l nodes=1:ppn=1
 #PBS -q default
 
 cd $PBS_O_WORKDIR
@@ -146,10 +153,12 @@ module load anaconda/5.3.0
 Rscript ols.R
 ```
 
+上面这个脚本中`#PBS -l nodes=1:ppn=1`这行设置了申请多少CPU计算资源。申请过多的资源不但不会加速你的程序，而且还会导致自己和他人的作业排队；申请过少的资源，会导致你自己的作业运行较慢。R语言默认只能使用多核处理器的单个核心，如果没有其他优化的话，ppn应该设置为1。如果你不确定自己应该申请多少计算资源，可以参考我们提供的[资源申请指南](../resources.md)。
+
 然后提交这个作业：
 
 ```bash
-qsub submit_R.pbs
+qsub submit_R.sh
 ```
 
 程序将输出生成到了标准输出，并生成了相应的图片。

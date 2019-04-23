@@ -24,7 +24,7 @@ M
 exit
 ```
 
-准备一个作业提交脚本 `submit_matlab.pbs` ，其中 `-nodisplay` 表示不使用图形化界面， `-nosplash` 表示启动matlab时不显示闪屏版权信息：
+准备一个作业提交脚本 `submit_matlab.pbs`，将脚本跟你的代码放在同一个文件夹下。其中 `-nodisplay` 表示不使用图形化界面， `-nosplash` 表示启动matlab时不显示闪屏版权信息：
 
 ```bash
 #!/bin/bash
@@ -38,6 +38,8 @@ cd $PBS_O_WORKDIR
 module load matlab/2016b
 matlab -nodisplay -nosplash < matlab_simple.m
 ```
+
+上面这个脚本中`#PBS -l nodes=1:ppn=1`这行设置了申请多少CPU计算资源。不同的程序所需的资源不同，申请过多的资源不但不会加速你的程序，而且还会导致自己和他人的作业排队；申请过少的资源，会导致你自己的作业运行较慢。具体如何申请资源，可以参考我们提供的[资源申请指南](../resources.md)。
 
 提交这个任务：
 

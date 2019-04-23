@@ -69,7 +69,7 @@ println("hello world")
 
 #PBS -N julia_example
 ### use one node for this job
-#PBS -l nodes=1
+#PBS -l nodes=1:ppn=1
 #PBS -q default
 
 cd $PBS_O_WORKDIR

@@ -174,24 +174,32 @@ print("Accuracy: %.2f %% " % (100 * cnt1 / (cnt1 + cnt2)))
 #plt.show()
 ```
 
-编写 PBS 脚本如下：
+在你的程序所在的文件夹下，编写 PBS 脚本如下，保存成名为`submit_python.sh`的文件：
 
 ```bash
+#!/bin/bash
+
 #PBS -N iris_classification_example
 ### use one node for this job
-#PBS -l nodes=1
+#PBS -l nodes=1:ppn=1
 #PBS -q default
 #PBS -o iris.stdout
 #PBS -e iris.stderr
 
 cd $PBS_O_WORKDIR
-### set python in anaconda and 'test_evn_2' environment
+### set python in anaconda 
 module load anaconda/5.3.0
-source activate test_env_2
 
 python3 iris_with_xgb.py
 ```
 
+上面这个脚本中`#PBS -l nodes=1:ppn=1`这行设置了申请多少CPU计算资源。申请过多的资源不但不会加速你的程序，而且还会导致自己和他人的作业排队；申请过少的资源，会导致你自己的作业运行较慢。Python语言默认只能使用多核处理器的单个核心，如果没有其他优化的话，ppn应该设置为1。如果你不确定自己应该申请多少计算资源，可以参考我们提供的[资源申请指南](../resources.md)。
+
+提交这个作业：
+
+```bash
+qsub submit_python.sh
+```
 ## 使用Jupyter
 
 Jupyter的使用请参考 [Jupyter使用方法](jupyter.md)。
