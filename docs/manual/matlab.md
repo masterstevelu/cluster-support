@@ -24,7 +24,7 @@ M
 exit
 ```
 
-准备一个作业提交脚本 `submit_matlab.pbs`，将脚本跟你的代码放在同一个文件夹下。其中 `-nodisplay` 表示不使用图形化界面， `-nosplash` 表示启动matlab时不显示闪屏版权信息：
+准备一个作业提交脚本 `submit_matlab.pbs`，<font color=red >将脚本跟你的代码放在同一个文件夹下</font>。其中 `-nodisplay` 表示不使用图形化界面， `-nosplash` 表示启动matlab时不显示闪屏版权信息：
 
 ```bash
 #!/bin/bash
@@ -46,6 +46,9 @@ matlab -nodisplay -nosplash < matlab_simple.m
 ```bash
 qsub submit_matlab.pbs
 ```
+
+程序的结果将写入同文件夹的 matlab_example.oXXXX 文件中，报错信息将写入 matlab_example.eXXXX 文件中，其中 XXXX 为作业的id。你可以将这两个文件同步到你的个人电脑上查看，也可以在集群上使用 `cat matlab_example.oXXXX` 命令查看输出结果。
+PBS脚本中 `#PBS -N matlab_example` 来修改作业名，不同的作业的运行结果会写到对应作业名的输出文件中。
 
 ## 并行加速
 
