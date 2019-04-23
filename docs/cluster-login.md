@@ -65,8 +65,8 @@ scp -r ~your-cluster-username~@183.174.229.251:/home/~your-cluster-username~/exa
 rsync -r README.md linpack@183.174.229.251:/home/~your-cluster-username~/examples
 ```
 
-!!! tip "文件夹同步"
-    `scp` 和 `rsync` 的 "-r" 模式可以同步整个文件夹。
+!!! tip "小提示"
+    `scp` 和 `rsync` 的 "-r" 模式可以同步整个文件夹。注意这两个命令的执行位置，是在你自己的机器上，而不是在高性能计算集群上！
 
 ### 免密码登录
 
