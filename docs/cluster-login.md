@@ -62,7 +62,7 @@ scp -r ~your-cluster-username~@183.174.229.251:/home/~your-cluster-username~/exa
 `rsync` 是一个比 `scp` 更快的命令，比起 `scp` 将整个文件进行传输，它是增量传输文件，即只传输文件中被修改的部分。`rsync` 可被用来文件夹之间以及机器之间同步数据。
 
 ```bash
-rsync -r README.md linpack@183.174.229.251:/home/~your-cluster-username~/examples
+rsync -r README.md ~your-cluster-username~@183.174.229.251:/home/~your-cluster-username~/examples
 ```
 
 !!! tip "小提示"
