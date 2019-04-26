@@ -237,7 +237,7 @@
 
 <p>更多<code>scp</code> 命令使用方法可参考<a href="http://www.runoob.com/linux/linux-comm-scp.html">文章</a>。</p>
 <p><code>rsync</code> 是一个比 <code>scp</code> 更快的命令，比起 <code>scp</code> 将整个文件进行传输，它是增量传输文件，即只传输文件中被修改的部分。<code>rsync</code> 可被用来文件夹之间以及机器之间同步数据。</p>
-<pre><code class="bash">rsync -r README.md linpack@183.174.229.251:/home/~your-cluster-username~/examples
+<pre><code class="bash">rsync -r README.md ~your-cluster-username~@183.174.229.251:/home/~your-cluster-username~/examples
 </code></pre>
 
 <div class="admonition tip">
