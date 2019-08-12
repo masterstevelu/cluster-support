@@ -2,7 +2,10 @@
 
 MATLAB（矩阵实验室）是MATrix LABoratory的缩写，是一款由美国 MathWorks 公司出品的商业数学软件。MATLAB是一种用于算法开发、数据可视化、数据分析以及数值计算的高级技术计算语言和交互式环境。MATLAB主要用于数值运算，但利用为数众多的附加工具箱（Toolbox）它也适合不同领域的应用，例如控制系统设计与分析、图像处理、信号处理与通讯、金融建模和分析等。
 
-在集群上，一般不推荐使用Matlab的界面，而要用命令行提交批处理任务。
+!!! note "请使用我们提供的全校授权正版MATLAB"
+        我们已经购买了MATLAB的全校授权的软件许可，全校师生都可以使用该许可在个人电脑、实验室公共电脑以及我们的高性能计算集群上使用MATLAB软件。
+
+在集群上，一般不推荐使用MATLAB的界面，而要用命令行提交批处理任务。
 
 !!! warning "不要直接在登录节点运行matlab！"
         请不要直接在登录节点（IP为183.174.229.251，名为rmdx-cluster的节点）上运行 matlab 任务，而应该使用调度系统来提交任务，否则会影响其他用户使用集群。有关调度系统的介绍和使用，请参考我们提供的[文档](../job-scheduler.md)。
@@ -10,7 +13,7 @@ MATLAB（矩阵实验室）是MATrix LABoratory的缩写，是一款由美国 Ma
 ## 加载软件
 
 ```bash
-module load matlab/2016b
+module load matlab/2019a
 ```
 
 ## 提交matlab作业
@@ -24,7 +27,7 @@ M
 exit
 ```
 
-准备一个作业提交脚本 `submit_matlab.pbs`，<font color=red >将脚本跟你的代码放在同一个文件夹下</font>。其中 `-nodisplay` 表示不使用图形化界面， `-nosplash` 表示启动matlab时不显示闪屏版权信息：
+准备一个作业提交脚本 `submit_matlab.pbs`，<font color=red >将脚本跟你的代码放在同一个文件夹下</font>。其中，`-nodisplay` 表示不使用图形化界面， `-nosplash` 表示启动matlab时不显示闪屏版权信息：
 
 ```bash
 #!/bin/bash
@@ -35,8 +38,8 @@ exit
 #PBS -q default
 
 cd $PBS_O_WORKDIR
-module load matlab/2016b
-matlab -nodisplay -nosplash < matlab_simple.m
+module load matlab/2019a
+matlab  -nojvm -nodisplay -nosplash < matlab_simple.m
 ```
 
 上面这个脚本中`#PBS -l nodes=1:ppn=1`这行设置了申请多少CPU计算资源。不同的程序所需的资源不同，申请过多的资源不但不会加速你的程序，而且还会导致自己和他人的作业排队；申请过少的资源，会导致你自己的作业运行较慢。具体如何申请资源，可以参考我们提供的[资源申请指南](../resources.md)。
@@ -164,7 +167,7 @@ BASE_MFILE_NAME=matlab_parfor
 MATLAB_OUTPUT=${BASE_MFILE_NAME}.out
 
 cd $PBS_O_WORKDIR
-module load matlab/2016b
+module load matlab/2019a
 matlab -nodisplay -nosplash -r $BASE_MFILE_NAME > $MATLAB_OUTPUT
 ```
 
@@ -186,7 +189,7 @@ MATLAB_OUTPUT=${BASE_MFILE_NAME}.out
 cd $PBS_O_WORKDIR
 # create a temporary dir for your parallel job
 mkdir -p $PBS_JOBID
-module load matlab/2016b
+module load matlab/2019a
 matlab -nodisplay -nosplash -r $BASE_MFILE_NAME > $MATLAB_OUTPUT
 
 # clean up the temporary dir you just created before
